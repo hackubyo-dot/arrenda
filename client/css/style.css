@@ -1,0 +1,553 @@
+/* 
+================================================================
+    SISTEMA DE DESIGN: ARRENDA ANGOLA VIP (ELITE EDITION)
+    Versão: 5.0 - Full Real-Time Hybrid
+    Design: Cinematic / Luxury / OLED Dark & Premium Light
+================================================================
+*/
+
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap');
+
+/* --- VARIÁVEIS DE TEMA DINÂMICO --- */
+:root {
+    /* TEMA ESCURO (OLED NIGHT) */
+    --bg-app: #050505;
+    --bg-card: #0f0f0f;
+    --bg-sidebar: #080808;
+    --bg-input: #151515;
+    --text-main: #ffffff;
+    --text-muted: #8e9196;
+    --border: rgba(255, 255, 255, 0.05);
+    --border-hover: rgba(255, 255, 255, 0.1);
+    --neon: #c6ff00;
+    --neon-rgb: 198, 255, 0;
+    --glass: rgba(15, 15, 15, 0.85);
+    --shadow: 0 15px 45px rgba(0, 0, 0, 0.6);
+    --shadow-neon: 0 0 20px rgba(198, 255, 0, 0.25);
+    
+    /* ESTRUTURA */
+    --sidebar-width: 290px;
+    --header-height: 90px;
+    --radius-xl: 40px;
+    --radius-lg: 30px;
+    --radius-md: 18px;
+    --transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+}
+
+[data-theme="light"] {
+    /* TEMA CLARO (CRYSTAL CLEAN) */
+    --bg-app: #f2f5f7;
+    --bg-card: #ffffff;
+    --bg-sidebar: #ffffff;
+    --bg-input: #f8fafb;
+    --text-main: #0a0a0b;
+    --text-muted: #6b7280;
+    --border: rgba(0, 0, 0, 0.06);
+    --border-hover: rgba(0, 0, 0, 0.1);
+    --glass: rgba(255, 255, 255, 0.85);
+    --shadow: 0 15px 45px rgba(0, 0, 0, 0.04);
+    --shadow-neon: 0 10px 20px rgba(198, 255, 0, 0.3);
+}
+
+/* --- RESET GLOBAL --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    scrollbar-width: none; /* Firefox */
+}
+
+*::-webkit-scrollbar { display: none; } /* Chrome, Safari, Edge */
+
+body {
+    background-color: var(--bg-app);
+    color: var(--text-main);
+    transition: background 0.5s ease, color 0.5s ease;
+    overflow-x: hidden;
+}
+
+button, a {
+    cursor: pointer;
+    text-decoration: none !important;
+    transition: var(--transition);
+}
+
+/* --- LAYOUT HÍBRIDO (PC vs MOBILE) --- */
+.app-shell {
+    display: flex;
+    min-height: 100vh;
+}
+
+/* SIDEBAR DESKTOP ELITE */
+.sidebar-desktop {
+    width: var(--sidebar-width);
+    height: 100vh;
+    background: var(--bg-sidebar);
+    border-right: 1px solid var(--border);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    flex-direction: column;
+    padding: 45px 35px;
+    z-index: 1000;
+}
+
+.sidebar-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 60px;
+}
+
+.logo-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--neon);
+    color: #000;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.7rem;
+    box-shadow: var(--shadow-neon);
+}
+
+.logo-text {
+    font-size: 1.6rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+    color: var(--text-main);
+}
+
+.logo-text span { color: var(--neon); }
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    flex: 1;
+}
+
+.nav-link {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    padding: 18px 22px;
+    color: var(--text-muted);
+    border-radius: 20px;
+    font-weight: 600;
+    transition: var(--transition);
+}
+
+.nav-link i { font-size: 1.4rem; }
+
+.nav-link:hover {
+    color: var(--text-main);
+    background: var(--bg-card);
+}
+
+.nav-link.active {
+    background: var(--neon);
+    color: #000;
+    box-shadow: 0 12px 28px rgba(var(--neon-rgb), 0.25);
+}
+
+.sidebar-footer {
+    padding-top: 30px;
+    border-top: 1px solid var(--border);
+}
+
+/* MAIN CONTENT */
+.main-content {
+    flex: 1;
+    margin-left: var(--sidebar-width);
+    padding: 0 60px 80px 60px;
+    min-width: 0;
+}
+
+/* --- HEADER SUPREMO --- */
+.top-header-elite {
+    height: var(--header-height);
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 900;
+}
+
+.header-container-inner {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.glass-effect {
+    backdrop-filter: blur(25px);
+    -webkit-backdrop-filter: blur(25px);
+    background: var(--glass);
+    border-bottom: 1px solid var(--border);
+}
+
+.search-bar-elite {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 100px;
+    padding: 12px 28px;
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    width: 100%;
+    max-width: 650px;
+}
+
+.search-bar-elite input {
+    background: transparent;
+    border: none;
+    color: var(--text-main);
+    flex: 1;
+    font-size: 1.05rem;
+    font-weight: 500;
+}
+
+.icon-btn-premium {
+    width: 55px;
+    height: 55px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.4rem;
+}
+
+.btn-publish-elite {
+    background: var(--neon);
+    color: #000;
+    padding: 15px 35px;
+    border-radius: 18px;
+    font-weight: 800;
+    box-shadow: var(--shadow-neon);
+}
+
+/* --- VIP CAROUSEL (ADMIN ADS) --- */
+.vip-carousel-wrapper {
+    display: flex;
+    gap: 30px;
+    overflow-x: auto;
+    padding: 15px 0;
+    scroll-behavior: smooth;
+}
+
+.vip-card-premium {
+    min-width: 400px;
+    height: 520px;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+    border: 1px solid var(--border);
+}
+
+.vip-card-premium::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 2px solid var(--neon);
+    border-radius: var(--radius-xl);
+    opacity: 0.3;
+}
+
+.vip-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1s ease;
+}
+
+.vip-card-premium:hover .vip-img { transform: scale(1.1); }
+
+.vip-info {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 40px;
+    background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 60%, transparent 100%);
+    z-index: 10;
+}
+
+.vip-badge {
+    background: var(--neon);
+    color: #000;
+    padding: 6px 18px;
+    border-radius: 100px;
+    font-weight: 900;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: var(--shadow-neon);
+}
+
+.carousel-controls {
+    display: flex;
+    gap: 15px;
+}
+
+.btn-nav {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: var(--bg-card);
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.2rem;
+}
+
+.btn-nav:hover { background: var(--text-main); color: var(--bg-app); }
+
+/* --- CATEGORIAS COM ÍCONES 3D --- */
+.category-3d-grid {
+    display: flex;
+    gap: 25px;
+    overflow-x: auto;
+    padding: 15px 5px;
+}
+
+.cat-3d-card {
+    min-width: 140px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    transition: var(--transition);
+}
+
+.cat-3d-card img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    transition: 0.4s;
+}
+
+.cat-3d-card span {
+    font-weight: 800;
+    font-size: 0.95rem;
+    color: var(--text-muted);
+}
+
+.cat-3d-card:hover {
+    transform: translateY(-12px);
+    border-color: var(--neon);
+    box-shadow: 0 15px 35px rgba(var(--neon-rgb), 0.15);
+}
+
+.cat-3d-card.active {
+    background: var(--neon);
+    border-color: var(--neon);
+    box-shadow: var(--shadow-neon);
+}
+
+.cat-3d-card.active span { color: #000; }
+.cat-3d-card.active img { filter: brightness(0.1); }
+
+/* --- PROPERTY CARDS ELITE --- */
+.property-card-elite {
+    background: var(--bg-card);
+    border-radius: var(--radius-lg);
+    border: 1px solid var(--border);
+    overflow: hidden;
+    height: 100%;
+    position: relative;
+    transition: var(--transition);
+}
+
+.property-card-elite:hover {
+    transform: translateY(-10px);
+    border-color: var(--neon);
+    box-shadow: var(--shadow);
+}
+
+.card-img-container {
+    height: 250px;
+    position: relative;
+    overflow: hidden;
+}
+
+.card-img-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.property-card-elite:hover .card-img-container img { transform: scale(1.1); }
+
+.price-badge-premium {
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    background: rgba(0,0,0,0.8);
+    backdrop-filter: blur(10px);
+    padding: 10px 22px;
+    border-radius: 16px;
+    color: var(--neon);
+    font-weight: 800;
+    font-size: 1.15rem;
+    border: 1px solid rgba(255,255,255,0.1);
+}
+
+.card-body-elite { padding: 25px; }
+
+.fw-800 { font-weight: 800; }
+.text-neon { color: var(--neon); }
+
+/* --- MAP PAGE OVERLAY --- */
+.map-page-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: var(--bg-app);
+    z-index: 5000;
+    display: none;
+    flex-direction: column;
+    animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.map-header {
+    padding: 25px 50px;
+    display: flex;
+    align-items: center;
+    gap: 40px;
+}
+
+.btn-back {
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    color: var(--text-main);
+    border-radius: 100px;
+    padding: 12px 28px;
+    font-weight: 800;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+#full-map {
+    flex: 1;
+    width: 100%;
+    z-index: 1;
+}
+
+/* --- THEME TOGGLE PREMIUM --- */
+.btn-theme-premium {
+    width: 100%;
+    padding: 18px;
+    background: var(--bg-card);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text-main);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    font-weight: 700;
+}
+
+.btn-theme-premium:hover { border-color: var(--neon); }
+
+/* --- ANIMATIONS --- */
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(25px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(100%); }
+    to { transform: translateY(0); }
+}
+
+.animate-fade { animation: fadeIn 0.8s forwards; }
+
+/* --- RESPONSIVIDADE FULL --- */
+@media (max-width: 1199px) {
+    .main-content { padding: 0 30px 100px 30px; }
+    .vip-card-premium { min-width: 320px; height: 450px; }
+}
+
+@media (max-width: 991px) {
+    .sidebar-desktop { display: none; }
+    .main-content { margin-left: 0; padding-bottom: 120px; }
+    .top-header-elite { margin: 0 -20px 25px -20px; padding: 0 20px; }
+    .vip-card-premium { min-width: 280px; height: 400px; }
+    .cat-3d-card { min-width: 110px; padding: 20px 15px; }
+    .cat-3d-card img { width: 45px; height: 45px; }
+}
+
+/* --- MOBILE BOTTOM NAV --- */
+.mobile-nav-elite {
+    position: fixed;
+    bottom: 25px;
+    left: 20px;
+    right: 20px;
+    height: 80px;
+    background: var(--glass);
+    backdrop-filter: blur(25px);
+    border-radius: 28px;
+    border: 1px solid var(--border);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    z-index: 2000;
+    box-shadow: var(--shadow);
+}
+
+.m-nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-muted);
+}
+
+.m-nav-item.active { color: var(--neon); }
+.m-nav-item i { font-size: 1.6rem; }
+
+/* MAP POPUP STYLING (LEAFLET) */
+.leaflet-popup-content-wrapper {
+    background: var(--bg-card) !important;
+    color: var(--text-main) !important;
+    border-radius: 20px !important;
+    padding: 10px !important;
+}
+
+.leaflet-popup-tip { background: var(--bg-card) !important; }
+
+/* SKELETONS */
+.vip-card-skeleton {
+    min-width: 400px;
+    height: 520px;
+    background: var(--bg-card);
+    border-radius: var(--radius-xl);
+    animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+    0% { opacity: 0.6; }
+    50% { opacity: 1; }
+    100% { opacity: 0.6; }
+}

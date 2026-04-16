@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Entrar | Arrenda Angola VIP</title>
+    
+    <!-- FONTES PREMIUM: PLUS JAKARTA SANS -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ICONS & BOOTSTRAP -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- ESTILO CUSTOMIZADO SUPREMO -->
+    <link rel="stylesheet" href="../css/style.css">
+
+    <style>
+        /* 
+           DESIGN DE ELITE PARA PÁGINA DE AUTENTICAÇÃO
+        */
+        .auth-split-layout {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+            background: var(--bg-app);
+            overflow: hidden;
+        }
+
+        /* LADO VISUAL (DESKTOP) */
+        .auth-visual-side {
+            position: relative;
+            background: url('https://images.unsplash.com/photo-1600585154340-be6199f7d009?auto=format&fit=crop&q=80&w=1200') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            align-items: flex-end;
+            padding: 80px;
+        }
+
+        .visual-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to right, var(--bg-app) 0%, rgba(0,0,0,0.2) 100%);
+            z-index: 1;
+        }
+
+        .visual-content {
+            position: relative;
+            z-index: 2;
+            max-width: 550px;
+            animation: fadeInRight 1s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* LADO DO FORMULÁRIO */
+        .auth-form-side {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+            background: var(--bg-app);
+            position: relative;
+        }
+
+        .login-card-elite {
+            width: 100%;
+            max-width: 440px;
+            animation: fadeInUp 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        /* INPUTS PREMIUM */
+        .premium-input-group {
+            position: relative;
+            margin-bottom: 25px;
+        }
+
+        .premium-input-group label {
+            display: block;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 10px;
+            margin-left: 5px;
+        }
+
+        .premium-field {
+            width: 100%;
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            padding: 16px 22px;
+            color: var(--text-main);
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .premium-field:focus {
+            background: var(--bg-card);
+            border-color: var(--neon);
+            box-shadow: 0 0 0 4px rgba(198, 255, 0, 0.1);
+            transform: translateY(-2px);
+        }
+
+        .btn-publish-elite {
+            background: var(--neon);
+            color: #000;
+            width: 100%;
+            padding: 16px;
+            border-radius: 20px;
+            font-weight: 800;
+            border: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-publish-elite:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(198, 255, 0, 0.2);
+            filter: brightness(1.1);
+        }
+
+        .btn-publish-elite:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+        }
+
+        /* BOTÕES SOCIAIS 3D */
+        .social-auth-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin-bottom: 35px;
+        }
+
+        .btn-social-3d {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 18px;
+            padding: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            font-weight: 700;
+            color: var(--text-main);
+            transition: 0.3s;
+        }
+
+        .btn-social-3d:hover {
+            background: var(--border);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow);
+        }
+
+        .btn-social-3d img { width: 24px; height: 24px; }
+
+        /* HEADER LOGIN */
+        .login-header {
+            margin-bottom: 45px;
+        }
+
+        .login-header .logo-icon {
+            width: 55px; height: 55px;
+            background: var(--neon);
+            color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 15px;
+            font-size: 1.8rem;
+            margin-bottom: 25px;
+        }
+
+        /* ANIMAÇÕES */
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(40px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInRight {
+            from { opacity: 0; transform: translateX(-40px); }
+            to { opacity: 1; transform: translateX(0); }
+        }
+
+        /* AJUSTES MOBILE */
+        @media (max-width: 991px) {
+            .auth-split-layout { grid-template-columns: 1fr; }
+            .auth-visual-side { display: none; }
+            .auth-form-side { padding: 30px 20px; }
+            .login-card-elite { max-width: 100%; }
+        }
+
+        /* TEMA TOGGLE NO LOGIN */
+        .theme-float {
+            position: absolute;
+            top: 40px;
+            right: 40px;
+            z-index: 100;
+        }
+
+        .text-neon { color: var(--neon) !important; }
+        .bg-neon { background-color: var(--neon) !important; }
+        .fw-800 { font-weight: 800; }
+    </style>
+</head>
+<body>
+
+    <div class="auth-split-layout">
+        
+        <!-- =============================================
+             COLUNA VISUAL (DESKTOP)
+             ============================================= -->
+        <div class="auth-visual-side">
+            <div class="visual-overlay"></div>
+            <div class="visual-content">
+                <div class="badge bg-neon text-black fw-800 px-3 py-2 rounded-pill mb-4" style="font-size: 0.75rem; letter-spacing: 1px;">PREMIUM ACCESS</div>
+                <h1 class="display-3 fw-800 text-white mb-4">A tua chave para o <span class="text-neon">luxo</span> em Angola.</h1>
+                <p class="text-white-50 fs-5 mb-0">Acede à plataforma de elite para arrendamento de imóveis verificados nas melhores localizações do país.</p>
+                
+                <div class="d-flex gap-5 mt-5 pt-4 border-top border-white border-opacity-10">
+                    <div>
+                        <h4 class="fw-800 text-white mb-0">12k+</h4>
+                        <span class="small text-white-50">Imóveis Ativos</span>
+                    </div>
+                    <div>
+                        <h4 class="fw-800 text-white mb-0">5k+</h4>
+                        <span class="small text-white-50">Clientes VIP</span>
+                    </div>
+                    <div>
+                        <h4 class="fw-800 text-white mb-0">100%</h4>
+                        <span class="small text-white-50">Seguro</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- =============================================
+             COLUNA DO FORMULÁRIO
+             ============================================= -->
+        <div class="auth-form-side">
+            
+            <!-- Floating Theme Switcher -->
+            <div class="theme-float">
+                <button id="theme-toggle" class="btn-theme-premium" style="width: 50px; height: 50px; border-radius: 50%; padding: 0; display: flex; align-items: center; justify-content: center; border: 1px solid var(--border); background: var(--bg-card); color: var(--text-main);">
+                    <i class="bi bi-moon-stars-fill dark-icon"></i>
+                    <i class="bi bi-sun-fill light-icon d-none"></i>
+                </button>
+            </div>
+
+            <div class="login-card-elite">
+                
+                <div class="login-header">
+                    <div class="logo-icon"><i class="bi bi-houses-fill"></i></div>
+                    <h2 class="fw-800 mb-2">Bem-vindo de volta</h2>
+                    <p class="text-muted">Acede à tua conta para gerir os teus imóveis ou encontrar o teu novo lar.</p>
+                </div>
+
+                <div id="alertPlaceholder"></div>
+
+                <div class="social-auth-grid">
+                    <button class="btn-social-3d">
+                        <img src="https://cdn-icons-png.flaticon.com/512/300/300221.png" alt="Google">
+                        <span>Google</span>
+                    </button>
+                    <button class="btn-social-3d">
+                        <img src="https://cdn-icons-png.flaticon.com/512/0/747.png" alt="Apple">
+                        <span>Apple</span>
+                    </button>
+                </div>
+
+                <div class="d-flex align-items-center mb-4">
+                    <hr class="flex-grow-1 border-secondary border-opacity-25">
+                    <span class="px-3 text-muted small fw-bold">OU USA O TEU E-MAIL</span>
+                    <hr class="flex-grow-1 border-secondary border-opacity-25">
+                </div>
+
+                <form id="loginFormElite">
+                    <div class="premium-input-group">
+                        <label>ENDEREÇO DE E-MAIL</label>
+                        <input type="email" id="email" class="premium-field" placeholder="exemplo@email.com" required>
+                    </div>
+
+                    <div class="premium-input-group">
+                        <div class="d-flex justify-content-between align-items-center">
+                            <label>PALAVRA-PASSE</label>
+                            <a href="#" class="small text-neon fw-bold text-decoration-none mb-2">Esqueceste a senha?</a>
+                        </div>
+                        <input type="password" id="password" class="premium-field" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-check mb-4 ms-1">
+                        <input class="form-check-input" type="checkbox" id="rememberMe">
+                        <label class="form-check-label small text-muted" for="rememberMe">
+                            Manter-me ligado neste dispositivo
+                        </label>
+                    </div>
+
+                    <button type="submit" id="btnLogin" class="btn-publish-elite w-100 py-3 fs-6 mb-4">
+                        Entrar na Minha Conta
+                    </button>
+
+                    <p class="text-center text-muted small mb-0">
+                        Ainda não tens conta? 
+                        <a href="register.html" class="text-neon fw-800 text-decoration-none">Regista-te agora</a>
+                    </p>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+
+    <!-- SCRIPTS CORE -->
+    <script src="../js/api.js"></script>
+    <script>
+        /**
+         * LÓGICA DE LOGIN & TEMA - INTEGRADA
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            initLoginTheme();
+            handleLoginSubmit();
+        });
+
+        function initLoginTheme() {
+            const btn = document.getElementById('theme-toggle');
+            const lightIcon = btn.querySelector('.light-icon');
+            const darkIcon = btn.querySelector('.dark-icon');
+            
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', savedTheme);
+            updateIcons(savedTheme);
+
+            btn.onclick = () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                updateIcons(next);
+            };
+
+            function updateIcons(theme) {
+                if (theme === 'dark') {
+                    darkIcon.classList.remove('d-none');
+                    lightIcon.classList.add('d-none');
+                } else {
+                    darkIcon.classList.add('d-none');
+                    lightIcon.classList.remove('d-none');
+                }
+            }
+        }
+
+        async function handleLoginSubmit() {
+            const form = document.getElementById('loginFormElite');
+            const btn = document.getElementById('btnLogin');
+            const alertPlaceholder = document.getElementById('alertPlaceholder');
+
+            form.onsubmit = async (e) => {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                // Feedback Visual
+                btn.disabled = true;
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> A autenticar...';
+
+                try {
+                    const response = await apiService.auth.login({ email, password });
+
+                    if (response.success) {
+                        localStorage.setItem('token', response.user.token);
+                        localStorage.setItem('user', JSON.stringify(response.user));
+                        
+                        alertPlaceholder.innerHTML = `
+                            <div class="alert alert-success border-0 rounded-4 py-3 shadow-sm">
+                                <i class="bi bi-check-circle-fill me-2"></i> Autenticado com sucesso!
+                            </div>
+                        `;
+                        
+                        // --- LÓGICA DE REDIRECIONAMENTO COM BASE NO CARGO (ROLE) ---
+                        setTimeout(() => {
+                            if (response.user.role === 'admin') {
+                                window.location.href = '../admin.html';
+                            } else {
+                                window.location.href = '../index.html';
+                            }
+                        }, 1000);
+
+                    } else {
+                        alertPlaceholder.innerHTML = `
+                            <div class="alert alert-danger border-0 rounded-4 py-3" style="background: rgba(255,59,48,0.1); color: #ff3b30;">
+                                <i class="bi bi-exclamation-triangle-fill me-2"></i> ${response.message}
+                            </div>
+                        `;
+                        btn.disabled = false;
+                        btn.innerText = 'Entrar na Minha Conta';
+                    }
+                } catch (error) {
+                    console.error(error);
+                    alertPlaceholder.innerHTML = `
+                        <div class="alert alert-danger border-0 rounded-4 py-3">
+                            <i class="bi bi-wifi-off me-2"></i> Erro ao conectar ao servidor.
+                        </div>
+                    `;
+                    btn.disabled = false;
+                    btn.innerText = 'Entrar na Minha Conta';
+                }
+            };
+        }
+    </script>
+</body>
+</html>
