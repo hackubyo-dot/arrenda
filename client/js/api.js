@@ -1,26 +1,26 @@
 /**
- * API SERVICE
- * Gerenciador de requisições para o Backend
+ * API SERVICE - CONFIGURAÇÃO DINÂMICA
+ * Resolve o erro de conexão recusada detetando o ambiente (Local vs Produção)
  */
-const API_URL = 'http://localhost:5000/api';
+
+// Se estiver no browser local, usa localhost. Se estiver na Render, usa o link da Render.
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000/api'
+    : '/api'; // Em produção, usa o caminho relativo (funciona sempre)
 
 const apiService = {
     // Helper para buscar o token do localStorage
     getToken: () => localStorage.getItem('token'),
 
     // Configuração de headers padrão
-    getHeaders: (isMultipart = false) => {
-        const headers = {};
+    getHeaders: () => {
+        const headers = {
+            'Content-Type': 'application/json'
+        };
         const token = apiService.getToken();
-
         if (token) {
             headers['Authorization'] = `Bearer ${token}`;
         }
-
-        if (!isMultipart) {
-            headers['Content-Type'] = 'application/json';
-        }
-
         return headers;
     },
 
@@ -29,7 +29,7 @@ const apiService = {
         register: async (userData) => {
             const response = await fetch(`${API_URL}/auth/register`, {
                 method: 'POST',
-                headers: apiService.getHeaders(),
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(userData)
             });
             return response.json();
@@ -38,7 +38,7 @@ const apiService = {
         login: async (credentials) => {
             const response = await fetch(`${API_URL}/auth/login`, {
                 method: 'POST',
-                headers: apiService.getHeaders(),
+                headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(credentials)
             });
             return response.json();
@@ -52,7 +52,7 @@ const apiService = {
         }
     },
 
-    // --- MÓDULO de IMÓVEIS ---
+    // --- MÓDULO DE IMÓVEIS ---
     properties: {
         getAll: async (filters = {}) => {
             const query = new URLSearchParams(filters).toString();
@@ -73,7 +73,7 @@ const apiService = {
         },
 
         create: async (formData) => {
-            // Note: FormData não precisa de Content-Type header manual (o browser define)
+            // FormData NÃO pode ter Content-Type manual, o browser faz sozinho
             const response = await fetch(`${API_URL}/properties`, {
                 method: 'POST',
                 headers: {
@@ -109,8 +109,29 @@ const apiService = {
             });
             return response.json();
         }
+    },
+
+    // --- MÓDULO DE CHAT ---
+    chat: {
+        getConversations: () => fetch(`${API_URL}/chat/conversations`, { 
+            headers: apiService.getHeaders() 
+        }).then(r => r.json()),
+        
+        getMessages: (id) => fetch(`${API_URL}/chat/messages/${id}`, { 
+            headers: apiService.getHeaders() 
+        }).then(r => r.json()),
+        
+        markRead: (id) => fetch(`${API_URL}/chat/read/${id}`, { 
+            method: 'PUT', 
+            headers: apiService.getHeaders() 
+        }),
+        
+        send: (formData) => fetch(`${API_URL}/chat/send`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${apiService.getToken()}` },
+            body: formData
+        }).then(r => r.json())
     }
 };
 
-// Tornar global para os outros scripts utilizarem
 window.apiService = apiService;
