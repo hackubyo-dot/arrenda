@@ -1,0 +1,4090 @@
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\css\style.css =====
+
+:root {
+    --bg-dark: #0b0b0b;
+    --bg-card: #181818;
+    --neon-lime: #c6ff00;
+    --text-white: #ffffff;
+    --text-gray: #a0a0a0;
+    --border-radius: 24px;
+    --transition: all 0.3s ease;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-white);
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+}
+
+/* --- SPLASH / ONBOARDING --- */
+.splash-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9999;
+    background: var(--bg-dark);
+    transition: opacity 0.5s ease;
+}
+
+.hero-image-container {
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+}
+
+.hero-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay-gradient {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to bottom, transparent, var(--bg-dark));
+}
+
+.onboarding-text h1 {
+    font-size: 2.2rem;
+    line-height: 1.2;
+    margin-bottom: 1rem;
+}
+
+.dots-indicator .dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #333;
+    margin: 0 4px;
+}
+
+.dots-indicator .dot.active {
+    width: 24px;
+    border-radius: 10px;
+    background: var(--neon-lime);
+}
+
+.btn-primary-neon {
+    background: var(--neon-lime);
+    color: #000;
+    border: none;
+    transition: var(--transition);
+}
+
+.btn-primary-neon:hover {
+    background: #b0e600;
+    transform: translateY(-2px);
+}
+
+.btn-dark-outline {
+    background: transparent;
+    border: 1px solid #333;
+    color: var(--text-white);
+}
+
+/* --- MAIN LAYOUT --- */
+.container-mobile {
+    max-width: 500px;
+    margin: 0 auto;
+    min-height: 100vh;
+    position: relative;
+}
+
+.notification-badge {
+    background: #1e1e1e;
+    padding: 10px;
+    border-radius: 15px;
+    position: relative;
+}
+
+.badge-dot {
+    position: absolute;
+    top: 10px;
+    right: 12px;
+    width: 8px;
+    height: 8px;
+    background: #ff3b30;
+    border-radius: 50%;
+    border: 2px solid #1e1e1e;
+}
+
+/* --- SEARCH & CATEGORIES --- */
+.search-container {
+    background: #1e1e1e;
+    border-radius: 18px;
+    height: 55px;
+}
+
+.btn-filter {
+    background: #000;
+    border: none;
+    color: white;
+    width: 40px;
+    height: 40px;
+    border-radius: 12px;
+}
+
+.categories-scroll {
+    overflow-x: auto;
+    white-space: nowrap;
+    scrollbar-width: none;
+}
+
+.categories-scroll::-webkit-scrollbar { display: none; }
+
+.category-pill {
+    padding: 8px 20px;
+    border-radius: 12px;
+    border: 1px solid #333;
+    background: transparent;
+    color: var(--text-gray);
+    margin-right: 10px;
+    font-size: 0.9rem;
+    font-weight: 500;
+}
+
+.category-pill.active {
+    background: var(--neon-lime);
+    color: #000;
+    border-color: var(--neon-lime);
+}
+
+/* --- CARDS --- */
+.featured-scroll {
+    display: flex;
+    overflow-x: auto;
+    gap: 15px;
+    scrollbar-width: none;
+    padding-bottom: 10px;
+}
+.featured-scroll::-webkit-scrollbar { display: none; }
+
+.card-featured {
+    min-width: 280px;
+    background: var(--bg-card);
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    border: none;
+}
+
+.card-img-wrapper {
+    position: relative;
+    height: 200px;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.tag-sale {
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    background: rgba(198, 255, 0, 0.9);
+    color: #000;
+    font-size: 0.75rem;
+    font-weight: bold;
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.btn-wishlist {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: rgba(0,0,0,0.3);
+    backdrop-filter: blur(5px);
+    border: none;
+    color: white;
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+}
+
+.property-card-vertical {
+    background: var(--bg-card);
+    border-radius: 20px;
+    padding: 12px;
+    display: flex;
+    gap: 15px;
+    margin-bottom: 15px;
+    text-decoration: none;
+    color: inherit;
+}
+
+.property-card-vertical img {
+    width: 100px;
+    height: 100px;
+    border-radius: 15px;
+    object-fit: cover;
+}
+
+/* --- BOTTOM NAV --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    background: rgba(11, 11, 11, 0.95);
+    backdrop-filter: blur(10px);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px 0 25px 0;
+    border-top: 1px solid #222;
+    z-index: 1000;
+}
+
+.nav-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: var(--text-gray);
+    text-decoration: none;
+    font-size: 0.7rem;
+}
+
+.nav-item i { font-size: 1.4rem; margin-bottom: 4px; }
+
+.nav-item.active { color: var(--neon-lime); }
+
+.nav-item-center {
+    position: relative;
+    top: -25px;
+}
+
+.btn-plus {
+    width: 55px;
+    height: 55px;
+    background: var(--neon-lime);
+    color: #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.8rem;
+    box-shadow: 0 4px 15px rgba(198, 255, 0, 0.4);
+}
+
+/* --- UTILS --- */
+.text-neon { color: var(--neon-lime); }
+.text-neon-link { color: var(--neon-lime); font-weight: 600; }
+.price-tag { font-size: 1.2rem; font-weight: 700; color: var(--neon-lime); }
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\js\api.js =====
+
+/**
+ * API SERVICE - CONFIGURAÇÃO DINÂMICA
+ * Resolve o erro de conexão recusada detetando o ambiente (Local vs Produção)
+ */
+
+// Se estiver no browser local, usa localhost. Se estiver na Render, usa o link da Render.
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
+    ? 'http://localhost:5000/api'
+    : '/api'; // Em produção, usa o caminho relativo (funciona sempre)
+
+const apiService = {
+    // Helper para buscar o token do localStorage
+    getToken: () => localStorage.getItem('token'),
+
+    // Configuração de headers padrão
+    getHeaders: () => {
+        const headers = {
+            'Content-Type': 'application/json'
+        };
+        const token = apiService.getToken();
+        if (token) {
+            headers['Authorization'] = `Bearer ${token}`;
+        }
+        return headers;
+    },
+
+    // --- MÓDULO DE AUTENTICAÇÃO ---
+    auth: {
+        register: async (userData) => {
+            const response = await fetch(`${API_URL}/auth/register`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(userData)
+            });
+            return response.json();
+        },
+
+        login: async (credentials) => {
+            const response = await fetch(`${API_URL}/auth/login`, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(credentials)
+            });
+            return response.json();
+        },
+
+        getMe: async () => {
+            const response = await fetch(`${API_URL}/auth/me`, {
+                headers: apiService.getHeaders()
+            });
+            return response.json();
+        }
+    },
+
+    // --- MÓDULO DE IMÓVEIS ---
+    properties: {
+        getAll: async (filters = {}) => {
+            const query = new URLSearchParams(filters).toString();
+            const response = await fetch(`${API_URL}/properties?${query}`);
+            return response.json();
+        },
+
+        getById: async (id) => {
+            const response = await fetch(`${API_URL}/properties/${id}`);
+            return response.json();
+        },
+
+        getMyProperties: async () => {
+            const response = await fetch(`${API_URL}/properties/user/me`, {
+                headers: apiService.getHeaders()
+            });
+            return response.json();
+        },
+
+        create: async (formData) => {
+            // FormData NÃO pode ter Content-Type manual, o browser faz sozinho
+            const response = await fetch(`${API_URL}/properties`, {
+                method: 'POST',
+                headers: {
+                    'Authorization': `Bearer ${apiService.getToken()}`
+                },
+                body: formData
+            });
+            return response.json();
+        },
+
+        delete: async (id) => {
+            const response = await fetch(`${API_URL}/properties/${id}`, {
+                method: 'DELETE',
+                headers: apiService.getHeaders()
+            });
+            return response.json();
+        }
+    },
+
+    // --- MÓDULO DE PAGAMENTOS ---
+    payments: {
+        pay: async () => {
+            const response = await fetch(`${API_URL}/payments/pay`, {
+                method: 'POST',
+                headers: apiService.getHeaders()
+            });
+            return response.json();
+        },
+
+        getQuota: async () => {
+            const response = await fetch(`${API_URL}/payments/quota`, {
+                headers: apiService.getHeaders()
+            });
+            return response.json();
+        }
+    },
+
+    // --- MÓDULO DE CHAT ---
+    chat: {
+        getConversations: () => fetch(`${API_URL}/chat/conversations`, { 
+            headers: apiService.getHeaders() 
+        }).then(r => r.json()),
+        
+        getMessages: (id) => fetch(`${API_URL}/chat/messages/${id}`, { 
+            headers: apiService.getHeaders() 
+        }).then(r => r.json()),
+        
+        markRead: (id) => fetch(`${API_URL}/chat/read/${id}`, { 
+            method: 'PUT', 
+            headers: apiService.getHeaders() 
+        }),
+        
+        send: (formData) => fetch(`${API_URL}/chat/send`, {
+            method: 'POST',
+            headers: { 'Authorization': `Bearer ${apiService.getToken()}` },
+            body: formData
+        }).then(r => r.json())
+    }
+};
+
+window.apiService = apiService;
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\js\auth.js =====
+
+/**
+ * AUTH LOGIC
+ * Gere login, logout e proteção de rotas no frontend
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+    // Se estivermos na página de login ou registro e já tivermos token, vai para a home
+    const token = localStorage.getItem('token');
+    const path = window.location.pathname;
+
+    if (token && (path.includes('login.html') || path.includes('register.html'))) {
+        window.location.href = '../index.html';
+    }
+});
+
+// Função para verificar se o usuário está logado em rotas protegidas
+function checkAuth() {
+    const token = localStorage.getItem('token');
+    if (!token) {
+        window.location.href = 'login.html';
+    }
+}
+
+// Função de Logout
+function logout() {
+    localStorage.removeItem('token');
+    localStorage.removeItem('user');
+    window.location.href = '../index.html';
+}
+
+// Função para obter dados do usuário logado do Storage
+function getCurrentUser() {
+    const user = localStorage.getItem('user');
+    return user ? JSON.parse(user) : null;
+}
+
+// Expõe para o escopo global
+window.logout = logout;
+window.checkAuth = checkAuth;
+window.getCurrentUser = getCurrentUser;
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\js\chat.js =====
+
+/**
+ * CHAT LOGIC - REALTIME & PERSISTENCE
+ * Integração com Socket.io e Neon DB
+ */
+
+let socket;
+let activeReceiverId = null;
+let currentUser = null;
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Verificar Autenticação
+    const token = apiService.getToken();
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    currentUser = JSON.parse(localStorage.getItem('user'));
+
+    // 2. Inicializar Socket.io
+    initSocket();
+
+    // 3. Carregar Inbox (Lista de Conversas)
+    loadInbox();
+
+    // 4. Configurar Envio de Mensagens
+    setupChatForm();
+});
+
+/**
+ * Conecta ao servidor via Socket.io e configura ouvintes
+ */
+function initSocket() {
+    socket = io(); // Conecta ao servidor Render
+
+    // Identifica o usuário no servidor
+    socket.emit('setup', currentUser);
+
+    socket.on('connected', () => console.log('✅ Chat Realtime Conectado!'));
+
+    // Ouvir mensagens recebidas em tempo real
+    socket.on('message received', (newMessage) => {
+        // Se a conversa aberta for a do remetente da mensagem
+        if (activeReceiverId && activeReceiverId == newMessage.sender_id) {
+            appendMessage(newMessage, 'received');
+            scrollToBottom();
+            // Marcar como lida no servidor
+            apiService.chat.markRead(activeReceiverId);
+        } else {
+            // Se estiver em outra tela, atualiza a lista da Inbox
+            loadInbox();
+            // Notificação sonora opcional aqui
+        }
+    });
+}
+
+/**
+ * Carrega a lista de conversas do Neon DB
+ */
+async function loadInbox() {
+    const list = document.getElementById('inboxList');
+    try {
+        const res = await apiService.chat.getConversations();
+        if (res.success) {
+            list.innerHTML = '';
+            if (res.data.length === 0) {
+                list.innerHTML = '<p class="text-center text-secondary py-5">Ainda não tens conversas.</p>';
+                return;
+            }
+
+            res.data.forEach(chat => {
+                const item = document.createElement('div');
+                item.className = 'conversa-item';
+                item.onclick = () => openChat(chat.other_id, chat.other_name);
+                
+                item.innerHTML = `
+                    <div class="user-avatar">${chat.other_name.charAt(0)}</div>
+                    <div class="flex-grow-1 overflow-hidden">
+                        <div class="d-flex justify-content-between align-items-center mb-1">
+                            <h6 class="fw-bold mb-0">${chat.other_name}</h6>
+                            <span class="small text-secondary" style="font-size: 0.65rem;">${formatDate(chat.created_at)}</span>
+                        </div>
+                        <p class="small text-secondary text-truncate mb-0">
+                            ${chat.file_type === 'image' ? '📷 Foto' : 
+                              chat.file_type === 'file' ? '📁 Ficheiro' : chat.message_text}
+                        </p>
+                    </div>
+                    ${chat.unread_count > 0 ? '<div class="unread-dot"></div>' : ''}
+                `;
+                list.appendChild(item);
+            });
+        }
+    } catch (err) { console.error(err); }
+}
+
+/**
+ * Abre a janela de chat com um utilizador específico
+ */
+async function openChat(otherId, otherName) {
+    activeReceiverId = otherId;
+    document.getElementById('activeChatName').innerText = otherName;
+    document.getElementById('activeChatAvatar').innerText = otherName.charAt(0);
+    document.getElementById('chatWindow').style.display = 'flex';
+
+    const messagesArea = document.getElementById('messagesArea');
+    messagesArea.innerHTML = '<div class="text-center py-5"><div class="spinner-border text-neon"></div></div>';
+
+    try {
+        const res = await apiService.chat.getMessages(otherId);
+        if (res.success) {
+            messagesArea.innerHTML = '';
+            res.data.forEach(msg => {
+                const type = msg.sender_id == currentUser.id ? 'sent' : 'received';
+                appendMessage(msg, type);
+            });
+            scrollToBottom();
+        }
+    } catch (err) { console.error(err); }
+}
+
+/**
+ * Fecha a janela de chat
+ */
+function closeChat() {
+    document.getElementById('chatWindow').style.display = 'none';
+    activeReceiverId = null;
+    loadInbox(); // Atualiza a lista para remover pontos de não lido
+}
+
+/**
+ * Adiciona uma bolha de mensagem à área de chat
+ */
+function appendMessage(msg, type) {
+    const area = document.getElementById('messagesArea');
+    const div = document.createElement('div');
+    div.className = `msg msg-${type}`;
+    
+    let content = '';
+    if (msg.file_url) {
+        if (msg.file_type === 'image') {
+            content = `<img src="${msg.file_url}" onclick="window.open('${msg.file_url}')" style="cursor:pointer">`;
+        } else {
+            content = `<a href="${msg.file_url}" target="_blank" class="text-white small d-block mb-1">
+                        <i class="bi bi-file-earmark-arrow-down"></i> Baixar Ficheiro
+                       </a>`;
+        }
+    }
+    
+    if (msg.message_text) {
+        content += `<span class="d-block">${msg.message_text}</span>`;
+    }
+
+    div.innerHTML = `
+        ${content}
+        <span class="msg-time">${new Date(msg.created_at).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</span>
+    `;
+    area.appendChild(div);
+}
+
+/**
+ * Gere o envio de mensagens (Texto + Ficheiros)
+ */
+async function setupChatForm() {
+    const form = document.getElementById('chatForm');
+    const input = document.getElementById('chatInput');
+    const fileInput = document.getElementById('chatFileInput');
+
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        const text = input.value.trim();
+        const file = fileInput.files[0];
+
+        if (!text && !file) return;
+
+        // Feedback Visual imediato (Opcional: bolha cinza de "enviando")
+        
+        const formData = new FormData();
+        formData.append('receiver_id', activeReceiverId);
+        formData.append('message_text', text);
+        if (file) formData.append('chat_file', file);
+
+        input.value = '';
+        fileInput.value = '';
+
+        try {
+            const res = await apiService.chat.send(formData);
+            if (res.success) {
+                appendMessage(res.data, 'sent');
+                scrollToBottom();
+                
+                // Enviar via Socket para tempo real
+                socket.emit('new message', {
+                    ...res.data,
+                    receiverId: activeReceiverId
+                });
+            }
+        } catch (err) { console.error(err); }
+    });
+}
+
+function scrollToBottom() {
+    const area = document.getElementById('messagesArea');
+    area.scrollTop = area.scrollHeight;
+}
+
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const now = new Date();
+    if (date.toDateString() === now.toDateString()) {
+        return date.toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'});
+    }
+    return date.toLocaleDateString('pt-AO');
+}
+
+// Estender apiService em api.js com estas funções de chat:
+apiService.chat = {
+    getConversations: () => fetch('/api/chat/conversations', { headers: apiService.getHeaders() }).then(r => r.json()),
+    getMessages: (id) => fetch(`/api/chat/messages/${id}`, { headers: apiService.getHeaders() }).then(r => r.json()),
+    markRead: (id) => fetch(`/api/chat/read/${id}`, { method: 'PUT', headers: apiService.getHeaders() }),
+    send: (formData) => fetch('/api/chat/send', {
+        method: 'POST',
+        headers: { 'Authorization': `Bearer ${apiService.getToken()}` },
+        body: formData
+    }).then(r => r.json())
+};
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\js\dashboard.js =====
+
+/**
+ * DASHBOARD LOGIC
+ * Painel de controle do proprietário.
+ */
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Verificar se está logado
+    if (!apiService.getToken()) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // 2. Carregar todos os dados do Painel
+    refreshDashboard();
+});
+
+/**
+ * Função principal para atualizar os dados da tela
+ */
+async function refreshDashboard() {
+    try {
+        // Carregar Perfil do Usuário
+        const userRes = await apiService.auth.getMe();
+        if (userRes.success) {
+            document.getElementById('userName').innerText = userRes.user.name;
+            document.getElementById('userEmail').innerText = userRes.user.email;
+        }
+
+        // Carregar Meus Imóveis
+        const propsRes = await apiService.properties.getMyProperties();
+        const propertyList = document.getElementById('myPropertiesList');
+        
+        if (propsRes.success) {
+            const props = propsRes.data;
+            document.getElementById('totalProps').innerText = props.length;
+            
+            renderUserProperties(props);
+        }
+
+        // Carregar Quotas e Pagamentos
+        const quotaRes = await apiService.payments.getQuota();
+        if (quotaRes.success && propsRes.success) {
+            const remaining = quotaRes.allowed_posts - propsRes.data.length;
+            document.getElementById('quotaLeft').innerText = remaining > 0 ? remaining : 0;
+        }
+
+    } catch (error) {
+        console.error('Erro ao carregar dashboard:', error);
+    }
+}
+
+/**
+ * Renderiza a lista de cards de gestão de imóveis
+ */
+function renderUserProperties(properties) {
+    const container = document.getElementById('myPropertiesList');
+    container.innerHTML = ''; // Limpa o spinner de carregamento
+
+    if (properties.length === 0) {
+        container.innerHTML = `
+            <div class="text-center py-5">
+                <i class="bi bi-house-add fs-1 text-secondary opacity-25"></i>
+                <p class="text-secondary mt-2">Você ainda não tem imóveis publicados.</p>
+                <a href="publish.html" class="btn btn-outline-light btn-sm rounded-pill">Publicar Primeiro</a>
+            </div>
+        `;
+        return;
+    }
+
+    properties.forEach(prop => {
+        const card = document.createElement('div');
+        card.className = 'manage-card';
+        card.innerHTML = `
+            <img src="${prop.main_image}" alt="thumb">
+            <div class="flex-grow-1 overflow-hidden">
+                <h6 class="fw-bold mb-1 text-truncate" style="font-size: 0.9rem;">${prop.title}</h6>
+                <div class="d-flex align-items-center gap-2">
+                    <span class="status-badge ${prop.status === 'active' ? 'status-active' : 'status-pending'}">
+                        ${prop.status === 'active' ? 'Ativo' : 'Pendente'}
+                    </span>
+                    <span class="text-secondary small">${formatCurrency(prop.price)}</span>
+                </div>
+            </div>
+            <div class="d-flex gap-2">
+                <button onclick="deleteProperty(${prop.id})" class="btn-action btn-delete" title="Apagar">
+                    <i class="bi bi-trash"></i>
+                </button>
+            </div>
+        `;
+        container.appendChild(card);
+    });
+}
+
+/**
+ * Deleta um imóvel após confirmação do usuário
+ */
+async function deleteProperty(id) {
+    if (confirm('Tem a certeza que deseja eliminar este anúncio permanentemente?')) {
+        try {
+            const response = await apiService.properties.delete(id);
+            if (response.success) {
+                // Atualiza a tela sem recarregar a página inteira
+                refreshDashboard();
+            } else {
+                alert('Erro ao eliminar: ' + response.message);
+            }
+        } catch (error) {
+            console.error(error);
+            alert('Erro de conexão ao eliminar imóvel.');
+        }
+    }
+}
+
+/**
+ * Formata valores para Kwanza (Kz)
+ */
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-AO', {
+        style: 'currency',
+        currency: 'AOA',
+    }).format(value).replace('Kz', 'Kz ');
+}
+
+// Expõe a função para o escopo global (usada no botão inline)
+window.deleteProperty = deleteProperty;
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\js\details.js =====
+
+/**
+ * DETAILS LOGIC
+ * Gere a exibição de dados do imóvel e o visualizador 360
+ */
+
+document.addEventListener('DOMContentLoaded', async () => {
+    const urlParams = new URLSearchParams(window.location.search);
+    const propId = urlParams.get('id');
+
+    if (!propId) {
+        window.location.href = '../index.html';
+        return;
+    }
+
+    try {
+        const response = await apiService.properties.getById(propId);
+        if (response.success) {
+            renderDetails(response.data);
+        } else {
+            alert('Imóvel não encontrado.');
+            window.location.href = '../index.html';
+        }
+    } catch (error) {
+        console.error('Erro ao carregar detalhes:', error);
+    }
+});
+
+function renderDetails(prop) {
+    // Textos básicos
+    document.getElementById('propTitle').innerText = prop.title;
+    document.getElementById('propLocation').innerText = prop.location;
+    document.getElementById('propPrice').innerText = formatCurrency(prop.price);
+    document.getElementById('propDescription').innerText = prop.description;
+    document.getElementById('propType').innerText = prop.type;
+    document.getElementById('ownerName').innerText = prop.owner_name;
+    document.getElementById('mainImage').src = prop.main_image;
+    document.getElementById('propDate').innerText = new Date(prop.created_at).toLocaleDateString('pt-AO');
+
+    // Galeria de miniaturas
+    const gallery = document.getElementById('photoGallery');
+    const images = [prop.main_image, prop.image_1, prop.image_2, prop.image_3, prop.image_4].filter(img => img);
+    
+    gallery.innerHTML = ''; // Limpa placeholder
+    images.forEach(img => {
+        const item = document.createElement('div');
+        item.className = 'gallery-item';
+        item.innerHTML = `<img src="${img}" alt="Gallery thumb">`;
+        item.onclick = () => { document.getElementById('mainImage').src = img; };
+        gallery.appendChild(item);
+    });
+
+    // Ativação do Visualizador 360°
+    if (prop.is_360) {
+        const btn360 = document.getElementById('btn360View');
+        btn360.classList.remove('d-none');
+        btn360.onclick = () => init360Viewer(prop.main_image);
+    }
+
+    // Botões de Ação (WhatsApp e Telefone)
+    const whatsappMsg = encodeURIComponent(`Olá, vi o anúncio "${prop.title}" no Angola Imóveis e gostaria de saber mais.`);
+    document.getElementById('whatsappBtn').href = `https://wa.me/${prop.phone_primary.replace(/\s/g, '')}?text=${whatsappMsg}`;
+    document.getElementById('callBtn').href = `tel:${prop.phone_primary}`;
+}
+
+function init360Viewer(imageUrl) {
+    const viewerDiv = document.getElementById('viewer-360');
+    viewerDiv.style.display = 'block';
+    viewerDiv.scrollIntoView({ behavior: 'smooth' });
+    
+    // Remove qualquer instância anterior
+    viewerDiv.innerHTML = '';
+
+    new PhotoSphereViewer.Viewer({
+        container: viewerDiv,
+        panorama: imageUrl,
+        loadingTxt: 'A carregar vista 360...',
+        navbar: ['autorotate', 'zoom', 'fullscreen']
+    });
+}
+
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-AO', {
+        style: 'currency',
+        currency: 'AOA',
+    }).format(value).replace('Kz', 'Kz ');
+}
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\js\main.js =====
+
+document.addEventListener('DOMContentLoaded', () => {
+    loadProperties();
+    setupSearch();
+});
+
+/**
+ * Carrega os imóveis do backend e renderiza na tela
+ */
+async function loadProperties() {
+    const featuredContainer = document.getElementById('featuredListings');
+    const gridContainer = document.getElementById('allPropertiesGrid');
+
+    try {
+        const response = await apiService.properties.getAll();
+
+        if (response.success) {
+            const properties = response.data;
+
+            if (properties.length === 0) {
+                gridContainer.innerHTML = '<p class="text-center text-secondary py-5">Nenhum imóvel disponível no momento.</p>';
+                return;
+            }
+
+            // Limpar containers
+            featuredContainer.innerHTML = '';
+            gridContainer.innerHTML = '';
+
+            properties.forEach((prop, index) => {
+                // Os primeiros 3 imóveis vão para o "Destaque" (Featured)
+                if (index < 3) {
+                    featuredContainer.appendChild(createFeaturedCard(prop));
+                }
+                
+                // Todos os imóveis aparecem na grade principal
+                gridContainer.appendChild(createVerticalCard(prop));
+            });
+
+        } else {
+            console.error('Erro ao carregar:', response.message);
+        }
+    } catch (error) {
+        console.error('Erro na requisição:', error);
+    }
+}
+
+/**
+ * Cria o card para o scroll horizontal (Featured)
+ */
+function createFeaturedCard(prop) {
+    const div = document.createElement('div');
+    div.className = 'card-featured';
+    div.innerHTML = `
+        <div class="card-img-wrapper">
+            <img src="${prop.main_image}" class="card-img-top" alt="${prop.title}">
+            <span class="tag-sale">Para Arrendar</span>
+            <button class="btn-wishlist"><i class="bi bi-heart"></i></button>
+        </div>
+        <div class="p-3">
+            <div class="d-flex justify-content-between align-items-center mb-1">
+                <span class="small text-secondary"><i class="bi bi-geo-alt"></i> ${prop.location}</span>
+                <span class="price-tag">${formatCurrency(prop.price)}</span>
+            </div>
+            <h6 class="fw-bold text-truncate">${prop.title}</h6>
+            <div class="d-flex gap-3 small text-secondary mt-2">
+                <span><i class="bi bi- house"></i> ${prop.type}</span>
+                ${prop.is_360 ? '<span class="text-neon"><i class="bi bi-view-360"></i> 360°</span>' : ''}
+            </div>
+            <a href="pages/details.html?id=${prop.id}" class="btn btn-primary-neon w-100 mt-3 py-2 rounded-3 fw-bold">Ver Detalhes</a>
+        </div>
+    `;
+    return div;
+}
+
+/**
+ * Cria o card para a lista vertical (Nearby)
+ */
+function createVerticalCard(prop) {
+    const col = document.createElement('div');
+    col.className = 'col-12';
+    col.innerHTML = `
+        <a href="pages/details.html?id=${prop.id}" class="property-card-vertical">
+            <img src="${prop.main_image}" alt="${prop.title}">
+            <div class="flex-grow-1 overflow-hidden">
+                <div class="d-flex justify-content-between">
+                    <span class="price-tag small">${formatCurrency(prop.price)}</span>
+                    ${prop.is_360 ? '<i class="bi bi-view-360 text-neon"></i>' : ''}
+                </div>
+                <h6 class="fw-bold text-white text-truncate mb-1 mt-1">${prop.title}</h6>
+                <p class="text-secondary small mb-1"><i class="bi bi-geo-alt"></i> ${prop.location}</p>
+                <div class="d-flex gap-2 extra-info">
+                    <span class="badge bg-dark border border-secondary text-secondary">${prop.type}</span>
+                </div>
+            </div>
+        </a>
+    `;
+    return col;
+}
+
+/**
+ * Configura o campo de busca
+ */
+function setupSearch() {
+    const searchInput = document.getElementById('searchInput');
+    let timeout = null;
+
+    searchInput.addEventListener('input', (e) => {
+        clearTimeout(timeout);
+        timeout = setTimeout(async () => {
+            const query = e.target.value;
+            const response = await apiService.properties.getAll({ location: query });
+            
+            const gridContainer = document.getElementById('allPropertiesGrid');
+            gridContainer.innerHTML = '';
+            
+            if (response.success && response.data.length > 0) {
+                response.data.forEach(prop => gridContainer.appendChild(createVerticalCard(prop)));
+            } else {
+                gridContainer.innerHTML = '<p class="text-center text-secondary py-4">Nenhum resultado encontrado.</p>';
+            }
+        }, 500);
+    });
+}
+
+/**
+ * Formata valores para a moeda local (Kwanza - Kz)
+ */
+function formatCurrency(value) {
+    return new Intl.NumberFormat('pt-AO', {
+        style: 'currency',
+        currency: 'AOA',
+    }).format(value).replace('Kz', 'Kz ');
+}
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\js\publish.js =====
+
+/**
+ * PUBLISH LOGIC
+ * Gerencia o formulário de anúncio, previews de imagem e regras de pagamento.
+ */
+
+document.addEventListener('DOMContentLoaded', async () => {
+    // 1. Verificar Autenticação
+    if (!apiService.getToken()) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    // 2. Verificar Quota de Publicação (Regra de Negócio: 1 grátis, resto pago)
+    checkPublicationQuota();
+
+    // 3. Inicializar Previews de Imagem
+    setupImagePreviews();
+
+    // 4. Lógica de Submissão do Formulário
+    const form = document.getElementById('publishForm');
+    form.addEventListener('submit', handlePublishSubmit);
+
+    // 5. Lógica de Botão de Pagamento no Modal
+    const btnPayNow = document.getElementById('btnPayNow');
+    if (btnPayNow) {
+        btnPayNow.addEventListener('click', handleProcessPayment);
+    }
+});
+
+/**
+ * Verifica se o usuário já atingiu o limite gratuito e exibe aviso
+ */
+async function checkPublicationQuota() {
+    try {
+        const quotaRes = await apiService.payments.getQuota();
+        const myPropsRes = await apiService.properties.getMyProperties();
+        
+        const allowed = quotaRes.allowed_posts;
+        const current = myPropsRes.data.length;
+
+        if (current >= allowed) {
+            const notice = document.getElementById('paymentNotice');
+            if (notice) notice.classList.remove('d-none');
+        }
+    } catch (error) {
+        console.error('Erro ao verificar quota:', error);
+    }
+}
+
+/**
+ * Configura os campos de upload para mostrar a imagem selecionada imediatamente
+ */
+function setupImagePreviews() {
+    const uploadFields = [
+        { id: 'main_image', preview: 'prev_main' },
+        { id: 'image_1', preview: 'prev_1' },
+        { id: 'image_2', preview: 'prev_2' }
+    ];
+
+    uploadFields.forEach(field => {
+        const input = document.getElementById(field.id);
+        const img = document.getElementById(field.preview);
+
+        if (input && img) {
+            input.addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    reader.onload = (e) => {
+                        img.src = e.target.result;
+                        img.classList.remove('d-none');
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+    });
+}
+
+/**
+ * Processa a submissão do formulário via FormData para o Backend
+ */
+async function handlePublishSubmit(e) {
+    e.preventDefault();
+    
+    const btn = document.getElementById('btnSubmit');
+    const form = e.target;
+    const formData = new FormData(form);
+
+    // Feedback Visual
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> A publicar anúncio...';
+
+    try {
+        const response = await apiService.properties.create(formData);
+
+        if (response.success) {
+            alert('Sucesso! O seu imóvel foi publicado em Angola Imóveis.');
+            window.location.href = 'dashboard.html';
+        } else if (response.requirePayment) {
+            // Se o backend bloquear por limite de 1 imóvel grátis
+            const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+            paymentModal.show();
+        } else {
+            alert('Erro: ' + response.message);
+        }
+    } catch (error) {
+        console.error('Erro na submissão:', error);
+        alert('Ocorreu um erro ao conectar com o servidor.');
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Publicar Anúncio';
+    }
+}
+
+/**
+ * Simula o processamento do pagamento de 5.000 Kz
+ */
+async function handleProcessPayment() {
+    const btn = document.getElementById('btnPayNow');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> A processar pagamento...';
+
+    try {
+        const response = await apiService.payments.pay();
+
+        if (response.success) {
+            alert('Pagamento de 5.000 Kz confirmado via Multicaixa/Unitel Money!');
+            // Fecha modal e tenta publicar novamente
+            const modalEl = document.getElementById('paymentModal');
+            const modal = bootstrap.Modal.getInstance(modalEl);
+            modal.hide();
+            
+            // Dispara o clique de publicação automaticamente após o pagamento
+            document.getElementById('publishForm').requestSubmit();
+        } else {
+            alert('Erro ao processar pagamento. Tente novamente.');
+        }
+    } catch (error) {
+        console.error(error);
+    } finally {
+        btn.disabled = false;
+        btn.innerText = 'Pagar e Publicar';
+    }
+}
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\pages\chat.html =====
+
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mensagens | Angola Imóveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .chat-container { height: 100vh; display: flex; flex-direction: column; overflow: hidden; }
+        .inbox-list { flex: 1; overflow-y: auto; padding: 20px; }
+        .chat-window { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: var(--bg-dark); z-index: 1100; display: none; flex-direction: column; }
+        
+        /* Inbox Cards */
+        .conversa-item {
+            background: #181818; border-radius: 18px; padding: 15px; margin-bottom: 12px;
+            display: flex; align-items: center; gap: 15px; cursor: pointer; transition: 0.2s;
+        }
+        .conversa-item:active { transform: scale(0.98); background: #222; }
+        .user-avatar { width: 50px; height: 50px; background: var(--neon-lime); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #000; font-weight: bold; }
+        .unread-dot { width: 10px; height: 10px; background: var(--neon-lime); border-radius: 50%; }
+
+        /* Message Bubbles */
+        .messages-area { flex: 1; overflow-y: auto; padding: 20px; display: flex; flex-direction: column; gap: 10px; }
+        .msg { max-width: 80%; padding: 12px 16px; border-radius: 18px; font-size: 0.95rem; line-height: 1.4; position: relative; }
+        .msg-sent { align-self: flex-end; background: var(--neon-lime); color: #000; border-bottom-right-radius: 4px; }
+        .msg-received { align-self: flex-start; background: #222; color: #fff; border-bottom-left-radius: 4px; }
+        .msg img { max-width: 100%; border-radius: 10px; margin-top: 5px; }
+        .msg-time { font-size: 0.7rem; opacity: 0.6; margin-top: 5px; display: block; text-align: right; }
+
+        /* Input Area */
+        .chat-input-bar { padding: 15px; background: #121212; border-top: 1px solid #222; display: flex; gap: 10px; align-items: center; }
+        .btn-attach { background: #222; color: white; border: none; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+        .input-text { flex: 1; background: #1e1e1e; border: 1px solid #333; color: white; border-radius: 25px; padding: 10px 20px; outline: none; }
+        .btn-send { background: var(--neon-lime); color: #000; border: none; width: 45px; height: 45px; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+    </style>
+</head>
+<body class="bg-dark">
+
+    <div class="container-mobile chat-container">
+        
+        <!-- Header Inbox -->
+        <header class="p-3 d-flex justify-content-between align-items-center border-bottom border-secondary border-opacity-10">
+            <h4 class="fw-bold mb-0">Mensagens</h4>
+            <div class="bg-card p-2 rounded-circle"><i class="bi bi-search"></i></div>
+        </header>
+
+        <!-- Lista de Conversas (Inbox) -->
+        <div id="inboxList" class="inbox-list">
+            <!-- Carregado via JS do Neon DB -->
+            <div class="text-center py-5">
+                <div class="spinner-border text-neon" role="status"></div>
+            </div>
+        </div>
+
+        <!-- Janela de Chat Ativo (Hidden by default) -->
+        <div id="chatWindow" class="chat-window">
+            <header class="p-3 d-flex align-items-center gap-3 border-bottom border-secondary border-opacity-10">
+                <button onclick="closeChat()" class="btn btn-link text-white p-0"><i class="bi bi-chevron-left fs-4"></i></button>
+                <div class="user-avatar" style="width: 40px; height: 40px;" id="activeChatAvatar">?</div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-bold mb-0" id="activeChatName">Nome do Usuário</h6>
+                    <span class="small text-neon" style="font-size: 0.7rem;">● Online agora</span>
+                </div>
+            </header>
+
+            <div id="messagesArea" class="messages-area">
+                <!-- Mensagens em tempo real aqui -->
+            </div>
+
+            <form id="chatForm" class="chat-input-bar">
+                <input type="file" id="chatFileInput" hidden accept="image/*,.pdf,.doc,.docx">
+                <button type="button" class="btn-attach" onclick="document.getElementById('chatFileInput').click()">
+                    <i class="bi bi-paperclip fs-5"></i>
+                </button>
+                <input type="text" id="chatInput" class="input-text" placeholder="Escreve a tua mensagem...">
+                <button type="submit" class="btn-send">
+                    <i class="bi bi-send-fill fs-5"></i>
+                </button>
+            </form>
+        </div>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="../index.html" class="nav-item">
+                <i class="bi bi-house-door"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-geo-alt"></i>
+                <span>Mapa</span>
+            </a>
+            <div class="nav-item-center">
+                <a href="publish.html" class="btn-plus">
+                    <i class="bi bi-plus-lg"></i>
+                </a>
+            </div>
+            <a href="chat.html" class="nav-item active">
+                <i class="bi bi-chat-dots-fill"></i>
+                <span>Chat</span>
+            </a>
+            <a href="dashboard.html" class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Perfil</span>
+            </a>
+        </nav>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="../js/api.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+</html>
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\pages\dashboard.html =====
+
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel do Utilizador | Angola Imóveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .dashboard-container { padding-top: 30px; padding-bottom: 100px; }
+        .profile-card {
+            background: linear-gradient(135deg, #181818 0%, #0b0b0b 100%);
+            border-radius: 24px;
+            padding: 25px;
+            border: 1px solid #222;
+            margin-bottom: 30px;
+        }
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+        .stat-box {
+            background: #181818;
+            padding: 20px;
+            border-radius: 20px;
+            text-align: center;
+        }
+        .stat-box h2 { color: var(--neon-lime); font-weight: 700; margin-bottom: 5px; }
+        .stat-box p { color: #888; font-size: 0.8rem; margin-bottom: 0; }
+        
+        .manage-card {
+            background: #181818;
+            border-radius: 20px;
+            padding: 15px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .manage-card img {
+            width: 70px;
+            height: 70px;
+            border-radius: 12px;
+            object-fit: cover;
+        }
+        .status-badge {
+            font-size: 0.7rem;
+            padding: 4px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+        .status-active { background: rgba(198, 255, 0, 0.1); color: var(--neon-lime); }
+        .status-pending { background: rgba(255, 193, 7, 0.1); color: #ffc107; }
+
+        .btn-action {
+            width: 35px;
+            height: 35px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            color: white;
+            transition: 0.2s;
+        }
+        .btn-edit { background: #333; }
+        .btn-delete { background: rgba(220, 53, 69, 0.1); color: #dc3545; }
+        
+        .logout-link { color: #dc3545; text-decoration: none; font-weight: 600; }
+    </style>
+</head>
+<body class="bg-dark">
+
+    <div class="container-mobile dashboard-container px-3">
+        
+        <!-- Header -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <h4 class="fw-bold mb-0">Meu Perfil</h4>
+            <a href="#" onclick="logout()" class="logout-link small">Sair da conta</a>
+        </div>
+
+        <!-- User Info -->
+        <div class="profile-card d-flex align-items-center gap-3">
+            <div class="rounded-circle bg-neon d-flex align-items-center justify-content-center" style="width: 65px; height: 65px; background: var(--neon-lime); color: #000;">
+                <i class="bi bi-person-fill fs-2"></i>
+            </div>
+            <div>
+                <h5 class="fw-bold mb-0" id="userName">...</h5>
+                <p class="text-secondary small mb-0" id="userEmail">...</p>
+            </div>
+        </div>
+
+        <!-- Quota & Stats -->
+        <div class="stats-grid">
+            <div class="stat-box">
+                <h2 id="totalProps">0</h2>
+                <p>Publicados</p>
+            </div>
+            <div class="stat-box">
+                <h2 id="quotaLeft">0</h2>
+                <p>Quota Restante</p>
+            </div>
+        </div>
+
+        <!-- Properties Management -->
+        <div class="d-flex justify-content-between align-items-center mb-3">
+            <h6 class="fw-bold mb-0">Gerir Meus Anúncios</h6>
+            <a href="publish.html" class="text-neon-link small text-decoration-none">+ Novo</a>
+        </div>
+
+        <div id="myPropertiesList">
+            <!-- JS carrega aqui -->
+            <div class="text-center py-5">
+                <div class="spinner-border text-neon" role="status"></div>
+            </div>
+        </div>
+
+        <!-- History -->
+        <h6 class="fw-bold mt-4 mb-3">Histórico de Pagamentos</h6>
+        <div id="paymentHistory" class="mb-5">
+            <p class="text-secondary small text-center py-3">Nenhum pagamento registrado.</p>
+        </div>
+
+        <!-- Bottom Navigation (Fixed) -->
+        <nav class="bottom-nav">
+            <a href="../index.html" class="nav-item">
+                <i class="bi bi-house-door"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-geo-alt"></i>
+                <span>Mapa</span>
+            </a>
+            <div class="nav-item-center">
+                <a href="publish.html" class="btn-plus">
+                    <i class="bi bi-plus-lg"></i>
+                </a>
+            </div>
+            <a href="#" class="nav-item">
+                <i class="bi bi-chat-dots"></i>
+                <span>Chat</span>
+            </a>
+            <a href="dashboard.html" class="nav-item active">
+                <i class="bi bi-person-fill"></i>
+                <span>Perfil</span>
+            </a>
+        </nav>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!apiService.getToken()) {
+                window.location.href = 'login.html';
+                return;
+            }
+            loadDashboardData();
+        });
+
+        async function loadDashboardData() {
+            try {
+                // 1. Carregar Perfil
+                const userRes = await apiService.auth.getMe();
+                if (userRes.success) {
+                    document.getElementById('userName').innerText = userRes.user.name;
+                    document.getElementById('userEmail').innerText = userRes.user.email;
+                }
+
+                // 2. Carregar Imóveis do Usuário
+                const propsRes = await apiService.properties.getMyProperties();
+                const container = document.getElementById('myPropertiesList');
+                container.innerHTML = '';
+
+                if (propsRes.success) {
+                    document.getElementById('totalProps').innerText = propsRes.data.length;
+                    
+                    if (propsRes.data.length === 0) {
+                        container.innerHTML = '<p class="text-secondary text-center small py-4">Você ainda não publicou nada.</p>';
+                    } else {
+                        propsRes.data.forEach(prop => {
+                            container.innerHTML += `
+                                <div class="manage-card">
+                                    <img src="${prop.main_image}" alt="thumb">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <h6 class="fw-bold mb-1 text-truncate" style="font-size: 0.9rem;">${prop.title}</h6>
+                                        <div class="d-flex align-items-center gap-2">
+                                            <span class="status-badge status-active">Ativo</span>
+                                            <span class="text-secondary small">${formatCurrency(prop.price)}</span>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex gap-2">
+                                        <button onclick="deleteProperty(${prop.id})" class="btn-action btn-delete"><i class="bi bi-trash"></i></button>
+                                    </div>
+                                </div>
+                            `;
+                        });
+                    }
+                }
+
+                // 3. Carregar Quota
+                const quotaRes = await apiService.payments.getQuota();
+                if (quotaRes.success) {
+                    const remaining = quotaRes.allowed_posts - propsRes.data.length;
+                    document.getElementById('quotaLeft').innerText = remaining > 0 ? remaining : 0;
+                }
+
+            } catch (error) {
+                console.error(error);
+            }
+        }
+
+        async function deleteProperty(id) {
+            if (confirm('Tem certeza que deseja apagar este anúncio?')) {
+                const res = await apiService.properties.delete(id);
+                if (res.success) {
+                    loadDashboardData();
+                } else {
+                    alert('Erro ao apagar: ' + res.message);
+                }
+            }
+        }
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-AO', {
+                style: 'currency',
+                currency: 'AOA',
+            }).format(value).replace('Kz', 'Kz ');
+        }
+    </script>
+</body>
+</html>
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\pages\details.html =====
+
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Imóvel | Angola Imóveis</title>
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Photo Sphere Viewer CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css">
+    
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .details-header {
+            position: relative;
+            height: 350px;
+        }
+        .details-img-main {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .header-actions {
+            position: absolute;
+            top: 20px;
+            left: 0;
+            width: 100%;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            z-index: 10;
+        }
+        .action-circle {
+            width: 45px;
+            height: 45px;
+            background: rgba(0,0,0,0.4);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            border: none;
+        }
+        .details-content {
+            background: var(--bg-dark);
+            border-radius: 30px 30px 0 0;
+            margin-top: -30px;
+            position: relative;
+            padding: 30px 20px;
+            min-height: 500px;
+        }
+        .info-pill {
+            background: #1e1e1e;
+            padding: 15px;
+            border-radius: 20px;
+            text-align: center;
+            flex: 1;
+        }
+        .info-pill i { font-size: 1.5rem; color: var(--neon-lime); display: block; margin-bottom: 5px; }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin-top: 20px;
+        }
+        .gallery-item {
+            height: 80px;
+            border-radius: 12px;
+            overflow: hidden;
+            cursor: pointer;
+        }
+        .gallery-item img { width: 100%; height: 100%; object-fit: cover; }
+        
+        #viewer-360 {
+            width: 100%;
+            height: 300px;
+            border-radius: 20px;
+            margin-top: 20px;
+            display: none;
+        }
+        .btn-360-toggle {
+            background: var(--neon-lime);
+            color: #000;
+            border-radius: 20px;
+            padding: 5px 15px;
+            font-size: 0.8rem;
+            font-weight: bold;
+            position: absolute;
+            bottom: 50px;
+            right: 20px;
+        }
+        .sticky-bottom-contact {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 500px;
+            background: rgba(11, 11, 11, 0.9);
+            backdrop-filter: blur(15px);
+            padding: 20px;
+            border-top: 1px solid #222;
+            display: flex;
+            gap: 15px;
+            z-index: 100;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+
+    <div class="container-mobile pb-5">
+        
+        <!-- Header Image -->
+        <div class="details-header" id="headerContainer">
+            <div class="header-actions">
+                <a href="../index.html" class="action-circle">
+                    <i class="bi bi-chevron-left"></i>
+                </a>
+                <div class="d-flex gap-2">
+                    <button class="action-circle"><i class="bi bi-share"></i></button>
+                    <button class="action-circle"><i class="bi bi-heart"></i></button>
+                </div>
+            </div>
+            <img id="mainImage" src="" class="details-img-main" alt="Imóvel">
+            <button id="btn360View" class="btn-360-toggle d-none">
+                <i class="bi bi-view-360 me-1"></i> VER 360°
+            </button>
+        </div>
+
+        <!-- Content -->
+        <div class="details-content">
+            <div class="d-flex justify-content-between align-items-start mb-3">
+                <div>
+                    <h2 id="propTitle" class="fw-bold mb-1">...</h2>
+                    <p class="text-secondary"><i class="bi bi-geo-alt"></i> <span id="propLocation">...</span></p>
+                </div>
+                <div class="text-end">
+                    <h3 id="propPrice" class="text-neon fw-bold mb-0">...</h3>
+                    <span class="text-secondary small">/mês</span>
+                </div>
+            </div>
+
+            <!-- Specs -->
+            <div class="d-flex gap-3 mb-4">
+                <div class="info-pill">
+                    <i class="bi bi-house-door"></i>
+                    <span id="propType" class="small text-secondary">...</span>
+                </div>
+                <div class="info-pill">
+                    <i class="bi bi-shield-check"></i>
+                    <span class="small text-secondary">Verificado</span>
+                </div>
+                <div class="info-pill">
+                    <i class="bi bi-calendar-event"></i>
+                    <span id="propDate" class="small text-secondary">...</span>
+                </div>
+            </div>
+
+            <h5 class="fw-bold mb-3">Descrição</h5>
+            <p id="propDescription" class="text-secondary lh-lg mb-4">...</p>
+
+            <h5 class="fw-bold mb-3">Galeria de Fotos</h5>
+            <div class="gallery-grid" id="photoGallery">
+                <!-- JS Carrega as thumbs aqui -->
+            </div>
+
+            <!-- 360 Viewer Container -->
+            <div id="viewer-360"></div>
+
+            <div class="mt-4 mb-5 p-3 rounded-4 bg-card d-flex align-items-center justify-content-between">
+                <div class="d-flex align-items-center gap-3">
+                    <div class="bg-neon rounded-circle d-flex align-items-center justify-content-center" style="width: 50px; height: 50px; background: var(--neon-lime); color: #000;">
+                        <i class="bi bi-person-fill fs-4"></i>
+                    </div>
+                    <div>
+                        <p class="mb-0 fw-bold" id="ownerName">...</p>
+                        <p class="mb-0 text-secondary small">Proprietário</p>
+                    </div>
+                </div>
+                <a href="#" id="callBtn" class="action-circle bg-secondary bg-opacity-25">
+                    <i class="bi bi-telephone-fill"></i>
+                </a>
+            </div>
+            
+            <!-- Espaço para não cobrir o botão fixo -->
+            <div style="height: 100px;"></div>
+        </div>
+
+        <!-- Sticky Bottom Contact -->
+        <div class="sticky-bottom-contact">
+            <a href="#" id="whatsappBtn" class="btn btn-primary-neon flex-grow-1 py-3 rounded-4 fw-bold d-flex align-items-center justify-content-center gap-2">
+                <i class="bi bi-whatsapp fs-5"></i> Agendar Visita
+            </a>
+        </div>
+
+    </div>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.js"></script>
+    <script src="../js/api.js"></script>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', async () => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propId = urlParams.get('id');
+
+            if (!propId) {
+                window.location.href = '../index.html';
+                return;
+            }
+
+            try {
+                const response = await apiService.properties.getById(propId);
+                if (response.success) {
+                    renderDetails(response.data);
+                }
+            } catch (error) {
+                console.error(error);
+            }
+        });
+
+        function renderDetails(prop) {
+            document.getElementById('propTitle').innerText = prop.title;
+            document.getElementById('propLocation').innerText = prop.location;
+            document.getElementById('propPrice').innerText = formatCurrency(prop.price);
+            document.getElementById('propDescription').innerText = prop.description;
+            document.getElementById('propType').innerText = prop.type;
+            document.getElementById('ownerName').innerText = prop.owner_name;
+            document.getElementById('mainImage').src = prop.main_image;
+            document.getElementById('propDate').innerText = new Date(prop.created_at).toLocaleDateString('pt-AO');
+
+            // Galeria
+            const gallery = document.getElementById('photoGallery');
+            const images = [prop.main_image, prop.image_1, prop.image_2, prop.image_3, prop.image_4].filter(img => img);
+            
+            images.forEach(img => {
+                const item = document.createElement('div');
+                item.className = 'gallery-item';
+                item.innerHTML = `<img src="${img}" onclick="document.getElementById('mainImage').src = '${img}'">`;
+                gallery.appendChild(item);
+            });
+
+            // Lógica 360°
+            if (prop.is_360) {
+                const btn360 = document.getElementById('btn360View');
+                btn360.classList.remove('d-none');
+                btn360.addEventListener('click', () => {
+                    const viewerDiv = document.getElementById('viewer-360');
+                    viewerDiv.style.display = 'block';
+                    viewerDiv.scrollIntoView({ behavior: 'smooth' });
+                    
+                    new PhotoSphereViewer.Viewer({
+                        container: viewerDiv,
+                        panorama: prop.main_image, // Em um sistema real seria o campo is_360_image
+                        navbar: ['autorotate', 'zoom', 'fullscreen']
+                    });
+                });
+            }
+
+            // WhatsApp Button
+            const whatsappMsg = encodeURIComponent(`Olá, vi o seu anúncio do imóvel "${prop.title}" na plataforma Angola Imóveis e gostaria de mais informações.`);
+            document.getElementById('whatsappBtn').href = `https://wa.me/${prop.phone_primary}?text=${whatsappMsg}`;
+            document.getElementById('callBtn').href = `tel:${prop.phone_primary}`;
+        }
+
+        function formatCurrency(value) {
+            return new Intl.NumberFormat('pt-AO', {
+                style: 'currency',
+                currency: 'AOA',
+            }).format(value).replace('Kz', 'Kz ');
+        }
+    </script>
+</body>
+</html>
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\pages\login.html =====
+
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login | Angola Imóveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .login-container {
+            padding-top: 60px;
+        }
+        .form-control-custom {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 16px;
+            color: white;
+            padding: 15px 20px;
+            margin-bottom: 20px;
+        }
+        .form-control-custom:focus {
+            background: #252525;
+            border-color: var(--neon-lime);
+            box-shadow: none;
+            color: white;
+        }
+        .back-btn {
+            width: 45px;
+            height: 45px;
+            background: #1e1e1e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+
+    <div class="container-mobile p-4 login-container">
+        
+        <a href="../index.html" class="back-btn">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+
+        <div class="mb-5">
+            <h1 class="fw-bold">Bem-vindo de volta!</h1>
+            <p class="text-secondary">Faça login para gerenciar seus imóveis e encontrar novas oportunidades.</p>
+        </div>
+
+        <div id="alertPlaceholder"></div>
+
+        <form id="loginForm">
+            <div class="mb-1">
+                <label class="small text-secondary mb-2 ms-1">E-mail</label>
+                <input type="email" id="email" class="form-control form-control-custom" placeholder="exemplo@email.com" required>
+            </div>
+
+            <div class="mb-1">
+                <label class="small text-secondary mb-2 ms-1">Palavra-passe</label>
+                <div class="position-relative">
+                    <input type="password" id="password" class="form-control form-control-custom" placeholder="Sua senha" required>
+                </div>
+            </div>
+
+            <div class="text-end mb-4">
+                <a href="#" class="text-neon-link small text-decoration-none">Esqueceu a senha?</a>
+            </div>
+
+            <button type="submit" id="btnLogin" class="btn btn-primary-neon w-100 py-3 rounded-4 fw-bold mb-4">
+                Entrar
+            </button>
+
+            <div class="text-center">
+                <p class="text-secondary">Não tem uma conta? 
+                    <a href="register.html" class="text-neon-link fw-bold text-decoration-none">Registe-se</a>
+                </p>
+            </div>
+        </form>
+
+        <!-- Social Login (Visual apenas) -->
+        <div class="mt-5">
+            <div class="d-flex align-items-center mb-4">
+                <hr class="flex-grow-1 border-secondary">
+                <span class="px-3 text-secondary small">Ou entre com</span>
+                <hr class="flex-grow-1 border-secondary">
+            </div>
+
+            <div class="d-flex gap-3">
+                <button class="btn btn-dark-outline flex-grow-1 py-3 rounded-4">
+                    <i class="bi bi-google me-2"></i> Google
+                </button>
+                <button class="btn btn-dark-outline flex-grow-1 py-3 rounded-4">
+                    <i class="bi bi-apple me-2"></i> Apple
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script src="../js/auth.js"></script>
+    <script>
+        document.getElementById('loginForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const btn = document.getElementById('btnLogin');
+            const alertPlaceholder = document.getElementById('alertPlaceholder');
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> A entrar...';
+
+            try {
+                const response = await apiService.auth.login({ email, password });
+
+                if (response.success) {
+                    // Salvar Token e Dados do Usuário
+                    localStorage.setItem('token', response.user.token);
+                    localStorage.setItem('user', JSON.stringify(response.user));
+                    
+                    window.location.href = '../index.html';
+                } else {
+                    alertPlaceholder.innerHTML = `
+                        <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger rounded-4">
+                            <i class="bi bi-exclamation-circle me-2"></i> ${response.message}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Entrar';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\pages\publish.html =====
+
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Imóvel | Angola Imóveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .publish-container { padding-top: 30px; padding-bottom: 100px; }
+        .form-section { background: #181818; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
+        .image-upload-box {
+            width: 100%;
+            height: 150px;
+            border: 2px dashed #333;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+        }
+        .image-upload-box:hover { border-color: var(--neon-lime); }
+        .image-upload-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; }
+        .grid-uploads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .form-control-custom {
+            background: #252525; border: 1px solid #333; border-radius: 12px; color: white; padding: 12px 15px;
+        }
+        .form-control-custom:focus { background: #2b2b2b; border-color: var(--neon-lime); box-shadow: none; color: white; }
+        .input-group-text-custom { background: #333; border: 1px solid #333; color: var(--neon-lime); border-radius: 12px 0 0 12px; }
+    </style>
+</head>
+<body class="bg-dark">
+
+    <div class="container-mobile publish-container px-3">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="../index.html" class="btn btn-dark-outline rounded-circle" style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-x-lg"></i>
+            </a>
+            <h5 class="fw-bold mb-0">Anunciar Imóvel</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div id="paymentNotice" class="alert alert-warning border-0 bg-warning bg-opacity-10 text-warning rounded-4 d-none mb-4">
+            <i class="bi bi-info-circle me-2"></i> Você já usou sua publicação grátis. Para postar este imóvel, será necessário pagar <strong>5.000 Kz</strong>.
+        </div>
+
+        <form id="publishForm">
+            <!-- Fotos -->
+            <div class="form-section">
+                <label class="fw-bold mb-3 d-block">Fotos do Imóvel</label>
+                <div class="mb-3">
+                    <p class="small text-secondary mb-2">Foto Principal (obrigatória)</p>
+                    <div class="image-upload-box" onclick="document.getElementById('main_image').click()">
+                        <i class="bi bi-camera fs-1 text-secondary"></i>
+                        <span class="small text-secondary">Adicionar foto</span>
+                        <img id="prev_main" src="" class="d-none">
+                    </div>
+                    <input type="file" id="main_image" name="main_image" hidden accept="image/*" required>
+                </div>
+
+                <p class="small text-secondary mb-2">Fotos Adicionais (até 4)</p>
+                <div class="grid-uploads">
+                    <div class="image-upload-box" onclick="document.getElementById('image_1').click()">
+                        <i class="bi bi-plus-lg text-secondary"></i>
+                        <img id="prev_1" src="" class="d-none">
+                    </div>
+                    <div class="image-upload-box" onclick="document.getElementById('image_2').click()">
+                        <i class="bi bi-plus-lg text-secondary"></i>
+                        <img id="prev_2" src="" class="d-none">
+                    </div>
+                    <input type="file" id="image_1" name="image_1" hidden accept="image/*">
+                    <input type="file" id="image_2" name="image_2" hidden accept="image/*">
+                </div>
+                
+                <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="is_360" name="is_360">
+                    <label class="form-check-label small text-white" for="is_360">Esta é uma imagem 360° interativa</label>
+                </div>
+            </div>
+
+            <!-- Detalhes -->
+            <div class="form-section">
+                <label class="fw-bold mb-3 d-block">Informações Básicas</label>
+                
+                <div class="mb-3">
+                    <input type="text" class="form-control form-control-custom" id="title" name="title" placeholder="Título do anúncio (ex: Vivenda T3 no Kilamba)" required>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-select form-control-custom" id="type" name="type" required>
+                        <option value="" disabled selected>Tipo de Imóvel</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Vivenda">Vivenda</option>
+                        <option value="Escritório">Escritório</option>
+                        <option value="Quarto">Quarto</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text input-group-text-custom fw-bold">Kz</span>
+                        <input type="number" class="form-control form-control-custom" id="price" name="price" placeholder="Preço mensal" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" class="form-control form-control-custom" id="location" name="location" placeholder="Localização (Bairro, Cidade)" required>
+                </div>
+            </div>
+
+            <!-- Contato -->
+            <div class="form-section">
+                <label class="fw-bold mb-3 d-block">Contatos para Interessados</label>
+                <div class="mb-3">
+                    <input type="tel" class="form-control form-control-custom" id="phone_primary" name="phone_primary" placeholder="Telefone Principal (WhatsApp)" required>
+                </div>
+                <div class="mb-0">
+                    <textarea class="form-control form-control-custom" id="description" name="description" rows="4" placeholder="Descrição completa do imóvel..." required></textarea>
+                </div>
+            </div>
+
+            <button type="submit" id="btnSubmit" class="btn btn-primary-neon w-100 py-3 rounded-4 fw-bold mt-2">
+                Publicar Anúncio
+            </button>
+        </form>
+    </div>
+
+    <!-- Modal de Pagamento -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-card border-0 rounded-4 p-3 text-center">
+                <div class="modal-body">
+                    <i class="bi bi-credit-card-2-back text-neon fs-1 mb-3 d-block"></i>
+                    <h4 class="fw-bold">Pagamento Necessário</h4>
+                    <p class="text-secondary">Para publicar mais imóveis, você deve pagar uma taxa única de 5.000 Kz por anúncio.</p>
+                    <div class="bg-dark p-3 rounded-3 mb-4">
+                        <span class="text-secondary small d-block">Total a pagar:</span>
+                        <span class="fs-3 fw-bold text-neon">5.000,00 Kz</span>
+                    </div>
+                    <button id="btnPayNow" class="btn btn-primary-neon w-100 py-3 rounded-4 fw-bold mb-2">Pagar e Publicar</button>
+                    <button class="btn btn-link text-secondary text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/api.js"></script>
+    <script>
+        const form = document.getElementById('publishForm');
+        const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+        
+        // Verificar limite ao carregar
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!apiService.getToken()) window.location.href = 'login.html';
+            
+            const quota = await apiService.payments.getQuota();
+            const myProps = await apiService.properties.getMyProperties();
+            
+            if (myProps.data.length >= quota.allowed_posts) {
+                document.getElementById('paymentNotice').classList.remove('d-none');
+            }
+        });
+
+        // Preview de Imagens
+        ['main_image', 'image_1', 'image_2'].forEach(id => {
+            document.getElementById(id).addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    const preview = document.getElementById('prev_' + (id === 'main_image' ? 'main' : id.split('_')[1]));
+                    reader.onload = e => { preview.src = e.target.result; preview.classList.remove('d-none'); }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Submissão do Formulário
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processando...';
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await apiService.properties.create(formData);
+
+                if (response.success) {
+                    alert('Imóvel publicado com sucesso!');
+                    window.location.href = 'dashboard.html';
+                } else if (response.requirePayment) {
+                    paymentModal.show();
+                } else {
+                    alert(response.message);
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Publicar Anúncio';
+            }
+        });
+
+        // Lógica de pagamento simulado
+        document.getElementById('btnPayNow').addEventListener('click', async () => {
+            const btn = document.getElementById('btnPayNow');
+            btn.disabled = true;
+            btn.innerHTML = 'Processando Pagamento...';
+
+            const payRes = await apiService.payments.pay();
+            if (payRes.success) {
+                alert('Pagamento confirmado! Enviando seu anúncio...');
+                // Tenta enviar o formulário novamente após o pagamento
+                form.dispatchEvent(new Event('submit'));
+            } else {
+                alert('Erro no pagamento. Tente novamente.');
+                btn.disabled = false;
+                btn.innerText = 'Pagar e Publicar';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\pages\register.html =====
+
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Conta | Angola Imóveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .register-container {
+            padding-top: 50px;
+        }
+        .form-control-custom {
+            background: #1e1e1e;
+            border: 1px solid #333;
+            border-radius: 16px;
+            color: white;
+            padding: 15px 20px;
+            margin-bottom: 15px;
+        }
+        .form-control-custom:focus {
+            background: #252525;
+            border-color: var(--neon-lime);
+            box-shadow: none;
+            color: white;
+        }
+        .back-btn {
+            width: 45px;
+            height: 45px;
+            background: #1e1e1e;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            margin-bottom: 25px;
+        }
+    </style>
+</head>
+<body class="bg-dark">
+
+    <div class="container-mobile p-4 register-container">
+        
+        <a href="login.html" class="back-btn">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+
+        <div class="mb-4">
+            <h1 class="fw-bold">Criar nova conta</h1>
+            <p class="text-secondary">Junte-se à maior plataforma de arrendamento de Angola.</p>
+        </div>
+
+        <div id="alertPlaceholder"></div>
+
+        <form id="registerForm">
+            <div class="mb-1">
+                <label class="small text-secondary mb-2 ms-1">Nome Completo</label>
+                <input type="text" id="name" class="form-control form-control-custom" placeholder="Como devemos chamar você?" required>
+            </div>
+
+            <div class="mb-1">
+                <label class="small text-secondary mb-2 ms-1">E-mail</label>
+                <input type="email" id="email" class="form-control form-control-custom" placeholder="exemplo@email.com" required>
+            </div>
+
+            <div class="mb-1">
+                <label class="small text-secondary mb-2 ms-1">Palavra-passe</label>
+                <input type="password" id="password" class="form-control form-control-custom" placeholder="Crie uma senha forte" required minlength="6">
+            </div>
+
+            <div class="mb-4">
+                <label class="small text-secondary mb-2 ms-1">Confirmar Palavra-passe</label>
+                <input type="password" id="confirmPassword" class="form-control form-control-custom" placeholder="Repita a senha" required>
+            </div>
+
+            <div class="form-check mb-4 ms-1">
+                <input class="form-check-input" type="checkbox" id="terms" required>
+                <label class="form-check-label small text-secondary" for="terms">
+                    Eu aceito os <a href="#" class="text-neon-link text-decoration-none">Termos de Uso</a> e a <a href="#" class="text-neon-link text-decoration-none">Política de Privacidade</a>.
+                </label>
+            </div>
+
+            <button type="submit" id="btnRegister" class="btn btn-primary-neon w-100 py-3 rounded-4 fw-bold mb-4">
+                Criar Conta
+            </button>
+
+            <div class="text-center">
+                <p class="text-secondary">Já tem uma conta? 
+                    <a href="login.html" class="text-neon-link fw-bold text-decoration-none">Faça Login</a>
+                </p>
+            </div>
+        </form>
+    </div>
+
+    <script src="../js/api.js"></script>
+    <script>
+        document.getElementById('registerForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const confirmPassword = document.getElementById('confirmPassword').value;
+            const alertPlaceholder = document.getElementById('alertPlaceholder');
+            const btn = document.getElementById('btnRegister');
+
+            // Validação de senha
+            if (password !== confirmPassword) {
+                alertPlaceholder.innerHTML = `
+                    <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger rounded-4">
+                        As palavras-passe não coincidem.
+                    </div>
+                `;
+                return;
+            }
+
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> A criar conta...';
+
+            try {
+                const response = await apiService.auth.register({ name, email, password });
+
+                if (response.success) {
+                    localStorage.setItem('token', response.user.token);
+                    localStorage.setItem('user', JSON.stringify(response.user));
+                    
+                    alertPlaceholder.innerHTML = `
+                        <div class="alert alert-success border-0 bg-success bg-opacity-10 text-success rounded-4">
+                            Conta criada com sucesso! Redirecionando...
+                        </div>
+                    `;
+                    
+                    setTimeout(() => {
+                        window.location.href = '../index.html';
+                    }, 1500);
+                } else {
+                    alertPlaceholder.innerHTML = `
+                        <div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger rounded-4">
+                            ${response.message}
+                        </div>
+                    `;
+                }
+            } catch (error) {
+                console.error(error);
+                alertPlaceholder.innerHTML = '<div class="alert alert-danger border-0 bg-danger bg-opacity-10 text-danger rounded-4">Erro ao conectar com o servidor.</div>';
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Criar Conta';
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+===== C:\Users\denyn\Downloads\arrenda\client\index.html =====
+
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angola Imóveis | Encontre seu Lar</title>
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Onboarding Screen (Splash) -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content text-center">
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=1000" alt="Hero" class="hero-bg">
+                <div class="overlay-gradient"></div>
+            </div>
+            <div class="onboarding-text p-4">
+                <h1 class="fw-bold">Your Trusted Guide <br> in Real Estate</h1>
+                <p class="text-secondary">Navigating the Path to Your Dream Home with Expertise and Integrity.</p>
+                <div class="dots-indicator mb-4">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button onclick="hideSplash()" class="btn btn-primary-neon w-100 mb-3 py-3 rounded-4 fw-bold">Get Started</button>
+                <a href="pages/login.html" class="btn btn-dark-outline w-100 py-3 rounded-4 fw-bold">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Layout -->
+    <main id="app-content" class="container-mobile">
+        
+        <!-- Header / Location -->
+        <header class="p-3 d-flex justify-content-between align-items-center">
+            <div>
+                <span class="text-secondary small d-block">Location</span>
+                <div class="dropdown">
+                    <button class="btn btn-link text-white p-0 text-decoration-none dropdown-toggle fw-semibold" type="button" data-bs-toggle="dropdown">
+                        Luanda, Angola <i class="bi bi-chevron-down small ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">Benguela</a></li>
+                        <li><a class="dropdown-item" href="#">Huambo</a></li>
+                        <li><a class="dropdown-item" href="#">Lubango</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="notification-badge">
+                <i class="bi bi-bell fs-4"></i>
+                <span class="badge-dot"></span>
+            </div>
+        </header>
+
+        <!-- Search Bar -->
+        <section class="px-3 mb-4">
+            <div class="search-container d-flex align-items-center">
+                <i class="bi bi-search ms-3 text-secondary"></i>
+                <input type="text" id="searchInput" class="form-control bg-transparent border-0 text-white" placeholder="Pesquisar casa ou bairro...">
+                <button class="btn-filter me-2">
+                    <i class="bi bi-sliders"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories-scroll ps-3 mb-4 d-flex">
+            <button class="category-pill active">Todos</button>
+            <button class="category-pill">Apartamento</button>
+            <button class="category-pill">Vivenda</button>
+            <button class="category-pill">Escritório</button>
+            <button class="category-pill">Quarto</button>
+        </section>
+
+        <!-- Featured Listings (Horizontal) -->
+        <section class="mb-4">
+            <div class="d-flex justify-content-between align-items-center px-3 mb-3">
+                <h5 class="fw-bold mb-0">Imóveis em Destaque</h5>
+                <a href="#" class="text-neon-link small text-decoration-none">Ver todos</a>
+            </div>
+            <div class="featured-scroll ps-3" id="featuredListings">
+                <!-- Carregado via JS -->
+                <div class="loading-placeholder"></div>
+            </div>
+        </section>
+
+        <!-- All Listings (Vertical) -->
+        <section class="px-3 pb-5 mb-5">
+            <h5 class="fw-bold mb-3">Próximos de si</h5>
+            <div id="allPropertiesGrid" class="row g-3">
+                <!-- Carregado via JS -->
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-geo-alt"></i>
+                <span>Mapa</span>
+            </a>
+            <div class="nav-item-center">
+                <a href="pages/publish.html" class="btn-plus">
+                    <i class="bi bi-plus-lg"></i>
+                </a>
+            </div>
+            <a href="#" class="nav-item">
+                <i class="bi bi-chat-dots"></i>
+                <span>Chat</span>
+            </a>
+            <a href="pages/dashboard.html" class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Perfil</span>
+            </a>
+        </nav>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function hideSplash() {
+            document.getElementById('splash-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.display = 'none';
+            }, 500);
+        }
+
+        // Verifica se o usuário já viu o splash antes
+        if(localStorage.getItem('visited')) {
+            document.getElementById('splash-screen').style.display = 'none';
+        } else {
+            localStorage.setItem('visited', 'true');
+        }
+    </script>
+</body>
+</html>
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\config\db.js =====
+
+const { Pool } = require('pg');
+require('dotenv').config();
+
+// Configuração do Pool de Conexão com SSL obrigatório para o Neon
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL,
+  ssl: {
+    rejectUnauthorized: false // Necessário para conexões seguras no Neon/AWS
+  }
+});
+
+/**
+ * Script de Inicialização do Banco de Dados
+ * Cria todas as tabelas necessárias se elas não existirem.
+ */
+const initDb = async () => {
+  try {
+    const client = await pool.connect();
+    console.log('✅ CONEXÃO ESTABELECIDA COM O NEON POSTGRESQL');
+
+    // 1. Tabela de Usuários
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS users (
+        id SERIAL PRIMARY KEY,
+        name VARCHAR(255) NOT NULL,
+        email VARCHAR(255) UNIQUE NOT NULL,
+        password VARCHAR(255) NOT NULL,
+        google_id VARCHAR(255),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // 2. Tabela de Imóveis (Persistência completa de dados e imagens)
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS properties (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        title VARCHAR(255) NOT NULL,
+        description TEXT NOT NULL,
+        price DECIMAL(15, 2) NOT NULL,
+        location VARCHAR(255) NOT NULL,
+        type VARCHAR(100) NOT NULL,
+        phone_primary VARCHAR(20) NOT NULL,
+        phone_secondary VARCHAR(20),
+        main_image TEXT NOT NULL,
+        image_1 TEXT,
+        image_2 TEXT,
+        image_3 TEXT,
+        image_4 TEXT,
+        is_360 BOOLEAN DEFAULT FALSE,
+        status VARCHAR(20) DEFAULT 'active',
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // 3. Tabela de Pagamentos (Controle de Quotas de 5.000 Kz)
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS payments (
+        id SERIAL PRIMARY KEY,
+        user_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        amount DECIMAL(15, 2) DEFAULT 5000.00,
+        status VARCHAR(50) DEFAULT 'pending',
+        reference VARCHAR(100),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    // 4. Tabela de Mensagens do Chat (Suporte a texto e ficheiros/imagens)
+    await client.query(`
+      CREATE TABLE IF NOT EXISTS messages (
+        id SERIAL PRIMARY KEY,
+        sender_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        receiver_id INTEGER REFERENCES users(id) ON DELETE CASCADE,
+        property_id INTEGER REFERENCES properties(id) ON DELETE SET NULL,
+        message_text TEXT,
+        file_url TEXT,
+        file_type VARCHAR(50), -- 'text', 'image', 'file'
+        is_read BOOLEAN DEFAULT FALSE,
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      );
+    `);
+
+    console.log('✅ PERSISTÊNCIA DE DADOS GARANTIDA: TODAS AS TABELAS ESTÃO PRONTAS');
+    client.release();
+  } catch (err) {
+    console.error('❌ ERRO CRÍTICO NA CONEXÃO COM O BANCO DE DADOS:', err.message);
+    process.exit(1);
+  }
+};
+
+// Executa a inicialização
+initDb();
+
+module.exports = {
+  query: (text, params) => pool.query(text, params),
+  pool
+};
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\controllers\authController.js =====
+
+const User = require('../models/User');
+const jwt = require('jsonwebtoken');
+
+/**
+ * FUNÇÃO AUXILIAR: Gerar Token JWT
+ * Cria um token assinado com o ID do utilizador que expira em 30 dias.
+ */
+const generateToken = (id) => {
+    return jwt.sign({ id }, process.env.JWT_SECRET, {
+        expiresIn: '30d',
+    });
+};
+
+const authController = {
+    /**
+     * @desc    Registar um novo utilizador em Angola Imóveis
+     * @route   POST /api/auth/register
+     */
+    register: async (req, res) => {
+        try {
+            const { name, email, password } = req.body;
+
+            // 1. Validação de campos obrigatórios
+            if (!name || !email || !password) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: 'Por favor, preencha o nome, e-mail e palavra-passe.' 
+                });
+            }
+
+            // 2. Verificar se o e-mail já existe no Neon
+            const userExists = await User.findByEmail(email);
+            if (userExists) {
+                return res.status(400).json({ 
+                    success: false, 
+                    message: 'Este e-mail já está registado na nossa plataforma.' 
+                });
+            }
+
+            // 3. Criar utilizador (Password será encriptada no Model)
+            const user = await User.create({ name, email, password });
+
+            if (user) {
+                res.status(201).json({
+                    success: true,
+                    message: 'Conta criada com sucesso!',
+                    user: {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        token: generateToken(user.id) // Envia token para login automático
+                    }
+                });
+            } else {
+                res.status(400).json({ success: false, message: 'Dados de utilizador inválidos.' });
+            }
+        } catch (error) {
+            console.error('Erro no registo:', error);
+            res.status(500).json({ success: false, message: 'Erro interno ao criar conta.' });
+        }
+    },
+
+    /**
+     * @desc    Autenticar utilizador existente
+     * @route   POST /api/auth/login
+     */
+    login: async (req, res) => {
+        try {
+            const { email, password } = req.body;
+
+            // 1. Buscar utilizador por e-mail no Neon
+            const user = await User.findByEmail(email);
+
+            // 2. Verificar se utilizador existe e se a password coincide
+            if (user && (await User.comparePassword(password, user.password))) {
+                res.json({
+                    success: true,
+                    message: `Bem-vindo de volta, ${user.name}!`,
+                    user: {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        token: generateToken(user.id)
+                    }
+                });
+            } else {
+                res.status(401).json({ 
+                    success: false, 
+                    message: 'E-mail ou palavra-passe incorretos.' 
+                });
+            }
+        } catch (error) {
+            console.error('Erro no login:', error);
+            res.status(500).json({ success: false, message: 'Erro ao processar o seu login.' });
+        }
+    },
+
+    /**
+     * @desc    Obter dados do perfil logado (Protegido)
+     * @route   GET /api/auth/me
+     */
+    getMe: async (req, res) => {
+        try {
+            // O req.user é injetado pelo middleware 'protect'
+            const user = await User.findById(req.user.id);
+            if (user) {
+                res.json({
+                    success: true,
+                    user: {
+                        id: user.id,
+                        name: user.name,
+                        email: user.email,
+                        created_at: user.created_at
+                    }
+                });
+            } else {
+                res.status(404).json({ success: false, message: 'Utilizador não encontrado.' });
+            }
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Erro ao buscar dados do perfil.' });
+        }
+    }
+};
+
+module.exports = authController;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\controllers\chatController.js =====
+
+const Chat = require('../models/Chat');
+const User = require('../models/User');
+
+const chatController = {
+    /**
+     * @desc    Obter lista de todas as conversas ativas (Inbox)
+     * @route   GET /api/chat/conversations
+     */
+    getConversations: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const conversations = await Chat.getConversations(userId);
+            
+            res.status(200).json({
+                success: true,
+                count: conversations.length,
+                data: conversations
+            });
+        } catch (error) {
+            console.error('Erro ao buscar conversas:', error);
+            res.status(500).json({ success: false, message: 'Erro ao carregar inbox.' });
+        }
+    },
+
+    /**
+     * @desc    Obter histórico de mensagens com um usuário específico
+     * @route   GET /api/chat/messages/:otherId
+     */
+    getMessages: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const otherId = req.params.otherId;
+
+            const messages = await Chat.getChatHistory(userId, otherId);
+            
+            // Marcar mensagens recebidas como lidas ao abrir a conversa
+            await Chat.markAsRead(otherId, userId);
+
+            res.status(200).json({
+                success: true,
+                count: messages.length,
+                data: messages
+            });
+        } catch (error) {
+            console.error('Erro ao buscar mensagens:', error);
+            res.status(500).json({ success: false, message: 'Erro ao carregar histórico.' });
+        }
+    },
+
+    /**
+     * @desc    Enviar nova mensagem (Texto ou Ficheiro/Foto)
+     * @route   POST /api/chat/send
+     */
+    sendMessage: async (req, res) => {
+        try {
+            const senderId = req.user.id;
+            const { receiver_id, property_id, message_text } = req.body;
+            
+            let fileUrl = null;
+            let fileType = 'text';
+
+            // Verificar se há upload de ficheiro/imagem via Multer
+            if (req.file) {
+                fileUrl = `/uploads/${req.file.filename}`;
+                // Detectar se é imagem ou outro arquivo
+                fileType = req.file.mimetype.startsWith('image/') ? 'image' : 'file';
+            }
+
+            if (!message_text && !fileUrl) {
+                return res.status(400).json({ message: 'A mensagem não pode estar vazia.' });
+            }
+
+            const messageData = {
+                sender_id: senderId,
+                receiver_id: receiver_id,
+                property_id: property_id || null,
+                message_text: message_text,
+                file_url: fileUrl,
+                file_type: fileType
+            };
+
+            // 1. Gravar no Banco de Dados (Persistência no Neon)
+            const savedMessage = await Chat.create(messageData);
+
+            // 2. Notificação via Socket.io (Tempo Real)
+            const io = req.app.get('socketio');
+            if (io) {
+                io.to(receiver_id.toString()).emit('message received', savedMessage);
+            }
+
+            res.status(201).json({
+                success: true,
+                data: savedMessage
+            });
+        } catch (error) {
+            console.error('Erro ao enviar mensagem:', error);
+            res.status(500).json({ success: false, message: 'Erro ao enviar mensagem.' });
+        }
+    },
+
+    /**
+     * @desc    Marcar conversa como lida
+     * @route   PUT /api/chat/read/:senderId
+     */
+    markRead: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const senderId = req.params.senderId;
+
+            await Chat.markAsRead(senderId, userId);
+
+            res.status(200).json({ success: true, message: 'Mensagens marcadas como lidas.' });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Erro ao atualizar status.' });
+        }
+    }
+};
+
+module.exports = chatController;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\controllers\paymentController.js =====
+
+const Payment = require('../models/Payment');
+
+const paymentController = {
+    /**
+     * @desc    Processar Pagamento de 5.000 Kz para quota extra
+     * @route   POST /api/payments/pay
+     * @access  Private (Apenas Utilizadores Logados)
+     */
+    processPayment: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const amount = 5000.00; // Valor fixo da regra de negócio em Angola (Kwanza)
+            
+            /**
+             * SIMULAÇÃO DE GATEWAY (Unitel Money / Multicaixa Express / Referência)
+             * Em um cenário real, aqui seria feita a chamada à API bancária.
+             * Para produção Render/Neon, geramos uma referência única.
+             */
+            const reference = 'KZ-' + Math.random().toString(36).substr(2, 9).toUpperCase();
+
+            // Criamos o registro como 'completed' para simular a aprovação imediata
+            // permitindo que o utilizador publique o imóvel logo após o clique.
+            const payment = await Payment.create({
+                user_id: userId,
+                amount: amount,
+                reference: reference,
+                status: 'completed' 
+            });
+
+            res.status(200).json({
+                success: true,
+                message: 'Pagamento de 5.000 Kz processado com sucesso! Quota de publicação aumentada.',
+                data: {
+                    reference: payment.reference,
+                    amount: payment.amount,
+                    status: payment.status,
+                    date: payment.created_at
+                }
+            });
+        } catch (error) {
+            console.error('Erro ao processar pagamento no Neon:', error);
+            res.status(500).json({ 
+                success: false, 
+                message: 'Erro interno ao processar pagamento. Tente novamente.' 
+            });
+        }
+    },
+
+    /**
+     * @desc    Obter histórico de transações do utilizador
+     * @route   GET /api/payments/history
+     */
+    getPaymentHistory: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const history = await Payment.findByUserId(userId);
+            
+            res.status(200).json({
+                success: true,
+                count: history.length,
+                data: history
+            });
+        } catch (error) {
+            console.error('Erro ao buscar histórico:', error);
+            res.status(500).json({ 
+                success: false, 
+                message: 'Erro ao buscar histórico de pagamentos.' 
+            });
+        }
+    },
+
+    /**
+     * @desc    Verificar quota atual (Quantos imóveis pode postar)
+     * @route   GET /api/payments/quota
+     */
+    getQuota: async (req, res) => {
+        try {
+            const userId = req.user.id;
+            const allowed = await Payment.getAllowedPostCount(userId);
+            
+            // O modelo já traz o cálculo: 1 grátis + pagamentos concluídos no Neon
+            res.status(200).json({
+                success: true,
+                allowed_posts: allowed
+            });
+        } catch (error) {
+            console.error('Erro ao verificar quota:', error);
+            res.status(500).json({ 
+                success: false, 
+                message: 'Erro ao verificar quota de publicações.' 
+            });
+        }
+    }
+};
+
+module.exports = paymentController;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\controllers\propertyController.js =====
+
+const Property = require('../models/Property');
+const User = require('../models/User');
+const Payment = require('../models/Payment');
+const fs = require('fs');
+const path = require('path');
+
+const propertyController = {
+    /**
+     * @desc    Listar todos os imóveis ativos (Público)
+     * @route   GET /api/properties
+     */
+    getProperties: async (req, res) => {
+        try {
+            const { location, type, minPrice, maxPrice } = req.query;
+            
+            let properties;
+            // Se houver filtros, usa a busca, caso contrário traz todos ativos
+            if (location || type || minPrice || maxPrice) {
+                properties = await Property.search({ location, type, minPrice, maxPrice });
+            } else {
+                properties = await Property.findAllActive();
+            }
+
+            res.json({
+                success: true,
+                count: properties.length,
+                data: properties
+            });
+        } catch (error) {
+            console.error('Erro ao buscar imóveis:', error);
+            res.status(500).json({ success: false, message: 'Erro ao carregar lista de imóveis.' });
+        }
+    },
+
+    /**
+     * @desc    Obter detalhes completos de um imóvel (Público)
+     * @route   GET /api/properties/:id
+     */
+    getPropertyById: async (req, res) => {
+        try {
+            const property = await Property.findById(req.params.id);
+            if (!property) {
+                return res.status(404).json({ success: false, message: 'Imóvel não encontrado.' });
+            }
+            res.json({ success: true, data: property });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Erro ao buscar detalhes.' });
+        }
+    },
+
+    /**
+     * @desc    Publicar novo imóvel (Privado - Com Regra de Quota)
+     * @route   POST /api/properties
+     */
+    createProperty: async (req, res) => {
+        try {
+            const userId = req.user.id;
+
+            // --- REGRA DE NEGÓCIO: VALIDAÇÃO DE QUOTA (1 Grátis / +1 Pago) ---
+            const currentCount = await User.countProperties(userId);
+            const allowedCount = await Payment.getAllowedPostCount(userId);
+
+            if (currentCount >= allowedCount) {
+                return res.status(403).json({
+                    success: false,
+                    message: 'Limite atingido. Pague 5.000 Kz para publicar mais um imóvel.',
+                    requirePayment: true
+                });
+            }
+
+            // Validar imagens do Multer
+            const files = req.files;
+            if (!files || !files['main_image']) {
+                return res.status(400).json({ success: false, message: 'A imagem principal é obrigatória.' });
+            }
+
+            const propertyData = {
+                user_id: userId,
+                title: req.body.title,
+                description: req.body.description,
+                price: parseFloat(req.body.price),
+                location: req.body.location,
+                type: req.body.type,
+                phone_primary: req.body.phone_primary,
+                phone_secondary: req.body.phone_secondary || null,
+                is_360: req.body.is_360 === 'true',
+                main_image: `/uploads/${files['main_image'][0].filename}`,
+                image_1: files['image_1'] ? `/uploads/${files['image_1'][0].filename}` : null,
+                image_2: files['image_2'] ? `/uploads/${files['image_2'][0].filename}` : null,
+                image_3: files['image_3'] ? `/uploads/${files['image_3'][0].filename}` : null,
+                image_4: files['image_4'] ? `/uploads/${files['image_4'][0].filename}` : null
+            };
+
+            const property = await Property.create(propertyData);
+
+            res.status(201).json({
+                success: true,
+                message: 'Imóvel publicado com sucesso no Neon!',
+                data: property
+            });
+        } catch (error) {
+            console.error('Erro ao criar imóvel:', error);
+            res.status(500).json({ success: false, message: 'Erro ao processar publicação.' });
+        }
+    },
+
+    /**
+     * @desc    Editar imóvel existente (Privado - Apenas Proprietário)
+     * @route   PUT /api/properties/:id
+     */
+    updateProperty: async (req, res) => {
+        try {
+            const propId = req.params.id;
+            const userId = req.user.id;
+
+            // Verificar se o imóvel pertence ao usuário antes de editar
+            const existingProp = await Property.findById(propId);
+            if (!existingProp || existingProp.user_id !== userId) {
+                return res.status(403).json({ success: false, message: 'Acesso negado ou imóvel inexistente.' });
+            }
+
+            const updateData = {
+                title: req.body.title || existingProp.title,
+                description: req.body.description || existingProp.description,
+                price: req.body.price ? parseFloat(req.body.price) : existingProp.price,
+                location: req.body.location || existingProp.location,
+                type: req.body.type || existingProp.type,
+                phone_primary: req.body.phone_primary || existingProp.phone_primary,
+                phone_secondary: req.body.phone_secondary || existingProp.phone_secondary,
+                status: req.body.status || existingProp.status
+            };
+
+            const updated = await Property.update(propId, userId, updateData);
+
+            res.json({
+                success: true,
+                message: 'Dados do imóvel atualizados com sucesso.',
+                data: updated
+            });
+        } catch (error) {
+            console.error('Erro ao editar:', error);
+            res.status(500).json({ success: false, message: 'Erro ao atualizar dados.' });
+        }
+    },
+
+    /**
+     * @desc    Remover imóvel e suas imagens (Privado - Apenas Proprietário)
+     * @route   DELETE /api/properties/:id
+     */
+    deleteProperty: async (req, res) => {
+        try {
+            const propId = req.params.id;
+            const userId = req.user.id;
+
+            // Buscar dados para remover ficheiros físicos do servidor Render
+            const prop = await Property.findById(propId);
+            if (!prop || prop.user_id !== userId) {
+                return res.status(403).json({ success: false, message: 'Ação não permitida.' });
+            }
+
+            // Apagar imagens da pasta uploads para não encher o servidor
+            const images = [prop.main_image, prop.image_1, prop.image_2, prop.image_3, prop.image_4];
+            images.forEach(imgUrl => {
+                if (imgUrl) {
+                    const filePath = path.join(__dirname, '../../client', imgUrl);
+                    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
+                }
+            });
+
+            // Apagar do Banco de Dados Neon
+            const success = await Property.delete(propId, userId);
+
+            if (success) {
+                res.json({ success: true, message: 'Imóvel removido permanentemente.' });
+            } else {
+                res.status(400).json({ success: false, message: 'Erro ao processar exclusão.' });
+            }
+        } catch (error) {
+            console.error('Erro ao deletar:', error);
+            res.status(500).json({ success: false, message: 'Erro interno ao remover imóvel.' });
+        }
+    },
+
+    /**
+     * @desc    Obter todos os imóveis do usuário logado (Painel)
+     * @route   GET /api/properties/user/me
+     */
+    getUserProperties: async (req, res) => {
+        try {
+            const properties = await Property.findByUserId(req.user.id);
+            res.json({ success: true, count: properties.length, data: properties });
+        } catch (error) {
+            res.status(500).json({ success: false, message: 'Erro ao buscar seu portfólio.' });
+        }
+    }
+};
+
+module.exports = propertyController;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\middleware\authMiddleware.js =====
+
+const jwt = require('jsonwebtoken');
+const db = require('../config/db');
+
+/**
+ * MIDDLEWARE DE PROTEÇÃO DE ROTAS
+ * Verifica o Token JWT e injeta o utilizador na requisição (req.user)
+ */
+const protect = async (req, res, next) => {
+    let token;
+
+    // 1. Verificar se o token existe nos headers (Padrão: Bearer <token>)
+    if (
+        req.headers.authorization &&
+        req.headers.authorization.startsWith('Bearer')
+    ) {
+        try {
+            // Extrair apenas a hash do token
+            token = req.headers.authorization.split(' ')[1];
+
+            // 2. Descodificar e verificar o token com a chave secreta
+            const decoded = jwt.verify(token, process.env.JWT_SECRET);
+
+            // 3. Buscar o utilizador no Neon para garantir que a conta ainda existe
+            const query = 'SELECT id, name, email FROM users WHERE id = $1';
+            const { rows } = await db.query(query, [decoded.id]);
+
+            if (rows.length === 0) {
+                return res.status(401).json({
+                    success: false,
+                    message: 'Acesso negado. Utilizador não encontrado no sistema.'
+                });
+            }
+
+            // 4. Anexar dados do utilizador ao objeto da requisição
+            req.user = rows[0];
+            
+            // Segue para o próximo passo (Controller)
+            next();
+
+        } catch (error) {
+            console.error('Falha na validação do Token:', error.message);
+            
+            let message = 'Não autorizado. Token inválido.';
+            if (error.name === 'TokenExpiredError') {
+                message = 'A sua sessão expirou. Por favor, faça login novamente.';
+            }
+
+            return res.status(401).json({
+                success: false,
+                message: message
+            });
+        }
+    }
+
+    // Caso não exista token no cabeçalho
+    if (!token) {
+        return res.status(401).json({
+            success: false,
+            message: 'Acesso negado. Nenhum token de autenticação foi fornecido.'
+        });
+    }
+};
+
+module.exports = { protect };
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\middleware\uploadMiddleware.js =====
+
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
+
+/**
+ * CONFIGURAÇÃO DO DIRETÓRIO DE UPLOADS
+ * Garante que a pasta existe no servidor Render para evitar erros de escrita.
+ */
+const uploadDir = path.join(__dirname, '../uploads');
+if (!fs.existsSync(uploadDir)) {
+    fs.mkdirSync(uploadDir, { recursive: true });
+}
+
+/**
+ * CONFIGURAÇÃO DE ARMAZENAMENTO (Storage)
+ * Define o destino e o nome único para cada imagem.
+ */
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, uploadDir);
+    },
+    filename: (req, file, cb) => {
+        // Gera: timestamp-aleatorio.extensao (ex: 1715829302-48291.jpg)
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        const extension = path.extname(file.originalname).toLowerCase();
+        cb(null, file.fieldname + '-' + uniqueSuffix + extension);
+    }
+});
+
+/**
+ * FILTRO DE ARQUIVOS (File Filter)
+ * Bloqueia qualquer arquivo que não seja uma imagem (Segurança).
+ */
+const fileFilter = (req, file, cb) => {
+    const allowedTypes = /jpeg|jpg|png|webp/;
+    const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+    const mimetype = allowedTypes.test(file.mimetype);
+
+    if (extname && mimetype) {
+        return cb(null, true);
+    } else {
+        cb(new Error('Formato inválido! Apenas imagens (.jpg, .png, .webp) são permitidas.'));
+    }
+};
+
+/**
+ * INSTÂNCIA DO MULTER COM LIMITES
+ * Define os campos aceitos (Main Image + 4 Extras) e limite de 5MB por foto.
+ */
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 5 * 1024 * 1024 // 5MB por imagem
+    },
+    fileFilter: fileFilter
+}).fields([
+    { name: 'main_image', maxCount: 1 },
+    { name: 'image_1', maxCount: 1 },
+    { name: 'image_2', maxCount: 1 },
+    { name: 'image_3', maxCount: 1 },
+    { name: 'image_4', maxCount: 1 }
+]);
+
+/**
+ * MIDDLEWARE WRAPPER
+ * Captura erros do Multer (como arquivo muito grande) e retorna resposta limpa.
+ */
+const uploadMiddleware = (req, res, next) => {
+    upload(req, res, function (err) {
+        if (err instanceof multer.MulterError) {
+            // Erros específicos do Multer (ex: LIMIT_FILE_SIZE)
+            return res.status(400).json({
+                success: false,
+                message: `Erro no upload: ${err.message === 'File too large' ? 'A imagem é muito pesada (máx 5MB)' : err.message}`
+            });
+        } else if (err) {
+            // Outros erros (ex: Formato inválido)
+            return res.status(400).json({
+                success: false,
+                message: err.message
+            });
+        }
+        // Se tudo estiver OK, segue para o Controller
+        next();
+    });
+};
+
+module.exports = uploadMiddleware;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\models\Chat.js =====
+
+const db = require('../config/db');
+
+const Chat = {
+    /**
+     * @desc    Gravar uma nova mensagem no banco de dados
+     * @param   {Object} data - Dados da mensagem (sender, receiver, text, file_url, etc)
+     */
+    async create(data) {
+        const query = `
+            INSERT INTO messages (
+                sender_id, 
+                receiver_id, 
+                property_id, 
+                message_text, 
+                file_url, 
+                file_type, 
+                is_read
+            )
+            VALUES ($1, $2, $3, $4, $5, $6, $7)
+            RETURNING *
+        `;
+        const values = [
+            data.sender_id,
+            data.receiver_id,
+            data.property_id || null,
+            data.message_text || null,
+            data.file_url || null,
+            data.file_type || 'text',
+            false
+        ];
+        const { rows } = await db.query(query, values);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Obter histórico de mensagens entre dois usuários
+     */
+    async getChatHistory(user1, user2) {
+        const query = `
+            SELECT m.*, 
+                   u_sender.name as sender_name, 
+                   u_receiver.name as receiver_name
+            FROM messages m
+            JOIN users u_sender ON m.sender_id = u_sender.id
+            JOIN users u_receiver ON m.receiver_id = u_receiver.id
+            WHERE (m.sender_id = $1 AND m.receiver_id = $2)
+               OR (m.sender_id = $2 AND m.receiver_id = $1)
+            ORDER BY m.created_at ASC
+        `;
+        const { rows } = await db.query(query, [user1, user2]);
+        return rows;
+    },
+
+    /**
+     * @desc    Obter a lista de conversas ativas do usuário (Inbox)
+     * Retorna o último contato e a última mensagem de cada chat
+     */
+    async getConversations(userId) {
+        const query = `
+            SELECT DISTINCT ON (other_id)
+                CASE WHEN m.sender_id = $1 THEN m.receiver_id ELSE m.sender_id END as other_id,
+                u.name as other_name,
+                m.message_text,
+                m.file_url,
+                m.file_type,
+                m.created_at,
+                m.is_read,
+                (SELECT COUNT(*) FROM messages 
+                 WHERE receiver_id = $1 AND sender_id = u.id AND is_read = false) as unread_count
+            FROM messages m
+            JOIN users u ON u.id = (CASE WHEN m.sender_id = $1 THEN m.receiver_id ELSE m.sender_id END)
+            WHERE m.sender_id = $1 OR m.receiver_id = $1
+            ORDER BY other_id, m.created_at DESC
+        `;
+        const { rows } = await db.query(query, [userId]);
+        // Ordenar por data mais recente no topo
+        return rows.sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+    },
+
+    /**
+     * @desc    Marcar mensagens como lidas
+     */
+    async markAsRead(senderId, receiverId) {
+        const query = `
+            UPDATE messages 
+            SET is_read = true 
+            WHERE sender_id = $1 AND receiver_id = $2 AND is_read = false
+            RETURNING id
+        `;
+        const { rows } = await db.query(query, [senderId, receiverId]);
+        return rows.length;
+    },
+
+    /**
+     * @desc    Apagar uma mensagem específica
+     */
+    async deleteMessage(messageId, userId) {
+        const query = `
+            DELETE FROM messages 
+            WHERE id = $1 AND sender_id = $2 
+            RETURNING id
+        `;
+        const { rows } = await db.query(query, [messageId, userId]);
+        return rows.length > 0;
+    }
+};
+
+module.exports = Chat;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\models\Payment.js =====
+
+const db = require('../config/db');
+
+const Payment = {
+    /**
+     * @desc    Registrar uma intenção ou confirmação de pagamento
+     * @param   {Object} data - user_id, amount (5000), reference, status
+     */
+    async create({ user_id, amount, reference, status }) {
+        const query = `
+            INSERT INTO payments (user_id, amount, reference, status)
+            VALUES ($1, $2, $3, $4)
+            RETURNING *
+        `;
+        const values = [
+            user_id,
+            amount || 5000.00,
+            reference,
+            status || 'pending'
+        ];
+        
+        const { rows } = await db.query(query, values);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Obter histórico de transações de um utilizador específico
+     */
+    async findByUserId(userId) {
+        const query = `
+            SELECT * FROM payments 
+            WHERE user_id = $1 
+            ORDER BY created_at DESC
+        `;
+        const { rows } = await db.query(query, [userId]);
+        return rows;
+    },
+
+    /**
+     * @desc    Atualizar o status de um pagamento (ex: de 'pending' para 'completed')
+     * Útil para integrações com APIs de bancos ou gateways em Angola.
+     */
+    async updateStatus(id, status) {
+        const query = `
+            UPDATE payments 
+            SET status = $1 
+            WHERE id = $2 
+            RETURNING *
+        `;
+        const { rows } = await db.query(query, [status, id]);
+        return rows[0];
+    },
+
+    /**
+     * @desc    CALCULAR QUOTA PERMITIDA (Regra de Negócio Crítica)
+     * Lógica: 1 Imóvel Grátis + 1 para cada pagamento de 5.000 Kz com status 'completed'.
+     */
+    async getAllowedPostCount(userId) {
+        const query = `
+            SELECT COUNT(*) FROM payments 
+            WHERE user_id = $1 AND status = 'completed'
+        `;
+        const { rows } = await db.query(query, [userId]);
+        const paidCount = parseInt(rows[0].count);
+        
+        // Retorna 1 (o grátis inicial) mais o total de pagamentos confirmados
+        return 1 + paidCount;
+    },
+
+    /**
+     * @desc    Buscar pagamento por referência (ex: KZ-12345)
+     */
+    async findByReference(reference) {
+        const query = 'SELECT * FROM payments WHERE reference = $1';
+        const { rows } = await db.query(query, [reference]);
+        return rows[0];
+    }
+};
+
+module.exports = Payment;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\models\Property.js =====
+
+const db = require('../config/db');
+
+const Property = {
+    /**
+     * @desc    Criar novo imóvel com persistência total (Imagens e Dados)
+     * @param   {Object} data - Objeto contendo todos os campos do formulário
+     */
+    async create(data) {
+        const query = `
+            INSERT INTO properties (
+                user_id, title, description, price, location, 
+                type, phone_primary, phone_secondary, 
+                main_image, image_1, image_2, image_3, image_4, 
+                is_360
+            )
+            VALUES ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14)
+            RETURNING *
+        `;
+        const values = [
+            data.user_id,
+            data.title,
+            data.description,
+            data.price,
+            data.location,
+            data.type,
+            data.phone_primary,
+            data.phone_secondary,
+            data.main_image,
+            data.image_1,
+            data.image_2,
+            data.image_3,
+            data.image_4,
+            data.is_360 || false
+        ];
+        const { rows } = await db.query(query, values);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Obter todos os imóveis com status 'active' para a Home
+     */
+    async findAllActive() {
+        const query = `
+            SELECT p.*, u.name as owner_name 
+            FROM properties p
+            JOIN users u ON p.user_id = u.id
+            WHERE p.status = 'active'
+            ORDER BY p.created_at DESC
+        `;
+        const { rows } = await db.query(query);
+        return rows;
+    },
+
+    /**
+     * @desc    Obter detalhes de um imóvel específico por ID (inclui dados do dono)
+     */
+    async findById(id) {
+        const query = `
+            SELECT p.*, u.name as owner_name, u.email as owner_email
+            FROM properties p
+            JOIN users u ON p.user_id = u.id
+            WHERE p.id = $1
+        `;
+        const { rows } = await db.query(query, [id]);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Obter lista de imóveis de um utilizador específico (para o Dashboard)
+     */
+    async findByUserId(userId) {
+        const query = `
+            SELECT * FROM properties 
+            WHERE user_id = $1 
+            ORDER BY created_at DESC
+        `;
+        const { rows } = await db.query(query, [userId]);
+        return rows;
+    },
+
+    /**
+     * @desc    Atualizar campos de texto do imóvel (Edição)
+     */
+    async update(id, userId, data) {
+        const query = `
+            UPDATE properties 
+            SET title = $1, description = $2, price = $3, location = $4, 
+                type = $5, phone_primary = $6, phone_secondary = $7,
+                status = $8
+            WHERE id = $9 AND user_id = $10
+            RETURNING *
+        `;
+        const values = [
+            data.title,
+            data.description,
+            data.price,
+            data.location,
+            data.type,
+            data.phone_primary,
+            data.phone_secondary,
+            data.status || 'active',
+            id,
+            userId
+        ];
+        const { rows } = await db.query(query, values);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Remover imóvel do Neon
+     */
+    async delete(id, userId) {
+        const query = 'DELETE FROM properties WHERE id = $1 AND user_id = $2 RETURNING id';
+        const { rows } = await db.query(query, [id, userId]);
+        return rows.length > 0;
+    },
+
+    /**
+     * @desc    Motor de Busca Filtrada (Localização, Preço, Tipo)
+     */
+    async search(filters) {
+        let query = `
+            SELECT p.*, u.name as owner_name 
+            FROM properties p
+            JOIN users u ON p.user_id = u.id
+            WHERE p.status = 'active'
+        `;
+        const values = [];
+        let count = 1;
+
+        if (filters.location) {
+            query += ` AND (p.location ILIKE $${count} OR p.title ILIKE $${count})`;
+            values.push(`%${filters.location}%`);
+            count++;
+        }
+
+        if (filters.type && filters.type !== 'Todos') {
+            query += ` AND p.type = $${count}`;
+            values.push(filters.type);
+            count++;
+        }
+
+        if (filters.minPrice) {
+            query += ` AND p.price >= $${count}`;
+            values.push(filters.minPrice);
+            count++;
+        }
+
+        if (filters.maxPrice) {
+            query += ` AND p.price <= $${count}`;
+            values.push(filters.maxPrice);
+            count++;
+        }
+
+        query += ' ORDER BY p.created_at DESC';
+        
+        const { rows } = await db.query(query, values);
+        return rows;
+    }
+};
+
+module.exports = Property;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\models\User.js =====
+
+const db = require('../config/db');
+const bcrypt = require('bcryptjs');
+
+const User = {
+    /**
+     * @desc    Criar um novo utilizador com password encriptada
+     * @param   {Object} data - Nome, E-mail e Password
+     */
+    async create({ name, email, password }) {
+        // 1. Gerar o "salt" e encriptar a palavra-passe (Segurança Máxima)
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        const query = `
+            INSERT INTO users (name, email, password)
+            VALUES ($1, $2, $3)
+            RETURNING id, name, email, created_at
+        `;
+        const values = [name, email, hashedPassword];
+        
+        // 2. Executar a inserção no Neon
+        const { rows } = await db.query(query, values);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Procurar utilizador por E-mail (usado no Login e Registo)
+     */
+    async findByEmail(email) {
+        const query = 'SELECT * FROM users WHERE email = $1';
+        const { rows } = await db.query(query, [email]);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Procurar utilizador por ID (usado em rotas protegidas)
+     */
+    async findById(id) {
+        const query = 'SELECT id, name, email, created_at FROM users WHERE id = $1';
+        const { rows } = await db.query(query, [id]);
+        return rows[0];
+    },
+
+    /**
+     * @desc    Comparar a palavra-passe digitada com a encriptada no banco
+     */
+    async comparePassword(candidatePassword, hashedPassword) {
+        return await bcrypt.compare(candidatePassword, hashedPassword);
+    },
+
+    /**
+     * @desc    Contar quantos imóveis o utilizador já publicou (Regra de Negócio)
+     * Usado para validar se o utilizador pode publicar grátis ou se deve pagar 5.000 Kz.
+     */
+    async countProperties(userId) {
+        const query = 'SELECT COUNT(*) FROM properties WHERE user_id = $1';
+        const { rows } = await db.query(query, [userId]);
+        return parseInt(rows[0].count);
+    },
+
+    /**
+     * @desc    Atualizar dados do utilizador (Perfil)
+     */
+    async updateProfile(id, { name, email }) {
+        const query = `
+            UPDATE users 
+            SET name = $1, email = $2 
+            WHERE id = $3 
+            RETURNING id, name, email
+        `;
+        const { rows } = await db.query(query, [name, email, id]);
+        return rows[0];
+    }
+};
+
+module.exports = User;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\routes\authRoutes.js =====
+
+const express = require('express');
+const router = express.Router();
+const authController = require('../controllers/authController');
+const { protect } = require('../middleware/authMiddleware');
+
+/**
+ * @route   POST /api/auth/register
+ * @desc    Registar um novo utilizador em Angola Imóveis (Neon DB)
+ * @access  Public
+ */
+router.post('/register', authController.register);
+
+/**
+ * @route   POST /api/auth/login
+ * @desc    Autenticar utilizador e gerar Token JWT
+ * @access  Public
+ */
+router.post('/login', authController.login);
+
+/**
+ * @route   GET /api/auth/me
+ * @desc    Obter dados do perfil do utilizador logado (requer token)
+ * @access  Private (Protegido por JWT)
+ */
+router.get('/me', protect, authController.getMe);
+
+module.exports = router;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\routes\chatRoutes.js =====
+
+const express = require('express');
+const router = express.Router();
+const chatController = require('../controllers/chatController');
+const { protect } = require('../middleware/authMiddleware');
+const multer = require('multer');
+const path = require('path');
+
+// Configuração rápida de upload para o Chat (Imagens e Documentos)
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => cb(null, 'server/uploads/'),
+    filename: (req, file, cb) => {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, 'chat-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+const uploadChat = multer({ storage: storage });
+
+/**
+ * @route   GET /api/chat/conversations
+ * @desc    Obter lista de conversas ativas (Inbox)
+ * @access  Private
+ */
+router.get('/conversations', protect, chatController.getConversations);
+
+/**
+ * @route   GET /api/chat/messages/:otherId
+ * @desc    Obter histórico de mensagens com um usuário
+ * @access  Private
+ */
+router.get('/messages/:otherId', protect, chatController.getMessages);
+
+/**
+ * @route   POST /api/chat/send
+ * @desc    Enviar nova mensagem (Texto ou Ficheiro)
+ * @access  Private
+ */
+router.post('/send', protect, uploadChat.single('chat_file'), chatController.sendMessage);
+
+/**
+ * @route   PUT /api/chat/read/:senderId
+ * @desc    Marcar mensagens como lidas
+ * @access  Private
+ */
+router.put('/read/:senderId', protect, chatController.markRead);
+
+module.exports = router;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\routes\paymentRoutes.js =====
+
+const express = require('express');
+const router = express.Router();
+const paymentController = require('../controllers/paymentController');
+const { protect } = require('../middleware/authMiddleware');
+
+/**
+ * @route   POST /api/payments/pay
+ * @desc    Processar pagamento de 5.000 Kz para quota extra de publicação
+ * @access  Private (Apenas Utilizadores Autenticados)
+ */
+router.post('/pay', protect, paymentController.processPayment);
+
+/**
+ * @route   GET /api/payments/history
+ * @desc    Ver histórico de transações/pagamentos do utilizador
+ * @access  Private
+ */
+router.get('/history', protect, paymentController.getPaymentHistory);
+
+/**
+ * @route   GET /api/payments/quota
+ * @desc    Verificar quantos imóveis o utilizador ainda pode publicar no Neon
+ * @access  Private
+ */
+router.get('/quota', protect, paymentController.getQuota);
+
+module.exports = router;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\routes\propertyRoutes.js =====
+
+const express = require('express');
+const router = express.Router();
+const propertyController = require('../controllers/propertyController');
+const { protect } = require('../middleware/authMiddleware');
+const uploadMiddleware = require('../middleware/uploadMiddleware');
+
+/**
+ * @route   GET /api/properties
+ * @desc    Listar todos os imóveis ativos (Público com Filtros)
+ * @access  Public
+ */
+router.get('/', propertyController.getProperties);
+
+/**
+ * @route   GET /api/properties/user/me
+ * @desc    Obter imóveis do usuário logado (Dashboard)
+ * @access  Private
+ */
+router.get('/user/me', protect, propertyController.getUserProperties);
+
+/**
+ * @route   GET /api/properties/:id
+ * @desc    Obter detalhes de um imóvel específico
+ * @access  Public
+ */
+router.get('/:id', propertyController.getPropertyById);
+
+/**
+ * @route   POST /api/properties
+ * @desc    Publicar novo imóvel com upload de imagens
+ * @access  Private (Requer Validação de Quota no Controller)
+ */
+router.post('/', protect, uploadMiddleware, propertyController.createProperty);
+
+/**
+ * @route   PUT /api/properties/:id
+ * @desc    Atualizar dados de um imóvel existente
+ * @access  Private (Apenas Proprietário)
+ */
+router.put('/:id', protect, propertyController.updateProperty);
+
+/**
+ * @route   DELETE /api/properties/:id
+ * @desc    Remover imóvel e apagar ficheiros do servidor
+ * @access  Private (Apenas Proprietário)
+ */
+router.delete('/:id', protect, propertyController.deleteProperty);
+
+module.exports = router;
+
+
+===== C:\Users\denyn\Downloads\arrenda\server\app.js =====
+
+const express = require('express');
+const http = require('http');
+const { Server } = require('socket.io');
+const cors = require('cors');
+const morgan = require('morgan');
+const path = require('path');
+require('dotenv').config();
+
+// Importação de Rotas
+const authRoutes = require('./routes/authRoutes');
+const propertyRoutes = require('./routes/propertyRoutes');
+const paymentRoutes = require('./routes/paymentRoutes');
+const chatRoutes = require('./routes/chatRoutes');
+
+const app = express();
+const server = http.createServer(app);
+
+// Configuração do Socket.io para Chat em Tempo Real
+const io = new Server(server, {
+    cors: {
+        origin: "*", // Em produção real, restrinja para o seu domínio
+        methods: ["GET", "POST"]
+    }
+});
+
+// Middlewares Globais
+app.use(cors());
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use(morgan('dev'));
+
+// Configuração de Pastas Estáticas
+app.use(express.static(path.join(__dirname, '../client')));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+
+// Definição das Rotas da API
+app.use('/api/auth', authRoutes);
+app.use('/api/properties', propertyRoutes);
+app.use('/api/payments', paymentRoutes);
+app.use('/api/chat', chatRoutes);
+
+// --- LÓGICA DO SOCKET.IO (CHAT) ---
+const activeUsers = new Map(); // Para rastrear usuários online: { userId => socketId }
+
+io.on('connection', (socket) => {
+    console.log('⚡ Novo cliente conectado:', socket.id);
+
+    // Usuário entra online
+    socket.on('setup', (userData) => {
+        socket.join(userData.id);
+        activeUsers.set(userData.id, socket.id);
+        socket.emit('connected');
+        console.log(`👤 Usuário ${userData.id} está online.`);
+    });
+
+    // Entrar em uma sala de conversa específica
+    socket.on('join chat', (room) => {
+        socket.join(room);
+        console.log('📂 Usuário entrou na sala: ' + room);
+    });
+
+    // Enviar mensagem (Texto ou Ficheiro)
+    socket.on('new message', (newMessageReceived) => {
+        const chat = newMessageReceived.chatId; // ID da conversa
+        const receiverId = newMessageReceived.receiverId;
+
+        if (!receiverId) return console.log("Receiver não definido");
+
+        // Envia para a sala da conversa
+        socket.in(receiverId).emit('message received', newMessageReceived);
+        
+        console.log(`📩 Mensagem enviada de ${newMessageReceived.sender_id} para ${receiverId}`);
+    });
+
+    socket.on('disconnect', () => {
+        console.log('❌ Cliente desconectado');
+    });
+});
+
+// Rota para capturar qualquer requisição frontend (SPA)
+app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, '../client/index.html'));
+});
+
+// Middleware de Erros
+app.use((err, req, res, next) => {
+    console.error(err.stack);
+    const statusCode = err.statusCode || 500;
+    res.status(statusCode).json({
+        success: false,
+        message: err.message || 'Erro interno no servidor',
+        error: process.env.NODE_ENV === 'development' ? err : {}
+    });
+});
+
+// Inicialização do Servidor (Usando o objeto SERVER para suportar Sockets)
+const PORT = process.env.PORT || 5000;
+server.listen(PORT, () => {
+    console.log(`-----------------------------------------------------`);
+    console.log(`🚀 SERVIDOR COMPLETO RODANDO: ${process.env.SERVER_URL}`);
+    console.log(`🔗 DB NEON CONECTADO`);
+    console.log(`💬 CHAT REALTIME ATIVADO`);
+    console.log(`-----------------------------------------------------`);
+});
+
+// Exportamos o IO para ser usado nos controllers se necessário
+app.set('socketio', io);
+
+module.exports = app;
