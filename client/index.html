@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Angola Imóveis | Encontre seu Lar</title>
+    
+    <!-- CSS Libraries -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+
+    <!-- Onboarding Screen (Splash) -->
+    <div id="splash-screen" class="splash-screen">
+        <div class="splash-content text-center">
+            <div class="hero-image-container">
+                <img src="https://images.unsplash.com/photo-1570129477492-45c003edd2be?auto=format&fit=crop&q=80&w=1000" alt="Hero" class="hero-bg">
+                <div class="overlay-gradient"></div>
+            </div>
+            <div class="onboarding-text p-4">
+                <h1 class="fw-bold">Your Trusted Guide <br> in Real Estate</h1>
+                <p class="text-secondary">Navigating the Path to Your Dream Home with Expertise and Integrity.</p>
+                <div class="dots-indicator mb-4">
+                    <span class="dot active"></span>
+                    <span class="dot"></span>
+                    <span class="dot"></span>
+                </div>
+                <button onclick="hideSplash()" class="btn btn-primary-neon w-100 mb-3 py-3 rounded-4 fw-bold">Get Started</button>
+                <a href="pages/login.html" class="btn btn-dark-outline w-100 py-3 rounded-4 fw-bold">Log in</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main App Layout -->
+    <main id="app-content" class="container-mobile">
+        
+        <!-- Header / Location -->
+        <header class="p-3 d-flex justify-content-between align-items-center">
+            <div>
+                <span class="text-secondary small d-block">Location</span>
+                <div class="dropdown">
+                    <button class="btn btn-link text-white p-0 text-decoration-none dropdown-toggle fw-semibold" type="button" data-bs-toggle="dropdown">
+                        Luanda, Angola <i class="bi bi-chevron-down small ms-1"></i>
+                    </button>
+                    <ul class="dropdown-menu dropdown-menu-dark">
+                        <li><a class="dropdown-item" href="#">Benguela</a></li>
+                        <li><a class="dropdown-item" href="#">Huambo</a></li>
+                        <li><a class="dropdown-item" href="#">Lubango</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="notification-badge">
+                <i class="bi bi-bell fs-4"></i>
+                <span class="badge-dot"></span>
+            </div>
+        </header>
+
+        <!-- Search Bar -->
+        <section class="px-3 mb-4">
+            <div class="search-container d-flex align-items-center">
+                <i class="bi bi-search ms-3 text-secondary"></i>
+                <input type="text" id="searchInput" class="form-control bg-transparent border-0 text-white" placeholder="Pesquisar casa ou bairro...">
+                <button class="btn-filter me-2">
+                    <i class="bi bi-sliders"></i>
+                </button>
+            </div>
+        </section>
+
+        <!-- Categories -->
+        <section class="categories-scroll ps-3 mb-4 d-flex">
+            <button class="category-pill active">Todos</button>
+            <button class="category-pill">Apartamento</button>
+            <button class="category-pill">Vivenda</button>
+            <button class="category-pill">Escritório</button>
+            <button class="category-pill">Quarto</button>
+        </section>
+
+        <!-- Featured Listings (Horizontal) -->
+        <section class="mb-4">
+            <div class="d-flex justify-content-between align-items-center px-3 mb-3">
+                <h5 class="fw-bold mb-0">Imóveis em Destaque</h5>
+                <a href="#" class="text-neon-link small text-decoration-none">Ver todos</a>
+            </div>
+            <div class="featured-scroll ps-3" id="featuredListings">
+                <!-- Carregado via JS -->
+                <div class="loading-placeholder"></div>
+            </div>
+        </section>
+
+        <!-- All Listings (Vertical) -->
+        <section class="px-3 pb-5 mb-5">
+            <h5 class="fw-bold mb-3">Próximos de si</h5>
+            <div id="allPropertiesGrid" class="row g-3">
+                <!-- Carregado via JS -->
+            </div>
+        </section>
+
+        <!-- Bottom Navigation -->
+        <nav class="bottom-nav">
+            <a href="index.html" class="nav-item active">
+                <i class="bi bi-house-door-fill"></i>
+                <span>Home</span>
+            </a>
+            <a href="#" class="nav-item">
+                <i class="bi bi-geo-alt"></i>
+                <span>Mapa</span>
+            </a>
+            <div class="nav-item-center">
+                <a href="pages/publish.html" class="btn-plus">
+                    <i class="bi bi-plus-lg"></i>
+                </a>
+            </div>
+            <a href="#" class="nav-item">
+                <i class="bi bi-chat-dots"></i>
+                <span>Chat</span>
+            </a>
+            <a href="pages/dashboard.html" class="nav-item">
+                <i class="bi bi-person"></i>
+                <span>Perfil</span>
+            </a>
+        </nav>
+
+    </main>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/main.js"></script>
+    <script>
+        function hideSplash() {
+            document.getElementById('splash-screen').style.opacity = '0';
+            setTimeout(() => {
+                document.getElementById('splash-screen').style.display = 'none';
+            }, 500);
+        }
+
+        // Verifica se o usuário já viu o splash antes
+        if(localStorage.getItem('visited')) {
+            document.getElementById('splash-screen').style.display = 'none';
+        } else {
+            localStorage.setItem('visited', 'true');
+        }
+    </script>
+</body>
+</html>

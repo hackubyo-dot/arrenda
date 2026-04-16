@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Publicar Imóvel | Angola Imóveis</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <style>
+        .publish-container { padding-top: 30px; padding-bottom: 100px; }
+        .form-section { background: #181818; border-radius: 20px; padding: 20px; margin-bottom: 20px; }
+        .image-upload-box {
+            width: 100%;
+            height: 150px;
+            border: 2px dashed #333;
+            border-radius: 15px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+            position: relative;
+            transition: var(--transition);
+        }
+        .image-upload-box:hover { border-color: var(--neon-lime); }
+        .image-upload-box img { width: 100%; height: 100%; object-fit: cover; position: absolute; }
+        .grid-uploads { display: grid; grid-template-columns: repeat(2, 1fr); gap: 10px; }
+        .form-control-custom {
+            background: #252525; border: 1px solid #333; border-radius: 12px; color: white; padding: 12px 15px;
+        }
+        .form-control-custom:focus { background: #2b2b2b; border-color: var(--neon-lime); box-shadow: none; color: white; }
+        .input-group-text-custom { background: #333; border: 1px solid #333; color: var(--neon-lime); border-radius: 12px 0 0 12px; }
+    </style>
+</head>
+<body class="bg-dark">
+
+    <div class="container-mobile publish-container px-3">
+        
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <a href="../index.html" class="btn btn-dark-outline rounded-circle" style="width: 40px; height: 40px; padding: 0; display: flex; align-items: center; justify-content: center;">
+                <i class="bi bi-x-lg"></i>
+            </a>
+            <h5 class="fw-bold mb-0">Anunciar Imóvel</h5>
+            <div style="width: 40px;"></div>
+        </div>
+
+        <div id="paymentNotice" class="alert alert-warning border-0 bg-warning bg-opacity-10 text-warning rounded-4 d-none mb-4">
+            <i class="bi bi-info-circle me-2"></i> Você já usou sua publicação grátis. Para postar este imóvel, será necessário pagar <strong>5.000 Kz</strong>.
+        </div>
+
+        <form id="publishForm">
+            <!-- Fotos -->
+            <div class="form-section">
+                <label class="fw-bold mb-3 d-block">Fotos do Imóvel</label>
+                <div class="mb-3">
+                    <p class="small text-secondary mb-2">Foto Principal (obrigatória)</p>
+                    <div class="image-upload-box" onclick="document.getElementById('main_image').click()">
+                        <i class="bi bi-camera fs-1 text-secondary"></i>
+                        <span class="small text-secondary">Adicionar foto</span>
+                        <img id="prev_main" src="" class="d-none">
+                    </div>
+                    <input type="file" id="main_image" name="main_image" hidden accept="image/*" required>
+                </div>
+
+                <p class="small text-secondary mb-2">Fotos Adicionais (até 4)</p>
+                <div class="grid-uploads">
+                    <div class="image-upload-box" onclick="document.getElementById('image_1').click()">
+                        <i class="bi bi-plus-lg text-secondary"></i>
+                        <img id="prev_1" src="" class="d-none">
+                    </div>
+                    <div class="image-upload-box" onclick="document.getElementById('image_2').click()">
+                        <i class="bi bi-plus-lg text-secondary"></i>
+                        <img id="prev_2" src="" class="d-none">
+                    </div>
+                    <input type="file" id="image_1" name="image_1" hidden accept="image/*">
+                    <input type="file" id="image_2" name="image_2" hidden accept="image/*">
+                </div>
+                
+                <div class="form-check form-switch mt-3">
+                    <input class="form-check-input" type="checkbox" id="is_360" name="is_360">
+                    <label class="form-check-label small text-white" for="is_360">Esta é uma imagem 360° interativa</label>
+                </div>
+            </div>
+
+            <!-- Detalhes -->
+            <div class="form-section">
+                <label class="fw-bold mb-3 d-block">Informações Básicas</label>
+                
+                <div class="mb-3">
+                    <input type="text" class="form-control form-control-custom" id="title" name="title" placeholder="Título do anúncio (ex: Vivenda T3 no Kilamba)" required>
+                </div>
+
+                <div class="mb-3">
+                    <select class="form-select form-control-custom" id="type" name="type" required>
+                        <option value="" disabled selected>Tipo de Imóvel</option>
+                        <option value="Apartamento">Apartamento</option>
+                        <option value="Vivenda">Vivenda</option>
+                        <option value="Escritório">Escritório</option>
+                        <option value="Quarto">Quarto</option>
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <div class="input-group">
+                        <span class="input-group-text input-group-text-custom fw-bold">Kz</span>
+                        <input type="number" class="form-control form-control-custom" id="price" name="price" placeholder="Preço mensal" required>
+                    </div>
+                </div>
+
+                <div class="mb-3">
+                    <input type="text" class="form-control form-control-custom" id="location" name="location" placeholder="Localização (Bairro, Cidade)" required>
+                </div>
+            </div>
+
+            <!-- Contato -->
+            <div class="form-section">
+                <label class="fw-bold mb-3 d-block">Contatos para Interessados</label>
+                <div class="mb-3">
+                    <input type="tel" class="form-control form-control-custom" id="phone_primary" name="phone_primary" placeholder="Telefone Principal (WhatsApp)" required>
+                </div>
+                <div class="mb-0">
+                    <textarea class="form-control form-control-custom" id="description" name="description" rows="4" placeholder="Descrição completa do imóvel..." required></textarea>
+                </div>
+            </div>
+
+            <button type="submit" id="btnSubmit" class="btn btn-primary-neon w-100 py-3 rounded-4 fw-bold mt-2">
+                Publicar Anúncio
+            </button>
+        </form>
+    </div>
+
+    <!-- Modal de Pagamento -->
+    <div class="modal fade" id="paymentModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content bg-card border-0 rounded-4 p-3 text-center">
+                <div class="modal-body">
+                    <i class="bi bi-credit-card-2-back text-neon fs-1 mb-3 d-block"></i>
+                    <h4 class="fw-bold">Pagamento Necessário</h4>
+                    <p class="text-secondary">Para publicar mais imóveis, você deve pagar uma taxa única de 5.000 Kz por anúncio.</p>
+                    <div class="bg-dark p-3 rounded-3 mb-4">
+                        <span class="text-secondary small d-block">Total a pagar:</span>
+                        <span class="fs-3 fw-bold text-neon">5.000,00 Kz</span>
+                    </div>
+                    <button id="btnPayNow" class="btn btn-primary-neon w-100 py-3 rounded-4 fw-bold mb-2">Pagar e Publicar</button>
+                    <button class="btn btn-link text-secondary text-decoration-none" data-bs-dismiss="modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/api.js"></script>
+    <script>
+        const form = document.getElementById('publishForm');
+        const paymentModal = new bootstrap.Modal(document.getElementById('paymentModal'));
+        
+        // Verificar limite ao carregar
+        document.addEventListener('DOMContentLoaded', async () => {
+            if (!apiService.getToken()) window.location.href = 'login.html';
+            
+            const quota = await apiService.payments.getQuota();
+            const myProps = await apiService.properties.getMyProperties();
+            
+            if (myProps.data.length >= quota.allowed_posts) {
+                document.getElementById('paymentNotice').classList.remove('d-none');
+            }
+        });
+
+        // Preview de Imagens
+        ['main_image', 'image_1', 'image_2'].forEach(id => {
+            document.getElementById(id).addEventListener('change', function() {
+                const file = this.files[0];
+                if (file) {
+                    const reader = new FileReader();
+                    const preview = document.getElementById('prev_' + (id === 'main_image' ? 'main' : id.split('_')[1]));
+                    reader.onload = e => { preview.src = e.target.result; preview.classList.remove('d-none'); }
+                    reader.readAsDataURL(file);
+                }
+            });
+        });
+
+        // Submissão do Formulário
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const btn = document.getElementById('btnSubmit');
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner-border spinner-border-sm"></span> Processando...';
+
+            const formData = new FormData(form);
+            
+            try {
+                const response = await apiService.properties.create(formData);
+
+                if (response.success) {
+                    alert('Imóvel publicado com sucesso!');
+                    window.location.href = 'dashboard.html';
+                } else if (response.requirePayment) {
+                    paymentModal.show();
+                } else {
+                    alert(response.message);
+                }
+            } catch (error) {
+                console.error(error);
+            } finally {
+                btn.disabled = false;
+                btn.innerText = 'Publicar Anúncio';
+            }
+        });
+
+        // Lógica de pagamento simulado
+        document.getElementById('btnPayNow').addEventListener('click', async () => {
+            const btn = document.getElementById('btnPayNow');
+            btn.disabled = true;
+            btn.innerHTML = 'Processando Pagamento...';
+
+            const payRes = await apiService.payments.pay();
+            if (payRes.success) {
+                alert('Pagamento confirmado! Enviando seu anúncio...');
+                // Tenta enviar o formulário novamente após o pagamento
+                form.dispatchEvent(new Event('submit'));
+            } else {
+                alert('Erro no pagamento. Tente novamente.');
+                btn.disabled = false;
+                btn.innerText = 'Pagar e Publicar';
+            }
+        });
+    </script>
+</body>
+</html>
