@@ -2,10 +2,10 @@
   "name": "arrenda-angola-pro",
   "version": "1.0.0",
   "description": "Plataforma profissional de arrendamento de imóveis em Angola",
-  "main": "server/app.js",
+  "main": "app.js",
   "scripts": {
-    "start": "node server/app.js",
-    "dev": "nodemon server/app.js"
+    "start": "node app.js",
+    "dev": "nodemon app.js"
   },
   "keywords": [
     "realestate",
