@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- META TAGS MOBILE RECENTES -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>Gestão de Ativos VIP | Arrenda Angola</title>
+
+    <!-- 1. FONTES DE ALTA DEFINIÇÃO (PLUS JAKARTA SANS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 2. BIBLIOTECAS CORE (BOOTSTRAP 5.3.3 + ICONS) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 
+           ===========================================================================
+           SISTEMA DE DESIGN SUPREMO: DASHBOARD GIGA-ELITE (CORREÇÃO TOTAL)
+           ===========================================================================
+        */
+        :root {
+            /* MODO ESCURO (OBSIDIAN) */
+            --bg-master: #050505;
+            --bg-card: #0f0f0f;
+            --bg-sidebar: #080808;
+            --bg-input: #121212;
+            --bg-glass: rgba(12, 12, 12, 0.85);
+            
+            --neon: #c6ff00;
+            --neon-rgb: 198, 255, 0;
+            --neon-glow: rgba(198, 255, 0, 0.35);
+
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #4b5563;
+            
+            --border: rgba(255, 255, 255, 0.08);
+            --sidebar-w: 320px;
+            --radius-xl: 45px;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            
+            --trans-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="light"] {
+            /* MODO CLARO (CRYSTAL CLEAN) */
+            --bg-master: #f2f5f7;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-input: #f8fafb;
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --text-main: #0a0a0b;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border: rgba(0, 0, 0, 0.12);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.05);
+        }
+
+        /* RESET & GLOBAL */
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { display: none; }
+        
+        body {
+            background-color: var(--bg-master);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background 0.6s ease, color 0.6s ease;
+        }
+
+        /* ---------------------------------------------------------------------------
+           SIDEBAR DESKTOP (ELITE STYLE)
+        --------------------------------------------------------------------------- */
+        .sidebar-desktop {
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0; top: 0; padding: 50px 35px;
+            display: flex; flex-direction: column; z-index: 2000;
+            transition: var(--trans-smooth);
+        }
+
+        .sidebar-brand { display: flex; align-items: center; gap: 18px; margin-bottom: 60px; }
+        .logo-box {
+            width: 52px; height: 52px; background: var(--neon); color: #000;
+            border-radius: 16px; display: grid; place-items: center;
+            font-weight: 900; font-size: 1.8rem; box-shadow: 0 0 25px var(--neon-glow);
+        }
+        .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; color: var(--text-main); }
+        .logo-text span { color: var(--neon); }
+
+        .nav-link {
+            display: flex; align-items: center; gap: 18px; padding: 18px 25px;
+            color: var(--text-secondary); border-radius: 22px; font-weight: 700;
+            transition: var(--trans-smooth); margin-bottom: 10px;
+        }
+        .nav-link:hover { background: var(--bg-card); color: var(--text-main); transform: translateX(8px); }
+        .nav-link.active { background: var(--neon); color: #000; box-shadow: 0 10px 25px rgba(var(--neon-rgb), 0.25); }
+
+        .sidebar-footer { padding-top: 30px; border-top: 1px solid var(--border); }
+        
+        /* THEME HUB SELECTOR */
+        .theme-hub-switch {
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+            padding: 8px; border-radius: 20px; display: flex; gap: 8px; margin-bottom: 25px;
+        }
+        .hub-btn {
+            flex: 1; border: none; padding: 10px; border-radius: 14px;
+            background: transparent; color: var(--text-muted); font-weight: 800;
+            font-size: 0.8rem; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: 0.3s;
+        }
+        .hub-btn.active { background: var(--bg-card); color: var(--text-main); box-shadow: var(--shadow-lux); }
+
+        /* ---------------------------------------------------------------------------
+           MAIN WRAPPER & HEADER
+        --------------------------------------------------------------------------- */
+        .main-wrapper {
+            margin-left: var(--sidebar-w);
+            padding: 40px 60px 150px 60px;
+            transition: var(--trans-smooth);
+        }
+
+        .dash-header {
+            display: flex; justify-content: space-between; align-items: center;
+            margin-bottom: 50px; animation: fadeIn 0.8s ease;
+        }
+        .dash-title h1 { font-size: 2.6rem; font-weight: 800; letter-spacing: -2px; margin: 0; color: var(--text-main); }
+        .dash-title p { color: var(--text-muted); font-weight: 600; font-size: 1.1rem; }
+
+        .btn-action-plus {
+            background: var(--neon); color: #000 !important; border: none;
+            padding: 16px 35px; border-radius: 22px; font-weight: 900;
+            display: flex; align-items: center; gap: 12px; transition: 0.3s;
+            box-shadow: 0 15px 35px rgba(var(--neon-rgb), 0.3);
+        }
+        .btn-action-plus:hover { transform: translateY(-5px); box-shadow: 0 20px 45px rgba(var(--neon-rgb), 0.5); }
+
+        /* STATS GRID */
+        .stats-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-bottom: 50px; }
+        .stat-card-luxury {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 35px;
+            display: flex; align-items: center; gap: 25px;
+            transition: var(--trans-smooth);
+        }
+        .stat-card-luxury:hover { transform: translateY(-10px); border-color: var(--neon); }
+        .stat-icon {
+            width: 75px; height: 75px; border-radius: 24px;
+            background: var(--bg-input); display: grid; place-items: center;
+            font-size: 2.2rem; color: var(--neon);
+        }
+        .stat-data h2 { font-weight: 900; font-size: 2.2rem; margin: 0; line-height: 1; color: var(--text-main); }
+        .stat-data p { font-weight: 700; color: var(--text-muted); font-size: 0.75rem; text-transform: uppercase; margin-top: 5px; }
+
+        /* ---------------------------------------------------------------------------
+           TABELA DE GESTÃO (PREMIUM ROWS)
+        --------------------------------------------------------------------------- */
+        .table-luxury-wrapper {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: var(--radius-xl); padding: 40px; box-shadow: var(--shadow-lux);
+            animation: fadeIn 1s ease;
+        }
+
+        .luxury-table { width: 100%; border-collapse: separate; border-spacing: 0 15px; }
+        .luxury-table th { padding: 0 25px 15px 25px; color: var(--text-muted); font-weight: 900; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 1px; }
+
+        .tr-prop-elite { background: var(--bg-master); transition: 0.4s; cursor: pointer; }
+        .tr-prop-elite:hover { transform: scale(1.01) translateX(8px); background: var(--bg-input); }
+        
+        .tr-prop-elite td { padding: 20px 25px; vertical-align: middle; border: none; }
+        .tr-prop-elite td:first-child { border-radius: 25px 0 0 25px; }
+        .tr-prop-elite td:last-child { border-radius: 0 25px 25px 0; }
+
+        .thumb-vip { width: 80px; height: 80px; border-radius: 22px; object-fit: cover; border: 2px solid var(--border); }
+        
+        .status-badge-vip {
+            background: rgba(var(--neon-rgb), 0.1); color: var(--neon);
+            padding: 8px 18px; border-radius: 100px; font-weight: 900; font-size: 0.7rem;
+            text-transform: uppercase; border: 1px solid rgba(var(--neon-rgb), 0.2);
+        }
+
+        .action-group { display: flex; gap: 12px; justify-content: flex-end; }
+        .btn-circle {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-main); display: grid; place-items: center;
+            font-size: 1.2rem; transition: 0.3s;
+        }
+        .btn-circle:hover { background: var(--neon); color: #000; border-color: var(--neon); transform: rotate(15deg); }
+        .btn-circle.del:hover { background: #ff4757; color: #fff; border-color: #ff4757; }
+
+        /* ---------------------------------------------------------------------------
+           MODAL DE EDIÇÃO (STAMPED FIGMA STYLE)
+        --------------------------------------------------------------------------- */
+        .modal-luxury-content {
+            background: var(--bg-glass); backdrop-filter: blur(45px);
+            border-radius: var(--radius-xl); border: 1px solid var(--border);
+            padding: 45px; box-shadow: 0 50px 100px rgba(0,0,0,0.8);
+        }
+        .modal-title-lux { font-weight: 900; font-size: 2.2rem; letter-spacing: -2px; margin: 0; color: #fff; }
+
+        .edit-gallery-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 15px; margin-bottom: 35px; }
+        .photo-slot {
+            aspect-ratio: 1/1; border-radius: 20px; border: 2px dashed var(--border);
+            position: relative; overflow: hidden; cursor: pointer; transition: 0.3s;
+            background: var(--bg-input);
+        }
+        .photo-slot:hover { border-color: var(--neon); }
+        .photo-slot img { width: 100%; height: 100%; object-fit: cover; }
+        .photo-slot .label { position: absolute; bottom: 0; width: 100%; background: rgba(0,0,0,0.7); color: #fff; font-size: 0.55rem; font-weight: 900; text-align: center; padding: 5px; }
+
+        .input-lux {
+            background: var(--bg-input); border: 1px solid var(--border);
+            border-radius: 20px; padding: 18px 25px; color: var(--text-main);
+            width: 100%; font-weight: 600; outline: none; transition: 0.3s;
+        }
+        .input-lux:focus { border-color: var(--neon); box-shadow: 0 0 30px rgba(var(--neon-rgb), 0.15); }
+
+        /* ---------------------------------------------------------------------------
+           MOBILE NAVIGATION (EXATA DA INDEX)
+           ===========================================================================
+        */
+        .mobile-nav-elite {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 100px;
+            background: var(--bg-glass); backdrop-filter: blur(40px);
+            border-top: 1px solid var(--border); display: flex;
+            justify-content: space-around; align-items: center; padding-bottom: 25px; z-index: 3000;
+            border-top-left-radius: 35px; border-top-right-radius: 35px;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+        }
+        .m-nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); text-decoration: none; }
+        .m-nav-item.active { color: var(--text-main); }
+        .m-nav-item i { font-size: 1.8rem; }
+        .m-nav-item span { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-top: 2px; }
+
+        .m-center-box {
+            width: 75px; height: 75px; background: var(--neon); color: #000;
+            border-radius: 50%; display: grid; place-items: center;
+            font-size: 2rem; transform: translateY(-35px);
+            box-shadow: 0 15px 35px rgba(var(--neon-rgb), 0.4);
+            border: 8px solid var(--bg-master);
+            transition: 0.3s;
+        }
+
+        /* ---------------------------------------------------------------------------
+           RESPONSIVIDADE
+        --------------------------------------------------------------------------- */
+        @media (max-width: 991px) {
+            .sidebar-desktop { display: none; }
+            .main-wrapper { margin-left: 0; padding: 25px 20px 150px 20px; }
+            .stats-row { grid-template-columns: 1fr; gap: 15px; }
+            .luxury-table thead { display: none; }
+            .tr-prop-elite { display: block; border-radius: 30px !important; margin-bottom: 20px; padding: 25px; }
+            .tr-prop-elite td { display: block; width: 100%; padding: 10px 0 !important; }
+            .action-group { margin-top: 20px; border-top: 1px solid var(--border); padding-top: 20px; }
+            .edit-gallery-grid { grid-template-columns: repeat(3, 1fr); }
+            .dash-header { flex-direction: column; align-items: flex-start; gap: 25px; }
+            .btn-action-plus { width: 100%; }
+            .mobile-nav-elite { display: flex !important; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        
+        <!-- SIDEBAR DESKTOP -->
+        <aside class="sidebar-desktop d-none d-lg-flex">
+            <a href="../index.html" class="sidebar-brand">
+                <div class="logo-box">V</div>
+                <div class="logo-text">Arrenda<span>VIP</span></div>
+            </a>
+            <nav class="sidebar-menu">
+                <a href="../index.html" class="nav-link"><i class="bi bi-house-door-fill"></i> <span>Explorar</span></a>
+                <a href="chat.html" class="nav-link"><i class="bi bi-chat-dots-fill"></i> <span>Mensagens</span></a>
+                <a href="dashboard.html" class="nav-link active"><i class="bi bi-grid-1x2-fill"></i> <span>Meu Painel</span></a>
+                <a href="settings.html" class="nav-link"><i class="bi bi-person-fill"></i> <span>Definições</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <!-- THEME HUB -->
+                <div class="theme-hub-switch">
+                    <button class="hub-btn" id="setThemeDark"><i class="bi bi-moon-stars-fill"></i> Escuro</button>
+                    <button class="hub-btn" id="setThemeLight"><i class="bi bi-brightness-high-fill"></i> Claro</button>
+                </div>
+                <div id="userSideStatus" class="p-3 bg-card rounded-4 border border-secondary border-opacity-10 d-flex align-items-center gap-3">
+                    <div style="width:12px; height:12px; background:var(--neon); border-radius:50%; box-shadow: 0 0 10px var(--neon);"></div>
+                    <span class="fw-800 small text-main" id="userNameSide">...</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- CONTEÚDO PRINCIPAL -->
+        <main class="main-wrapper">
+            
+            <header class="dash-header">
+                <div class="welcome-box">
+                    <h1>Olá, <span id="userFirst" class="text-neon">Proprietário</span></h1>
+                    <p>Aqui está o resumo dos seus investimentos imobiliários.</p>
+                </div>
+                <a href="publish.html" class="btn-action-plus">
+                    <i class="bi bi-plus-lg"></i> PUBLICAR NOVO ANÚNCIO
+                </a>
+            </header>
+
+            <!-- STATS ELITE -->
+            <section class="stats-row">
+                <div class="stat-card-luxury">
+                    <div class="stat-icon"><i class="bi bi-houses"></i></div>
+                    <div class="stat-data"><h2 id="countActive">0</h2><p>Imóveis Ativos</p></div>
+                </div>
+                <div class="stat-card-luxury">
+                    <div class="stat-icon"><i class="bi bi-eye"></i></div>
+                    <div class="stat-data"><h2>2.8k</h2><p>Alcance VIP</p></div>
+                </div>
+                <div class="stat-card-luxury">
+                    <div class="stat-icon"><i class="bi bi-patch-check"></i></div>
+                    <div class="stat-data"><h2>GOLD</h2><p>Membro Verificado</p></div>
+                </div>
+            </section>
+
+            <!-- LISTAGEM -->
+            <section class="table-luxury-wrapper">
+                <div class="d-flex justify-content-between align-items-center mb-5">
+                    <h4 class="fw-900 m-0">Gestão de Ativos</h4>
+                    <button class="btn btn-outline-secondary btn-sm rounded-pill px-4 fw-bold" onclick="DashboardEngine.load()">SINCRONIZAR</button>
+                </div>
+
+                <div class="table-responsive">
+                    <table class="luxury-table">
+                        <thead>
+                            <tr>
+                                <th>Imóvel</th>
+                                <th>Localização</th>
+                                <th>Investimento</th>
+                                <th>Estado</th>
+                                <th class="text-end">Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="propertyList">
+                            <!-- Injetado via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+
+                <div id="emptyState" class="text-center py-5 d-none">
+                    <i class="bi bi-house-add display-1 text-muted opacity-25"></i>
+                    <h5 class="mt-4 text-muted fw-bold">Nenhum imóvel listado no motor de busca.</h5>
+                    <a href="publish.html" class="btn btn-outline-neon mt-2">Começar Agora</a>
+                </div>
+            </section>
+
+        </main>
+
+        <!-- MOBILE NAV (IGUAL À INDEX) -->
+        <nav class="mobile-nav-elite d-lg-none">
+            <a href="../index.html" class="m-nav-item"><i class="bi bi-house-door-fill"></i><span>Início</span></a>
+            <a href="chat.html" class="m-nav-item"><i class="bi bi-chat-dots-fill"></i><span>Chat</span></a>
+            <div class="m-center-box" onclick="location.href='publish.html'"><i class="bi bi-plus-lg"></i></div>
+            <a href="dashboard.html" class="m-nav-item active"><i class="bi bi-grid-fill"></i><span>Painel</span></a>
+            <a href="settings.html" class="m-nav-item"><i class="bi bi-person-fill"></i><span>Perfil</span></a>
+        </nav>
+
+    </div>
+
+    <!-- MODAL DE EDIÇÃO SUPREMA -->
+    <div class="modal fade" id="modalEditVIP" tabindex="-1">
+        <div class="modal-dialog modal-xl modal-dialog-centered">
+            <div class="modal-content modal-luxury-content">
+                <div class="modal-header border-0 pb-4">
+                    <h2 class="modal-title-lux">Atualizar Ativo VIP</h2>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                
+                <form id="formUpdateProperty">
+                    <input type="hidden" id="editPropId" name="id">
+                    
+                    <div class="row g-4">
+                        <div class="col-12">
+                            <label class="small text-muted fw-900 mb-3" style="letter-spacing: 1px;">GALERIA DE FOTOS (CLIQUE PARA ALTERAR)</label>
+                            <div class="edit-gallery-grid">
+                                <div class="photo-slot" onclick="document.getElementById('fMain').click()"><img id="vMain"><div class="label">CAPA</div></div>
+                                <div class="photo-slot" onclick="document.getElementById('f1').click()"><img id="v1"><div class="label">FOTO 1</div></div>
+                                <div class="photo-slot" onclick="document.getElementById('f2').click()"><img id="v2"><div class="label">FOTO 2</div></div>
+                                <div class="photo-slot" onclick="document.getElementById('f3').click()"><img id="v3"><div class="label">FOTO 3</div></div>
+                                <div class="photo-slot" onclick="document.getElementById('f4').click()"><img id="v4"><div class="label">FOTO 4</div></div>
+                            </div>
+                            <!-- Hidden Inputs -->
+                            <input type="file" id="fMain" name="main_image" hidden accept="image/*">
+                            <input type="file" id="f1" name="image_1" hidden accept="image/*">
+                            <input type="file" id="f2" name="image_2" hidden accept="image/*">
+                            <input type="file" id="f3" name="image_3" hidden accept="image/*">
+                            <input type="file" id="f4" name="image_4" hidden accept="image/*">
+                        </div>
+
+                        <div class="col-md-8">
+                            <label class="small text-muted fw-bold mb-2">TÍTULO DO IMÓVEL</label>
+                            <input type="text" id="eTitle" name="title" class="input-lux" required>
+                        </div>
+                        <div class="col-md-4">
+                            <label class="small text-muted fw-bold mb-2">VALOR MENSAL (KZ)</label>
+                            <input type="number" id="ePrice" name="price" class="input-lux" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold mb-2">LOCALIZAÇÃO / ENDEREÇO</label>
+                            <input type="text" id="eLoc" name="location" class="input-lux" required>
+                        </div>
+                        <div class="col-md-6">
+                            <label class="small text-muted fw-bold mb-2">TIPOLOGIA</label>
+                            <select id="eType" name="type" class="input-lux form-select">
+                                <option value="Vivenda">Vivenda de Luxo</option>
+                                <option value="Apartamento">Apartamento Premium</option>
+                                <option value="Casa">Casa Independente</option>
+                                <option value="Quarto">Quarto VIP</option>
+                                <option value="Escritório">Escritório Corporativo</option>
+                            </select>
+                        </div>
+                        <div class="col-12">
+                            <label class="small text-muted fw-bold mb-2">DESCRIÇÃO DO ATIVO</label>
+                            <textarea id="eDesc" name="description" class="input-lux" rows="4"></textarea>
+                        </div>
+                    </div>
+
+                    <div class="mt-5">
+                        <button type="submit" id="btnSync" class="btn w-100 py-4 rounded-4" style="background:var(--neon); color:#000; font-weight:900; box-shadow: 0 15px 35px rgba(var(--neon-rgb), 0.3);">
+                            SINCRONIZAR COM O SERVIDOR VIP
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS CORE -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/api.js"></script>
+
+    <script>
+        /**
+         * ENGINE DASHBOARD VIP - DEFINITIVA E CORRIGIDA
+         */
+        const DashboardEngine = (() => {
+            const listBody = document.getElementById('propertyList');
+            const emptyState = document.getElementById('emptyState');
+
+            const init = async () => {
+                checkAuth();
+                ThemeManager.boot();
+                syncUser();
+                await load();
+                setupPreviews();
+                handleFormUpdate();
+            };
+
+            const checkAuth = () => {
+                try {
+                    const token = typeof apiService.getToken === 'function' ? apiService.getToken() : localStorage.getItem('token');
+                    if(!token || token === 'undefined') window.location.href = 'login.html';
+                } catch(e) { window.location.href = 'login.html'; }
+            };
+
+            const syncUser = () => {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if(user) {
+                    document.getElementById('userFirst').innerText = user.name.split(' ')[0];
+                    document.getElementById('userNameSide').innerText = user.name;
+                }
+            };
+
+            const load = async () => {
+                try {
+                    const res = await apiService.properties.getMyProperties();
+                    if(res.success) {
+                        const props = res.data;
+                        document.getElementById('countActive').innerText = props.length;
+                        
+                        if(props.length === 0) {
+                            emptyState.classList.remove('d-none');
+                            listBody.innerHTML = '';
+                            return;
+                        }
+
+                        emptyState.classList.add('d-none');
+                        listBody.innerHTML = props.map(p => `
+                            <tr class="tr-prop-vip animate-fade">
+                                <td>
+                                    <div class="d-flex align-items-center gap-3">
+                                        <img src="/api/properties/image/${p.id}/0" class="thumb-vip" onerror="this.src='https://placehold.co/120/111/c6ff00?text=VIP'">
+                                        <div class="overflow-hidden">
+                                            <h6 class="fw-800 text-main mb-0 text-truncate" style="max-width: 250px;">${p.title}</h6>
+                                            <span class="small text-muted fw-bold">${p.type}</span>
+                                        </div>
+                                    </div>
+                                </td>
+                                <td><span class="small fw-bold text-secondary"><i class="bi bi-geo-alt me-1"></i> ${p.location}</span></td>
+                                <td><span class="fw-900 text-neon">${new Intl.NumberFormat('pt-AO').format(p.price)} Kz</span></td>
+                                <td><span class="status-badge-vip">Ativo</span></td>
+                                <td class="text-end">
+                                    <div class="action-btns">
+                                        <button class="btn-circle" onclick="DashboardEngine.edit(${p.id})"><i class="bi bi-pencil-square"></i></button>
+                                        <button class="btn-circle del" onclick="DashboardEngine.delete(${p.id})"><i class="bi bi-trash3-fill"></i></button>
+                                    </div>
+                                </td>
+                            </tr>
+                        `).join('');
+                    }
+                } catch(e) { console.error("API Error:", e); }
+            };
+
+            const edit = async (id) => {
+                try {
+                    const res = await apiService.properties.getById(id);
+                    if(res.success) {
+                        const p = res.data;
+                        document.getElementById('editPropId').value = p.id;
+                        document.getElementById('eTitle').value = p.title;
+                        document.getElementById('ePrice').value = p.price;
+                        document.getElementById('eLoc').value = p.location;
+                        document.getElementById('eType').value = p.type;
+                        document.getElementById('eDesc').value = p.description;
+
+                        document.getElementById('vMain').src = `/api/properties/image/${p.id}/0`;
+                        for(let i=1; i<=4; i++) {
+                            const imgTarget = document.getElementById(`v${i}`);
+                            if(imgTarget) imgTarget.src = `/api/properties/image/${p.id}/${i}`;
+                        }
+                        new bootstrap.Modal('#modalEditVIP').show();
+                    }
+                } catch(err) { console.error(err); }
+            };
+
+            const del = async (id) => {
+                if(confirm("Eliminar este imóvel permanentemente?")) {
+                    const res = await apiService.properties.delete(id);
+                    if(res.success) load();
+                }
+            };
+
+            const setupPreviews = () => {
+                const map = { 'fMain': 'vMain', 'f1': 'v1', 'f2': 'v2', 'f3': 'v3', 'f4': 'v4' };
+                Object.keys(map).forEach(key => {
+                    document.getElementById(key).onchange = (e) => {
+                        const reader = new FileReader();
+                        reader.onload = (ev) => document.getElementById(map[key]).src = ev.target.result;
+                        if(e.target.files[0]) reader.readAsDataURL(e.target.files[0]);
+                    };
+                });
+            };
+
+            const handleFormUpdate = () => {
+                const form = document.getElementById('formUpdateProperty');
+                form.onsubmit = async (e) => {
+                    e.preventDefault();
+                    const btn = document.getElementById('btnSync');
+                    const id = document.getElementById('editPropId').value;
+                    btn.disabled = true;
+                    btn.innerHTML = 'Sincronizando...';
+
+                    try {
+                        const formData = new FormData(form);
+                        const token = typeof apiService.getToken === 'function' ? apiService.getToken() : localStorage.getItem('token');
+                        
+                        const response = await fetch(`/api/properties/${id}`, {
+                            method: 'PUT',
+                            headers: { 'Authorization': `Bearer ${token}` },
+                            body: formData
+                        });
+                        
+                        const result = await response.json();
+                        if(result.success) {
+                            bootstrap.Modal.getInstance(document.getElementById('modalEditVIP')).hide();
+                            load();
+                        }
+                    } catch(err) { console.error(err); }
+                    finally {
+                        btn.disabled = false;
+                        btn.innerText = 'SINCRONIZAR COM O SERVIDOR VIP';
+                    }
+                };
+            };
+
+            return { load, edit, delete: del, boot: init };
+        })();
+
+        /**
+         * THEME MANAGER - CORRIGIDO E DEFINITIVO
+         */
+        const ThemeManager = {
+            boot: () => {
+                const saved = localStorage.getItem('theme') || 'dark';
+                ThemeManager.apply(saved);
+
+                document.getElementById('setThemeDark').onclick = () => ThemeManager.apply('dark');
+                document.getElementById('setThemeLight').onclick = () => ThemeManager.apply('light');
+            },
+            apply: (t) => {
+                document.documentElement.setAttribute('data-theme', t);
+                localStorage.setItem('theme', t);
+                
+                // Forçar atualização visual dos botões
+                const dBtn = document.getElementById('setThemeDark');
+                const lBtn = document.getElementById('setThemeLight');
+
+                if(t === 'dark') {
+                    dBtn.classList.add('active'); lBtn.classList.remove('active');
+                } else {
+                    dBtn.classList.remove('active'); lBtn.classList.add('active');
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', DashboardEngine.boot);
+    </script>
+</body>
+</html>

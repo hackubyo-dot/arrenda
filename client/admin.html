@@ -1,0 +1,562 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Master Core | Arrenda Angola VIP Admin</title>
+    
+    <!-- FONTES PREMIUM: PLUS JAKARTA SANS -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <!-- ICONS & LIBS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <style>
+        :root {
+            --bg: #050505;
+            --sidebar: #000000;
+            --card: #0d0d0d;
+            --neon: #c6ff00;
+            --neon-soft: rgba(198, 255, 0, 0.1);
+            --border: rgba(255, 255, 255, 0.04);
+            --text-main: #ffffff;
+            --text-muted: #666666;
+            --danger: #ff3b30;
+            --sidebar-w: 280px;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+        }
+
+        [data-theme="light"] {
+            --bg: #f8f9fa;
+            --sidebar: #ffffff;
+            --card: #ffffff;
+            --border: rgba(0, 0, 0, 0.05);
+            --text-main: #111111;
+            --text-muted: #888888;
+        }
+
+        * { 
+            margin: 0; padding: 0; box-sizing: border-box; 
+            font-family: 'Plus Jakarta Sans', sans-serif; 
+            transition: background 0.3s ease, color 0.3s ease, border-color 0.3s ease, transform 0.2s ease;
+        }
+
+        body { background: var(--bg); color: var(--text-main); overflow-x: hidden; }
+
+        /* --- SIDEBAR ELITE --- */
+        .sidebar-master {
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--sidebar);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0; top: 0;
+            padding: 40px 24px;
+            display: flex;
+            flex-direction: column;
+            z-index: 1050;
+        }
+
+        .brand-box {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 60px;
+            padding-left: 10px;
+        }
+
+        .brand-logo {
+            width: 42px; height: 42px;
+            background: var(--neon);
+            border-radius: 12px;
+            display: grid; place-items: center;
+            color: #000; font-weight: 800; font-size: 1.2rem;
+            box-shadow: 0 0 20px var(--neon-soft);
+        }
+
+        .nav-menu { flex: 1; }
+        .nav-link-master {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            padding: 16px 20px;
+            color: var(--text-muted);
+            text-decoration: none !important;
+            border-radius: var(--radius-md);
+            font-weight: 600;
+            font-size: 0.95rem;
+            margin-bottom: 8px;
+            border: 1px solid transparent;
+            cursor: pointer;
+        }
+
+        .nav-link-master:hover {
+            color: var(--text-main);
+            background: rgba(255,255,255,0.03);
+        }
+
+        .nav-link-master.active {
+            background: var(--card);
+            color: var(--neon);
+            border-color: var(--border);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- CANVAS PRINCIPAL --- */
+        .main-canvas {
+            margin-left: var(--sidebar-w);
+            padding: 60px 80px;
+            min-height: 100vh;
+        }
+
+        .header-action-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 60px;
+        }
+
+        .welcome-text h1 { font-weight: 800; font-size: 2.8rem; letter-spacing: -1px; }
+        .welcome-text p { color: var(--text-muted); font-size: 1.1rem; }
+
+        /* --- CARDS DE ESTATÍSTICA --- */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .stat-card-premium {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .stat-card-premium h6 { 
+            text-transform: uppercase; letter-spacing: 2px; 
+            font-weight: 700; font-size: 0.75rem; color: var(--text-muted);
+            margin-bottom: 15px;
+        }
+
+        .stat-card-premium h2 { font-weight: 800; font-size: 3rem; margin: 0; }
+
+        /* --- TABELAS LUXO --- */
+        .content-shell {
+            background: var(--card);
+            border: 1px solid var(--border);
+            border-radius: var(--radius-lg);
+            padding: 40px;
+            animation: slideUp 0.6s ease;
+        }
+
+        .table-premium { width: 100%; border-collapse: separate; border-spacing: 0 12px; }
+        .table-premium th {
+            padding: 10px 20px; color: var(--text-muted); 
+            font-size: 0.8rem; text-transform: uppercase; font-weight: 800;
+        }
+        .table-premium td {
+            padding: 20px; background: rgba(255,255,255,0.01);
+            border-top: 1px solid var(--border); border-bottom: 1px solid var(--border);
+            vertical-align: middle;
+        }
+        .table-premium td:first-child { border-left: 1px solid var(--border); border-radius: 20px 0 0 20px; }
+        .table-premium td:last-child { border-right: 1px solid var(--border); border-radius: 0 20px 20px 0; }
+
+        /* --- COMPONENTES UI --- */
+        .btn-neon-master {
+            background: var(--neon); color: #000; border: none;
+            padding: 16px 35px; border-radius: 20px; font-weight: 800;
+            box-shadow: 0 15px 30px var(--neon-soft);
+            cursor: pointer;
+        }
+
+        .btn-neon-master:hover { transform: translateY(-3px); box-shadow: 0 20px 40px rgba(198, 255, 0, 0.3); }
+
+        .btn-action-circle {
+            width: 42px; height: 42px; border-radius: 50%;
+            display: grid; place-items: center; background: rgba(255,255,255,0.05);
+            border: 1px solid var(--border); color: inherit; cursor: pointer;
+            text-decoration: none;
+        }
+        .btn-action-circle:hover { background: var(--text-main); color: var(--bg); }
+        .btn-delete:hover { background: var(--danger) !important; border-color: var(--danger) !important; color: #fff !important; }
+
+        .theme-btn-float {
+            position: fixed; top: 40px; right: 40px; z-index: 2000; 
+            width: 55px; height: 55px; border-radius: 50%;
+            background: var(--card); border: 1px solid var(--border);
+            color: var(--neon); display: grid; place-items: center;
+            cursor: pointer; box-shadow: 0 10px 20px rgba(0,0,0,0.2);
+        }
+
+        /* --- MODAL --- */
+        .modal-content-premium {
+            background: var(--card); border: 1px solid var(--border);
+            border-radius: var(--radius-lg); padding: 30px; color: var(--text-main);
+        }
+        .form-vip-input {
+            background: var(--bg); border: 1px solid var(--border);
+            border-radius: 18px; padding: 18px; color: #fff; width: 100%; margin-bottom: 15px;
+        }
+        .form-vip-input:focus { border-color: var(--neon); outline: none; }
+
+        /* --- ANIMAÇÕES --- */
+        @keyframes slideUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .animate-fade { animation: fadeIn 0.4s ease; }
+        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+
+        .admin-section { display: none; }
+        .admin-section.active { display: block; }
+        
+        .avatar-frame { width: 45px; height: 45px; border-radius: 14px; object-fit: cover; background: #222; }
+        .text-neon { color: var(--neon) !important; }
+        .badge-vip { background: var(--neon-soft); color: var(--neon); padding: 6px 14px; border-radius: 10px; font-size: 0.7rem; font-weight: 800; }
+
+        @media (max-width: 1200px) {
+            .stats-grid { grid-template-columns: 1fr 1fr; }
+            .main-canvas { padding: 40px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- BOTÃO DE TEMA -->
+    <button id="theme-toggle" class="theme-btn-float">
+        <i class="bi bi-moon-stars-fill"></i>
+    </button>
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar-master">
+        <div class="brand-box">
+            <div class="brand-logo">A</div>
+            <div class="fw-800 fs-4" style="letter-spacing: -1px;">MASTER<span class="text-neon">CORE</span></div>
+        </div>
+
+        <nav class="nav-menu">
+            <div class="nav-link-master active" onclick="switchTab('dashboard', this)">
+                <i class="bi bi-grid-1x2-fill"></i> Dashboard
+            </div>
+            <div class="nav-link-master" onclick="switchTab('users', this)">
+                <i class="bi bi-people-fill"></i> Utilizadores
+            </div>
+            <div class="nav-link-master" onclick="switchTab('properties', this)">
+                <i class="bi bi-house-lock-fill"></i> Imóveis VIP
+            </div>
+            <div class="nav-link-master" onclick="switchTab('analytics', this)">
+                <i class="bi bi-graph-up-arrow"></i> Analytics
+            </div>
+        </nav>
+
+        <div class="mt-auto">
+            <a href="index.html" class="nav-link-master text-danger">
+                <i class="bi bi-box-arrow-left"></i> Sair do Painel
+            </a>
+        </div>
+    </aside>
+
+    <!-- ÁREA PRINCIPAL -->
+    <main class="main-canvas">
+        
+        <!-- HEADER -->
+        <div class="header-action-bar">
+            <div class="welcome-text">
+                <h1 id="page-title">Painel de Controle</h1>
+                <p id="page-subtitle">Monitorização em tempo real do ecossistema VIP.</p>
+            </div>
+            <button class="btn-neon-master" data-bs-toggle="modal" data-bs-target="#modalVip">
+                <i class="bi bi-plus-lg me-2"></i> PUBLICAR ANÚNCIO VIP
+            </button>
+        </div>
+
+        <!-- DASHBOARD SECTION -->
+        <section id="dashboard" class="admin-section active">
+            <div class="stats-grid">
+                <div class="stat-card-premium">
+                    <h6>Total Utilizadores</h6>
+                    <h2 id="u-count">0</h2>
+                </div>
+                <div class="stat-card-premium">
+                    <h6>Imóveis Ativos</h6>
+                    <h2 id="p-count">0</h2>
+                </div>
+                <div class="stat-card-premium">
+                    <h6>Receita Estimada</h6>
+                    <h2 class="text-neon" id="r-count">0 Kz</h2>
+                </div>
+            </div>
+
+            <div class="content-shell">
+                <h4 class="fw-800 mb-4">Fluxo de Atividade (7 dias)</h4>
+                <canvas id="mainChart" height="100"></canvas>
+            </div>
+        </section>
+
+        <!-- USERS SECTION -->
+        <section id="users" class="admin-section">
+            <div class="content-shell">
+                <h4 class="fw-800 mb-4">Gestão de Membros</h4>
+                <table class="table-premium">
+                    <thead>
+                        <tr>
+                            <th>Membro</th>
+                            <th>Email Oficial</th>
+                            <th>Cargo</th>
+                            <th>Adesão</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="userListBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+        <!-- PROPERTIES SECTION -->
+        <section id="properties" class="admin-section">
+            <div class="content-shell">
+                <h4 class="fw-800 mb-4">Inventário Global</h4>
+                <table class="table-premium">
+                    <thead>
+                        <tr>
+                            <th>Preview</th>
+                            <th>Título</th>
+                            <th>Preço</th>
+                            <th>Status VIP</th>
+                            <th class="text-end">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="propListBody"></tbody>
+                </table>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- MODAL POSTAGEM VIP -->
+    <div class="modal fade" id="modalVip" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg">
+            <div class="modal-content modal-content-premium">
+                <div class="d-flex justify-content-between align-items-center mb-4">
+                    <h3 class="fw-800 text-neon mb-0">Novo Destaque VIP</h3>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <form id="vipFormMaster">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label class="small text-muted mb-2 fw-bold">IMAGEM PRINCIPAL</label>
+                            <input type="file" name="main_image" class="form-vip-input" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="title" class="form-vip-input" placeholder="Título do Imóvel" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="number" name="price" class="form-vip-input" placeholder="Preço (Kz)" required>
+                        </div>
+                        <div class="col-md-6">
+                            <input type="text" name="location" class="form-vip-input" placeholder="Localização" required>
+                        </div>
+                        <div class="col-md-6">
+                            <select name="type" class="form-vip-input">
+                                <option value="Vivenda">Vivenda de Luxo</option>
+                                <option value="Apartamento">Apartamento VIP</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12">
+                            <textarea name="description" class="form-vip-input" rows="4" placeholder="Descrição comercial detalhada..." required></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn-neon-master w-100 mt-3 py-3 fs-5">CONFIRMAR PUBLICAÇÃO VIP</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- SCRIPTS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/api.js"></script>
+
+    <script>
+        /**
+         * LÓGICA DO PAINEL ADMINISTRATIVO
+         */
+        let chartInstance = null;
+
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboard();
+            initChart();
+            initTheme();
+        });
+
+        function switchTab(id, el) {
+            document.querySelectorAll('.admin-section').forEach(s => s.classList.remove('active'));
+            document.querySelectorAll('.nav-link-master').forEach(l => l.classList.remove('active'));
+            
+            document.getElementById(id).classList.add('active');
+            el.classList.add('active');
+
+            // Atualiza Títulos
+            const titles = {
+                dashboard: ["Painel de Controle", "Monitorização em tempo real."],
+                users: ["Gestão de Membros", "Controle de acessos e permissões."],
+                properties: ["Inventário Global", "Moderação de anúncios e destaques."]
+            };
+
+            if (titles[id]) {
+                document.getElementById('page-title').innerText = titles[id][0];
+                document.getElementById('page-subtitle').innerText = titles[id][1];
+            }
+
+            if(id === 'users') loadUsers();
+            if(id === 'properties') loadProperties();
+        }
+
+        async function loadDashboard() {
+            try {
+                const res = await fetch('/api/admin/stats', { headers: apiService.getHeaders() }).then(r => r.json());
+                if(res.success) {
+                    document.getElementById('u-count').innerText = res.data.totalUsers;
+                    document.getElementById('p-count').innerText = res.data.totalProperties;
+                    document.getElementById('r-count').innerText = new Intl.NumberFormat().format(res.data.totalRevenue) + ' Kz';
+                }
+            } catch(e) { console.error('Erro stats:', e); }
+        }
+
+        async function loadUsers() {
+            try {
+                const res = await fetch('/api/admin/users', { headers: apiService.getHeaders() }).then(r => r.json());
+                const body = document.getElementById('userListBody');
+                body.innerHTML = res.data.map(u => `
+                    <tr class="animate-fade">
+                        <td>
+                            <div class="d-flex align-items-center gap-3">
+                                <img src="/api/auth/avatar/${u.id}" class="avatar-frame" onerror="this.src='https://ui-avatars.com/api/?name=${u.name}'">
+                                <span class="fw-700">${u.name}</span>
+                            </div>
+                        </td>
+                        <td class="text-muted">${u.email}</td>
+                        <td><span class="badge-vip" style="${u.role === 'admin' ? 'background:rgba(198,255,0,0.15);color:#c6ff00;' : ''}">${u.role.toUpperCase()}</span></td>
+                        <td class="text-muted small">${new Date(u.created_at).toLocaleDateString()}</td>
+                        <td class="text-end">
+                            <button class="btn-action-circle btn-delete d-inline-flex" onclick="deleteUser(${u.id})"><i class="bi bi-trash3"></i></button>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error('Erro users:', e); }
+        }
+
+        async function loadProperties() {
+            try {
+                const res = await fetch('/api/admin/properties', { headers: apiService.getHeaders() }).then(r => r.json());
+                const body = document.getElementById('propListBody');
+                body.innerHTML = res.data.map(p => `
+                    <tr class="animate-fade">
+                        <td><img src="/api/properties/image/${p.id}/0" style="width:70px;height:45px;border-radius:10px;object-fit:cover;"></td>
+                        <td class="fw-700">${p.title}</td>
+                        <td class="text-neon fw-800">${new Intl.NumberFormat().format(p.price)} Kz</td>
+                        <td>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" ${p.is_vip ? 'checked' : ''} onchange="toggleVip(${p.id}, this.checked)" style="background-color:#333;border:none;cursor:pointer;">
+                            </div>
+                        </td>
+                        <td class="text-end">
+                            <div class="d-flex justify-content-end gap-2">
+                                <button class="btn-action-circle" onclick="window.open('../pages/details.html?id=${p.id}')"><i class="bi bi-eye"></i></button>
+                                <button class="btn-action-circle btn-delete" onclick="deleteProp(${p.id})"><i class="bi bi-trash3"></i></button>
+                            </div>
+                        </td>
+                    </tr>
+                `).join('');
+            } catch(e) { console.error('Erro properties:', e); }
+        }
+
+        async function toggleVip(id, status) {
+            await fetch(`/api/admin/properties/${id}/vip`, {
+                method: 'PUT',
+                headers: apiService.getHeaders(),
+                body: JSON.stringify({ is_vip: status })
+            });
+            loadDashboard();
+        }
+
+        async function deleteUser(id) {
+            if(confirm('Banir este utilizador permanentemente?')) {
+                await fetch(`/api/admin/users/${id}`, { method: 'DELETE', headers: apiService.getHeaders() });
+                loadUsers();
+            }
+        }
+
+        async function deleteProp(id) {
+            if(confirm('Remover este imóvel do servidor?')) {
+                await fetch(`/api/properties/${id}`, { method: 'DELETE', headers: apiService.getHeaders() });
+                loadProperties();
+            }
+        }
+
+        document.getElementById('vipFormMaster').onsubmit = async (e) => {
+            e.preventDefault();
+            const fd = new FormData(e.target);
+            fd.append('is_vip', 'true');
+            fd.append('phone_primary', '+244 999 999 999');
+
+            try {
+                const res = await apiService.properties.create(fd);
+                if(res.success) {
+                    alert('Anúncio VIP publicado com sucesso!');
+                    location.reload();
+                }
+            } catch(err) { alert('Erro ao publicar anúncio.'); }
+        };
+
+        function initChart() {
+            const ctx = document.getElementById('mainChart').getContext('2d');
+            if(chartInstance) chartInstance.destroy();
+
+            chartInstance = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: ['Seg', 'Ter', 'Qua', 'Qui', 'Sex', 'Sáb', 'Dom'],
+                    datasets: [{
+                        label: 'Utilizadores',
+                        data: [5, 12, 19, 15, 25, 22, 35],
+                        borderColor: '#c6ff00',
+                        tension: 0.4,
+                        borderWidth: 3,
+                        pointRadius: 4,
+                        pointBackgroundColor: '#c6ff00',
+                        fill: true,
+                        backgroundColor: 'rgba(198, 255, 0, 0.03)'
+                    }]
+                },
+                options: {
+                    plugins: { legend: { display: false } },
+                    scales: { 
+                        y: { display: false },
+                        x: { grid: { display: false }, ticks: { color: '#666' } }
+                    }
+                }
+            });
+        }
+
+        function initTheme() {
+            const btn = document.getElementById('theme-toggle');
+            const saved = localStorage.getItem('theme') || 'dark';
+            document.documentElement.setAttribute('data-theme', saved);
+            
+            btn.onclick = () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                btn.innerHTML = next === 'dark' ? '<i class="bi bi-moon-stars-fill"></i>' : '<i class="bi bi-sun-fill"></i>';
+            };
+        }
+    </script>
+</body>
+</html>

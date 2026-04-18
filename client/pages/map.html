@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Mapa VIP | Arrenda Angola Ultimate</title>
+
+    <!-- 1. FONTES DE ALTA DEFINIÇÃO (PLUS JAKARTA SANS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 2. BIBLIOTECAS CORE -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+
+    <!-- 3. MOTOR DE DESIGN SYSTEM SUPREMO -->
+    <style>
+        :root {
+            /* MODO ESCURO */
+            --bg-master: #050505;
+            --bg-card: #0f0f0f;
+            --bg-sidebar: #080808;
+            --bg-input: #121212;
+            --bg-glass: rgba(10, 10, 10, 0.85);
+            
+            --neon: #c6ff00;
+            --neon-rgb: 198, 255, 0;
+            --neon-glow: rgba(198, 255, 0, 0.35);
+
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #4b5563;
+            
+            --border: rgba(255, 255, 255, 0.08);
+            --radius-xl: 45px;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            
+            --sidebar-w: 320px;
+            --trans-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="light"] {
+            /* MODO CLARO */
+            --bg-master: #f2f5f7;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-input: #f8fafb;
+            --bg-glass: rgba(255, 255, 255, 0.9);
+            --text-main: #0a0a0b;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border: rgba(0, 0, 0, 0.06);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.05);
+        }
+
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { display: none; }
+        
+        body {
+            background-color: var(--bg-master);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow: hidden;
+            height: 100vh;
+            transition: var(--trans-smooth);
+        }
+
+        /* ---------------------------------------------------------------------------
+           SIDEBAR DESKTOP (ELITE STYLE)
+        --------------------------------------------------------------------------- */
+        .sidebar-desktop {
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0; top: 0; padding: 50px 35px;
+            display: flex; flex-direction: column; z-index: 2000;
+            transition: var(--trans-smooth);
+        }
+        .sidebar-brand { display: flex; align-items: center; gap: 18px; margin-bottom: 60px; }
+        .logo-box {
+            width: 52px; height: 52px; background: var(--neon); color: #000;
+            border-radius: 16px; display: grid; place-items: center;
+            font-weight: 900; font-size: 1.8rem; box-shadow: 0 0 20px var(--neon-glow);
+        }
+        .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; color: var(--text-main); }
+        .logo-text span { color: var(--neon); }
+
+        .nav-link {
+            display: flex; align-items: center; gap: 18px; padding: 18px 25px;
+            color: var(--text-secondary); border-radius: 22px; font-weight: 700;
+            transition: var(--trans-smooth); margin-bottom: 10px;
+        }
+        .nav-link:hover { background: var(--bg-card); color: var(--text-main); transform: translateX(8px); }
+        .nav-link.active { background: var(--neon); color: #000; box-shadow: 0 10px 25px rgba(var(--neon-rgb), 0.2); }
+        .nav-link i { font-size: 1.6rem; }
+
+        /* ---------------------------------------------------------------------------
+           MAIN CONTENT & MAP
+        --------------------------------------------------------------------------- */
+        .main-wrapper {
+            position: absolute; inset: 0; margin-left: var(--sidebar-w);
+            z-index: 1; transition: margin 0.5s ease;
+        }
+
+        #leafletMap { width: 100%; height: 100%; background: var(--bg-master); }
+
+        /* PINS DE PREÇO CUSTOMIZADOS (BALÕES NEON) */
+        .price-pin-elite {
+            background: #000; border: 2.5px solid var(--neon); border-radius: 16px;
+            color: var(--neon); font-weight: 900; font-size: 0.85rem; padding: 6px 14px;
+            white-space: nowrap; display: flex; align-items: center; justify-content: center;
+            box-shadow: 0 0 20px rgba(var(--neon-rgb), 0.45);
+            position: relative; cursor: pointer; transition: 0.3s;
+        }
+        .price-pin-elite::after {
+            content: ''; position: absolute; bottom: -11px; left: 50%;
+            transform: translateX(-50%); border-left: 8px solid transparent;
+            border-right: 8px solid transparent; border-top: 11px solid var(--neon);
+        }
+        .price-pin-elite:hover { transform: scale(1.18); z-index: 5000; }
+
+        /* ---------------------------------------------------------------------------
+           CONTROLES FLUTUANTES (RIGHT UI)
+        --------------------------------------------------------------------------- */
+        .map-floating-ui {
+            position: absolute; right: 35px; top: 50%;
+            transform: translateY(-50%); display: flex; flex-direction: column;
+            gap: 18px; z-index: 1500;
+        }
+        .btn-ui-fab {
+            width: 62px; height: 62px; border-radius: 50%;
+            background: var(--bg-card); border: 1px solid var(--border);
+            color: var(--text-main); display: grid; place-items: center;
+            font-size: 1.6rem; box-shadow: var(--shadow-lux); cursor: pointer;
+            transition: 0.3s;
+        }
+        .btn-ui-fab:hover { background: var(--text-main); color: var(--bg-master); }
+        .btn-ui-fab.active-neon { background: var(--neon); color: #000; border: none; box-shadow: 0 0 30px rgba(var(--neon-rgb), 0.4); }
+
+        /* ---------------------------------------------------------------------------
+           CARROSSEL DE IMÓVEIS (BOTTOM TRAY)
+        --------------------------------------------------------------------------- */
+        .bottom-carousel-tray {
+            position: absolute; bottom: 125px; left: 30px; right: 0;
+            z-index: 1500; display: flex; gap: 20px; overflow-x: auto;
+            padding: 10px 10px 30px 0; scroll-behavior: smooth;
+            scroll-snap-type: x mandatory;
+        }
+        .tray-card {
+            min-width: 350px; background: #ffffff; border-radius: var(--radius-lg);
+            padding: 16px; display: flex; align-items: center; gap: 20px;
+            scroll-snap-align: start; box-shadow: var(--shadow-lux);
+            cursor: pointer; transition: 0.4s var(--trans-smooth);
+            border: 1px solid transparent;
+        }
+        [data-theme="dark"] .tray-card { background: #1a1a1a; }
+        .tray-card:hover { transform: translateY(-8px) scale(1.02); border-color: var(--neon); }
+
+        .card-img-holder {
+            width: 115px; height: 115px; border-radius: var(--radius-md);
+            overflow: hidden; flex-shrink: 0; background: #222;
+        }
+        .card-img-holder img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .card-body-info { flex: 1; overflow: hidden; }
+        .card-body-info h6 { font-weight: 800; font-size: 1.15rem; color: #000; margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        [data-theme="dark"] .card-body-info h6 { color: #fff; }
+        .card-body-info p { font-size: 0.85rem; color: #888; margin-bottom: 12px; display: flex; align-items: center; gap: 6px; }
+        .card-body-info .price-label { font-weight: 900; font-size: 1.25rem; color: var(--neon); filter: brightness(0.8); }
+
+        /* ---------------------------------------------------------------------------
+           MODAL ELITE (DETALHES ATRAENTES)
+        --------------------------------------------------------------------------- */
+        .modal-elite-overlay {
+            position: fixed; inset: 0; background: rgba(0,0,0,0.75);
+            backdrop-filter: blur(15px); z-index: 9000; display: none;
+            align-items: center; justify-content: center; padding: 25px;
+        }
+        .modal-elite-box {
+            background: var(--bg-card); width: 100%; max-width: 520px;
+            border-radius: var(--radius-xl); overflow: hidden;
+            position: relative; animation: modalReveal 0.6s var(--trans-smooth);
+            box-shadow: 0 40px 100px rgba(0,0,0,0.8);
+            border: 1px solid var(--border);
+        }
+        @keyframes modalReveal { from { opacity: 0; transform: translateY(80px) scale(0.85); } to { opacity: 1; transform: translateY(0) scale(1); } }
+
+        .modal-elite-header { width: 100%; height: 320px; position: relative; }
+        .modal-elite-header img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .modal-close-btn {
+            position: absolute; top: 25px; right: 25px; width: 50px; height: 50px;
+            background: rgba(255,255,255,0.9); border-radius: 50%; display: grid; place-items: center;
+            color: #000; border: none; font-size: 1.4rem; cursor: pointer; transition: 0.3s;
+        }
+        .modal-close-btn:hover { transform: rotate(90deg); background: var(--neon); }
+
+        .modal-elite-body { padding: 40px; }
+        .modal-status-badge { 
+            background: rgba(var(--neon-rgb), 0.15); padding: 8px 18px; border-radius: 100px;
+            font-size: 0.75rem; font-weight: 900; color: var(--neon);
+            text-transform: uppercase; margin-bottom: 20px; display: inline-flex; align-items: center; gap: 8px;
+        }
+        .modal-elite-body h3 { font-weight: 800; font-size: 1.8rem; margin-bottom: 12px; letter-spacing: -1px; }
+        .modal-elite-body .price-tag { font-size: 2.2rem; font-weight: 900; color: var(--neon); margin-bottom: 30px; letter-spacing: -2px; }
+
+        .btn-elite-action {
+            width: 100%; padding: 22px; background: var(--neon); color: #000;
+            border: none; border-radius: 25px; font-weight: 900; font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 1.5px; transition: 0.4s;
+            box-shadow: 0 10px 30px rgba(var(--neon-rgb), 0.3);
+        }
+        .btn-elite-action:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(var(--neon-rgb), 0.5); }
+
+        /* ---------------------------------------------------------------------------
+           MOBILE NAVIGATION (APPLE STYLE)
+        --------------------------------------------------------------------------- */
+        .mobile-nav-apple {
+            position: absolute; bottom: 35px; left: 25px; right: 25px;
+            height: 90px; background: rgba(255, 255, 255, 0.9);
+            backdrop-filter: blur(30px); border-radius: 45px;
+            display: flex; justify-content: space-around; align-items: center;
+            padding-bottom: 8px; z-index: 2000; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        [data-theme="dark"] .mobile-nav-apple { background: rgba(15, 15, 15, 0.85); border: 1px solid rgba(255,255,255,0.05); }
+
+        .m-nav-link { display: flex; flex-direction: column; align-items: center; color: #888; transition: 0.3s; }
+        .m-nav-link.active { color: var(--neon); }
+        .m-nav-link i { font-size: 1.9rem; }
+        .m-nav-link span { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-top: 2px; }
+
+        .m-nav-center-elite {
+            width: 80px; height: 80px; background: var(--neon); color: #000;
+            border-radius: 50%; display: grid; place-items: center;
+            font-size: 2.2rem; transform: translateY(-20px);
+            box-shadow: 0 15px 35px rgba(var(--neon-rgb), 0.4);
+            border: 8px solid var(--bg-master);
+        }
+
+        /* ---------------------------------------------------------------------------
+           RESPONSIVIDADE & AJUSTES
+        --------------------------------------------------------------------------- */
+        @media (max-width: 991px) {
+            .sidebar-desktop { display: none; }
+            .main-wrapper { margin-left: 0; }
+        }
+
+        @media (min-width: 992px) {
+            .mobile-nav-apple { display: none; }
+            .bottom-carousel-tray { bottom: 40px; left: 40px; }
+            .map-floating-ui { right: 50px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 1. SIDEBAR ELITE (FIDELIDADE TOTAL) -->
+    <aside class="sidebar-desktop">
+        <div class="sidebar-brand">
+            <div class="logo-box">V</div>
+            <div class="logo-text">Arrenda<span>VIP</span></div>
+        </div>
+        <nav>
+            <a href="../index.html" class="nav-link"><i class="bi bi-house-door-fill"></i> <span>Explorar</span></a>
+            <a href="mapa.html" class="nav-link active"><i class="bi bi-geo-alt-fill"></i> <span>Mapa VIP</span></a>
+            <a href="chat.html" class="nav-link"><i class="bi bi-chat-dots-fill"></i> <span>Mensagens</span></a>
+            <a href="dashboard.html" class="nav-link"><i class="bi bi-grid-fill"></i> <span>Meu Painel</span></a>
+        </nav>
+        <div class="mt-auto">
+            <button onclick="ThemeEngine.toggle()" class="nav-link border-0 bg-transparent w-100 text-start">
+                <i class="bi bi-moon-stars-fill"></i> <span id="themeLabel">Modo Escuro</span>
+            </button>
+        </div>
+    </aside>
+
+    <!-- 2. MAIN MAP WRAPPER -->
+    <div class="main-wrapper">
+        <div id="leafletMap"></div>
+
+        <!-- CONTROLES UI -->
+        <div class="map-floating-ui">
+            <button class="btn-ui-fab" onclick="MapEngine.zoomIn()"><i class="bi bi-plus-lg"></i></button>
+            <button class="btn-ui-fab" onclick="MapEngine.zoomOut()"><i class="bi bi-dash-lg"></i></button>
+            <button class="btn-ui-fab active-neon" onclick="MapEngine.locate()"><i class="bi bi-crosshair"></i></button>
+            <button class="btn-ui-fab d-lg-none" onclick="ThemeEngine.toggle()"><i class="bi bi-brightness-high-fill"></i></button>
+        </div>
+
+        <!-- CARROSSEL DE IMÓVEIS -->
+        <div class="bottom-carousel-tray" id="mapCarousel">
+            <!-- Gerado via JS -->
+        </div>
+    </div>
+
+    <!-- 3. NAVBAR MOBILE (APPLE DESIGN) -->
+    <nav class="mobile-nav-apple">
+        <a href="../index.html" class="m-nav-link">
+            <i class="bi bi-house-door-fill"></i>
+            <span>Início</span>
+        </a>
+        <a href="mapa.html" class="m-nav-link active">
+            <i class="bi bi-geo-alt-fill"></i>
+            <span>Mapa</span>
+        </a>
+        <a href="publish.html" class="m-nav-center-elite">
+            <i class="bi bi-plus-lg"></i>
+        </a>
+        <a href="chat.html" class="m-nav-link">
+            <i class="bi bi-chat-dots-fill"></i>
+            <span>Chat</span>
+        </a>
+        <a href="dashboard.html" class="m-nav-link">
+            <i class="bi bi-grid-fill"></i>
+            <span>Painel</span>
+        </a>
+    </nav>
+
+    <!-- 4. MODAL ELITE GLAMOUR -->
+    <div class="modal-elite-overlay" id="detailsModal">
+        <div class="modal-elite-box">
+            <div class="modal-elite-header">
+                <button class="modal-close-btn" onclick="ModalEngine.close()"><i class="bi bi-x-lg"></i></button>
+                <img id="mHeroImg" src="" alt="">
+            </div>
+            <div class="modal-elite-body">
+                <div class="modal-status-badge">
+                    <i class="bi bi-patch-check-fill"></i> Verificado Arrenda VIP
+                </div>
+                <h3 id="mTitle">Título do Imóvel</h3>
+                <div class="price-tag" id="mPrice">0 Kz</div>
+                <button class="btn-elite-action" id="btnGoToProp">Ver Imóvel de Luxo</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 5. SCRIPTS ENGINE -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script src="../js/api.js"></script>
+
+    <script>
+        /**
+         * 🏆 ARRENDA ANGOLA MAP ENGINE - DEFINITIVO
+         */
+        let lMap;
+        let activeTileLayer;
+        const markers = [];
+
+        const MapEngine = {
+            init: async () => {
+                const initialTheme = localStorage.getItem('theme') || 'dark';
+                
+                // Inicialização Leaflet
+                lMap = L.map('leafletMap', { 
+                    zoomControl: false, 
+                    attributionControl: false 
+                }).setView([-8.8390, 13.2894], 14);
+
+                // Aplicar estilo de mapa inicial
+                MapEngine.updateMapTiles(initialTheme);
+
+                // Carregar Dados
+                await MapEngine.fetchAndRender();
+            },
+
+            updateMapTiles: (theme) => {
+                if(activeTileLayer) lMap.removeLayer(activeTileLayer);
+                
+                const url = theme === 'dark' 
+                    ? 'https://{s}.basemaps.cartocdn.com/dark_all/{z}/{x}/{y}{r}.png'
+                    : 'https://{s}.basemaps.cartocdn.com/rastertiles/voyager/{z}/{x}/{y}{r}.png';
+                
+                activeTileLayer = L.tileLayer(url).addTo(lMap);
+            },
+
+            fetchAndRender: async () => {
+                try {
+                    // API REAL INTEGRATION
+                    const res = await apiService.properties.getAll();
+                    if(res.success) {
+                        const props = res.data;
+                        MapEngine.renderPins(props);
+                        MapEngine.renderTray(props);
+                    }
+                } catch(e) { console.error("Erro na engine de dados:", e); }
+            },
+
+            renderPins: (props) => {
+                props.forEach(p => {
+                    // Coordenadas próximas a Luanda para o demo
+                    const lat = -8.8390 + (Math.random() - 0.5) * 0.15;
+                    const lng = 13.2894 + (Math.random() - 0.5) * 0.15;
+
+                    const priceLabel = MapEngine.compactPrice(p.price);
+
+                    const customIcon = L.divIcon({
+                        className: 'custom-icon-wrapper',
+                        html: `<div class="price-pin-elite">${priceLabel}</div>`,
+                        iconSize: [60, 40],
+                        iconAnchor: [30, 40]
+                    });
+
+                    const marker = L.marker([lat, lng], { icon: customIcon }).addTo(lMap);
+                    
+                    marker.on('click', () => {
+                        ModalEngine.open(p);
+                        lMap.flyTo([lat, lng], 16, { duration: 1.5 });
+                    });
+
+                    markers.push({ id: p.id, marker });
+                });
+            },
+
+            renderTray: (props) => {
+                const tray = document.getElementById('mapCarousel');
+                tray.innerHTML = props.map(p => `
+                    <div class="tray-card" id="card-${p.id}" onclick="ModalEngine.open(${JSON.stringify(p).replace(/"/g, '&quot;')})">
+                        <div class="card-img-holder">
+                            <img src="${apiService.properties.resolveImageUrl(p.id, 0)}" onerror="this.src='https://placehold.co/400x400/111/c6ff00?text=VIP'">
+                        </div>
+                        <div class="card-body-info">
+                            <h6>${p.title}</h6>
+                            <p><i class="bi bi-geo-alt-fill" style="color:var(--neon)"></i> ${p.location}</p>
+                            <div class="price-label">${apiService.utils.formatCurrency(p.price)}</div>
+                        </div>
+                    </div>
+                `).join('');
+            },
+
+            compactPrice: (price) => {
+                if(price >= 1000000) return (price/1000000).toFixed(1) + 'M';
+                if(price >= 1000) return (price/1000).toFixed(0) + 'Kz';
+                return price + 'Kz';
+            },
+
+            zoomIn: () => lMap.zoomIn(),
+            zoomOut: () => lMap.zoomOut(),
+            locate: () => lMap.locate({ setView: true, maxZoom: 16 })
+        };
+
+        /**
+         * 💎 MODAL ENGINE (ELITE POPUP)
+         */
+        const ModalEngine = {
+            open: (p) => {
+                document.getElementById('mTitle').innerText = p.title;
+                document.getElementById('mPrice').innerText = apiService.utils.formatCurrency(p.price);
+                document.getElementById('mHeroImg').src = apiService.properties.resolveImageUrl(p.id, 0);
+                
+                document.getElementById('btnGoToProp').onclick = () => {
+                    location.href = `details.html?id=${p.id}`;
+                };
+
+                document.getElementById('detailsModal').style.display = 'flex';
+                
+                // Scroll do carrossel sincronizado
+                const card = document.getElementById(`card-${p.id}`);
+                if(card) card.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+            },
+            close: () => {
+                document.getElementById('detailsModal').style.display = 'none';
+            }
+        };
+
+        /**
+         * 🌗 THEME ENGINE (SYNC COM MAPA)
+         */
+        const ThemeEngine = {
+            toggle: () => {
+                const html = document.documentElement;
+                const current = html.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                
+                html.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+                
+                document.getElementById('themeLabel').innerText = next === 'dark' ? 'Modo Escuro' : 'Modo Claro';
+                
+                // Atualizar Mapa
+                MapEngine.updateMapTiles(next);
+            }
+        };
+
+        // FECHAR MODAL CLICANDO FORA
+        window.onclick = (e) => {
+            if (e.target == document.getElementById('detailsModal')) ModalEngine.close();
+        };
+
+        // INICIALIZAÇÃO
+        document.addEventListener('DOMContentLoaded', MapEngine.init);
+    </script>
+</body>
+</html>

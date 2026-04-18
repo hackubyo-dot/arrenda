@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    
+    <!-- META TAGS MOBILE MODERNAS -->
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    
+    <title>Arrenda Angola VIP | Luxury Real Estate</title>
+
+    <!-- 1. FONTES DE ALTA DEFINIÇÃO (PLUS JAKARTA SANS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 2. BIBLIOTECAS CORE (BOOTSTRAP 5.3.3 + ICONS) -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- 3. MOTOR DE DESIGN SYSTEM SUPREMO -->
+    <style>
+        :root {
+            /* MODO ESCURO (OBSIDIAN) */
+            --bg-master: #050505;
+            --bg-card: #0f0f0f;
+            --bg-sidebar: #080808;
+            --bg-input: #121212;
+            --bg-glass: rgba(12, 12, 12, 0.85);
+            
+            --neon: #c6ff00;
+            --neon-rgb: 198, 255, 0;
+            --neon-glow: rgba(198, 255, 0, 0.35);
+
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #4b5563;
+            
+            --border: rgba(255, 255, 255, 0.08);
+            --sidebar-w: 320px;
+            --radius-xl: 45px;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            
+            --trans-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="light"] {
+            /* MODO CLARO (CRYSTAL CLEAN) */
+            --bg-master: #f2f5f7;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-input: #f8fafb;
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --text-main: #0a0a0b;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border: rgba(0, 0, 0, 0.12);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.05);
+        }
+
+        /* RESET & BASE */
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { display: none; }
+        
+        body {
+            background-color: var(--bg-master);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background 0.6s ease, color 0.6s ease;
+        }
+
+        /* ---------------------------------------------------------------------------
+           SIDEBAR DESKTOP (ELITE STYLE)
+        --------------------------------------------------------------------------- */
+        .sidebar-desktop {
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0; top: 0; padding: 50px 35px;
+            display: flex; flex-direction: column; z-index: 2000;
+            transition: var(--trans-smooth);
+        }
+
+        .sidebar-brand { display: flex; align-items: center; gap: 18px; margin-bottom: 60px; }
+        .logo-box {
+            width: 52px; height: 52px; background: var(--neon); color: #000;
+            border-radius: 16px; display: grid; place-items: center;
+            font-weight: 900; font-size: 1.8rem; box-shadow: 0 0 25px var(--neon-glow);
+        }
+        .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; color: var(--text-main); }
+        .logo-text span { color: var(--neon); }
+
+        .sidebar-menu { flex: 1; }
+        .nav-link {
+            display: flex; align-items: center; gap: 18px; padding: 18px 25px;
+            color: var(--text-secondary); border-radius: 22px; font-weight: 700;
+            transition: var(--trans-smooth); margin-bottom: 10px;
+        }
+        .nav-link:hover { background: var(--bg-card); color: var(--text-main); transform: translateX(8px); }
+        .nav-link.active { background: var(--neon); color: #000; box-shadow: 0 10px 25px rgba(var(--neon-rgb), 0.25); }
+        .nav-link i { font-size: 1.6rem; }
+
+        .sidebar-footer { padding-top: 30px; border-top: 1px solid var(--border); }
+        
+        /* THEME HUB SELECTOR (BOTÕES QUE AGORA APARECEM NO CLARO) */
+        .theme-hub-pill {
+            width: 100%; background: var(--bg-input); border: 1px solid var(--border);
+            padding: 8px; border-radius: 20px; display: flex; gap: 8px; margin-bottom: 25px;
+        }
+        .hub-btn {
+            flex: 1; border: none; padding: 12px; border-radius: 14px;
+            background: transparent; color: var(--text-muted); font-weight: 800;
+            font-size: 0.75rem; display: flex; align-items: center; justify-content: center; gap: 8px;
+            transition: 0.3s; cursor: pointer;
+        }
+        .hub-btn.active { background: var(--bg-card); color: var(--text-main); box-shadow: var(--shadow-lux); }
+
+        /* USER CARD SIDEBAR */
+        #userSideCard {
+            background: var(--bg-card);
+            border: 1px solid var(--border);
+            border-radius: 22px;
+            padding: 15px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.3s;
+        }
+        .avatar-min {
+            width: 45px; height: 45px; background: var(--neon); color: #000;
+            border-radius: 14px; display: grid; place-items: center; font-weight: 900;
+            box-shadow: 0 5px 15px rgba(var(--neon-rgb), 0.2);
+        }
+        #userSideCard h6 { color: var(--text-main); font-weight: 800; margin: 0; font-size: 0.9rem; }
+
+        /* ---------------------------------------------------------------------------
+           MAIN WRAPPER & HEADER
+        --------------------------------------------------------------------------- */
+        .main-wrapper {
+            margin-left: var(--sidebar-w);
+            padding: 0 60px 150px 60px;
+            transition: var(--trans-smooth);
+        }
+
+        .top-header-vip { padding: 35px 0; display: flex; flex-direction: column; gap: 35px; }
+        .header-row { display: flex; justify-content: space-between; align-items: center; width: 100%; }
+
+        .location-widget { display: flex; align-items: center; gap: 15px; }
+        .loc-circle {
+            width: 55px; height: 55px; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 50%; display: grid; place-items: center; color: var(--neon); font-size: 1.5rem;
+            box-shadow: var(--shadow-lux);
+        }
+        .loc-details small { display: block; font-size: 0.7rem; font-weight: 800; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.5px; }
+        .loc-details h6 { margin: 0; font-weight: 800; font-size: 1.15rem; color: var(--text-main); }
+
+        .header-actions { display: flex; align-items: center; gap: 18px; }
+        .btn-notif {
+            width: 55px; height: 55px; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 50%; display: grid; place-items: center; color: var(--text-main);
+            font-size: 1.4rem; position: relative; transition: 0.3s;
+        }
+        .notif-dot {
+            position: absolute; top: 15px; right: 15px; width: 10px; height: 10px;
+            background: #ff4757; border-radius: 50%; border: 2px solid var(--bg-card);
+            animation: pulseNotif 2s infinite;
+        }
+        @keyframes pulseNotif { 0% { transform: scale(1); } 50% { transform: scale(1.3); } 100% { transform: scale(1); } }
+
+        .top-avatar-box {
+            width: 55px; height: 55px; background: var(--neon); color: #000;
+            border-radius: 18px; display: grid; place-items: center;
+            font-weight: 900; font-size: 1.2rem; cursor: pointer;
+            box-shadow: 0 8px 20px rgba(var(--neon-rgb), 0.25);
+            transition: 0.3s; border: 2px solid transparent;
+        }
+        .top-avatar-box:hover { transform: scale(1.05); border-color: var(--text-main); }
+
+        .hero-headline { font-size: 3.4rem; font-weight: 800; line-height: 1; letter-spacing: -2.5px; margin: 10px 0; color: var(--text-main); }
+        .hero-headline span { color: var(--text-muted); display: block; }
+
+        /* SEARCH ENGINE */
+        .search-engine { display: flex; gap: 15px; align-items: center; }
+        .search-box {
+            flex: 1; background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 25px; padding: 18px 30px; display: flex; align-items: center; gap: 18px;
+            box-shadow: var(--shadow-lux);
+        }
+        .search-box input { background: transparent; border: none; color: var(--text-main); width: 100%; font-weight: 600; font-size: 1.1rem; outline: none; }
+
+        .btn-map-trigger {
+            width: 65px; height: 65px; background: #000; color: var(--neon);
+            border: 1px solid var(--border); border-radius: 22px; display: grid; place-items: center;
+            font-size: 1.8rem; cursor: pointer; transition: 0.3s;
+        }
+        .btn-map-trigger:hover { background: var(--neon); color: #000; transform: translateY(-5px); }
+
+        /* ---------------------------------------------------------------------------
+           CATEGORIES (COM ÍCONES ESTILIZADOS)
+        --------------------------------------------------------------------------- */
+        .cat-scroll { display: flex; gap: 15px; overflow-x: auto; padding: 15px 0; }
+        .cat-pill {
+            padding: 16px 30px; border-radius: 100px; background: var(--bg-card);
+            color: var(--text-secondary); font-weight: 800; font-size: 0.95rem;
+            border: 1px solid var(--border); transition: 0.4s; white-space: nowrap; 
+            cursor: pointer; display: flex; align-items: center; gap: 12px;
+        }
+        .cat-pill i { font-size: 1.2rem; }
+        .cat-pill.active { background: var(--neon); color: #000; border-color: var(--neon); box-shadow: 0 10px 25px rgba(var(--neon-rgb), 0.2); }
+
+        /* ---------------------------------------------------------------------------
+           VIP CARDS & RECENT GRID
+        --------------------------------------------------------------------------- */
+        .vip-scroll { display: flex; gap: 30px; overflow-x: auto; padding: 20px 5px 40px 5px; scroll-behavior: smooth; }
+        .vip-card {
+            min-width: 420px; height: 550px; border-radius: var(--radius-xl);
+            position: relative; overflow: hidden; border: 1px solid var(--border);
+            cursor: pointer; transition: var(--trans-smooth);
+        }
+        .vip-card img { width: 100%; height: 100%; object-fit: cover; transition: 1.2s cubic-bezier(0.16, 1, 0.3, 1); }
+        .vip-card:hover img { transform: scale(1.1); }
+        .vip-overlay {
+            position: absolute; inset: 0;
+            background: linear-gradient(to top, rgba(0,0,0,1) 0%, rgba(0,0,0,0.4) 40%, transparent 85%);
+            padding: 45px; display: flex; flex-direction: column; justify-content: flex-end;
+        }
+        .vip-price { font-size: 2.8rem; font-weight: 800; color: var(--neon); letter-spacing: -2px; }
+
+        /* RECENT GRID (2 COLUNAS MOBILE) */
+        .property-grid-recent { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); 
+            gap: 25px; 
+            margin-top: 20px; 
+        }
+
+        .recent-card-vip {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--trans-smooth);
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 15px;
+            box-shadow: var(--shadow-lux);
+        }
+        .recent-card-vip:hover { transform: translateY(-10px); border-color: var(--neon); }
+
+        .recent-img-holder { width: 100%; aspect-ratio: 1 / 1; position: relative; background: #222; }
+        .recent-img-holder img { width: 100%; height: 100%; object-fit: cover; }
+        .recent-price-badge {
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(10px);
+            padding: 6px 14px; border-radius: 12px; color: var(--neon);
+            font-weight: 800; font-size: 0.85rem; border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .recent-details { padding: 20px; }
+        .rating-row { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 0.85rem; color: var(--text-main); margin-bottom: 8px; }
+        .rating-row i { color: #ffb800; }
+        .recent-details h6 { font-weight: 800; font-size: 1.15rem; color: var(--text-main); margin-bottom: 5px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+
+        /* ---------------------------------------------------------------------------
+           MOBILE NAVIGATION (FIEL À INDEX ORIGEM)
+           ===========================================================================
+        */
+        .mobile-nav-elite {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 100px;
+            background: var(--bg-glass); backdrop-filter: blur(40px);
+            border-top: 1px solid var(--border); display: flex;
+            justify-content: space-around; align-items: center; padding-bottom: 25px; z-index: 3000;
+            border-top-left-radius: 35px; border-top-right-radius: 35px;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+        }
+        .m-nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); text-decoration: none; }
+        .m-nav-item.active { color: var(--text-main); }
+        .m-nav-item i { font-size: 1.8rem; }
+        .m-nav-item span { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-top: 2px; }
+
+        .m-center-box {
+            width: 75px; height: 75px; background: var(--neon); color: #000;
+            border-radius: 50%; display: grid; place-items: center;
+            font-size: 2rem; transform: translateY(-35px);
+            box-shadow: 0 15px 35px rgba(var(--neon-rgb), 0.4);
+            border: 8px solid var(--bg-master);
+        }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 991px) {
+            .sidebar-desktop { display: none; }
+            .main-wrapper { margin-left: 0; padding: 0 20px 150px 20px !important; }
+            .property-grid-recent { grid-template-columns: repeat(2, 1fr) !important; gap: 15px; }
+            .hero-headline { font-size: 2.4rem !important; }
+            .vip-card { min-width: 320px !important; height: 450px !important; }
+            .mobile-nav-elite { display: flex !important; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(15px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        
+        <!-- SIDEBAR DESKTOP -->
+        <aside class="sidebar-desktop d-none d-lg-flex">
+            <a href="index.html" class="sidebar-brand">
+                <div class="logo-box">V</div>
+                <div class="logo-text">Arrenda<span>VIP</span></div>
+            </a>
+            <nav class="sidebar-menu">
+                <a href="index.html" class="nav-link active"><i class="bi bi-house-door-fill"></i> <span>Explorar</span></a>
+                <a href="map.html" class="nav-link"><i class="bi bi-geo-alt-fill"></i> <span>Mapa VIP</span></a>
+                <a href="pages/chat.html" class="nav-link"><i class="bi bi-chat-dots-fill"></i> <span>Mensagens</span></a>
+                <a href="pages/dashboard.html" class="nav-link"><i class="bi bi-grid-1x2-fill"></i> <span>Meus Ativos</span></a>
+                <a href="pages/settings.html" class="nav-link"><i class="bi bi-person-fill"></i> <span>Perfil Elite</span></a>
+            </nav>
+            <div class="sidebar-footer">
+                <!-- THEME HUB (CORRIGIDO PARA MODO CLARO) -->
+                <div class="theme-hub-pill">
+                    <button class="hub-btn" id="btnThemeDark"><i class="bi bi-moon-stars-fill"></i> Escuro</button>
+                    <button class="hub-btn" id="btnThemeLight"><i class="bi bi-brightness-high-fill"></i> Claro</button>
+                </div>
+                <!-- USER CARD -->
+                <div id="userSideCard">
+                    <div class="avatar-min" id="uInitial">?</div>
+                    <div class="overflow-hidden">
+                        <h6 id="uName">Utilizador VIP</h6>
+                        <small class="text-muted" style="font-size: 0.6rem; font-weight: 800;">MEMBRO GOLD</small>
+                    </div>
+                </div>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT -->
+        <main class="main-wrapper">
+            
+            <header class="top-header-vip">
+                <div class="header-row">
+                    <div class="location-widget">
+                        <div class="loc-circle"><i class="bi bi-geo-alt-fill"></i></div>
+                        <div class="loc-details">
+                            <small>LOCALIZAÇÃO ATUAL</small>
+                            <h6>Luanda, Angola</h6>
+                        </div>
+                    </div>
+                    <div class="header-actions">
+                        <button class="btn-notif"><i class="bi bi-bell-fill"></i><span class="notif-dot"></span></button>
+                        <div class="top-avatar-box" onclick="location.href='pages/settings.html'" id="uHeaderAvatar">US</div>
+                    </div>
+                </div>
+
+                <h1 class="hero-headline animate-fade">Habitações de <br><span>Elite & Exclusividade</span></h1>
+
+                <div class="search-engine">
+                    <div class="search-box">
+                        <i class="bi bi-search text-muted"></i>
+                        <input type="text" id="globalPropSearch" placeholder="Procure por condomínios, áreas VIP...">
+                    </div>
+                    <button class="btn-map-trigger" onclick="location.href='map.html'">
+                        <i class="bi bi-geo-alt"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- CATEGORIAS (COM ICONES) -->
+            <section class="mt-2 mb-4">
+                <div class="cat-scroll" id="catSelector">
+                    <div class="cat-pill active" data-type="Todos"><i class="bi bi-grid-fill"></i> Todos</div>
+                    <div class="cat-pill" data-type="Vivenda"><i class="bi bi-house-heart-fill"></i> Vivendas</div>
+                    <div class="cat-pill" data-type="Apartamento"><i class="bi bi-building-fill"></i> Apartamentos</div>
+                    <div class="cat-pill" data-type="Quarto"><i class="bi bi-door-open-fill"></i> Quartos VIP</div>
+                    <div class="cat-pill" data-type="Escritório"><i class="bi bi-briefcase-fill"></i> Escritórios</div>
+                </div>
+            </section>
+
+            <!-- DESTAQUES VIP -->
+            <section class="mb-5">
+                <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+                    <h5 class="fw-800 m-0"><i class="bi bi-patch-check-fill text-neon me-2"></i> Destaques VIP</h5>
+                </div>
+                <div class="vip-scroll" id="vipCarousel">
+                    <!-- SKELETON LOAD -->
+                    <div class="vip-card bg-secondary bg-opacity-10 animate-fade"></div>
+                </div>
+            </section>
+
+            <!-- EXPLORAR RECENTES (2 COLUNAS MOBILE) -->
+            <section>
+                <div class="d-flex justify-content-between align-items-center mb-4 px-2">
+                    <h5 class="fw-800 m-0">Explorar Recentes</h5>
+                    <span class="badge bg-secondary bg-opacity-10 text-success fw-bold px-4 py-2 rounded-3" id="activeCounter" style="font-size:0.75rem">0 ATIVOS</span>
+                </div>
+                <div id="recentGrid" class="property-grid-recent">
+                    <!-- Injetado dinamicamente via JS -->
+                </div>
+            </section>
+
+        </main>
+
+        <!-- DOWNBAR MOBILE -->
+        <nav class="mobile-nav-elite d-lg-none">
+            <a href="index.html" class="m-nav-item active"><i class="bi bi-house-door-fill"></i><span>Início</span></a>
+            <a href="map.html" class="m-nav-item"><i class="bi bi-geo-alt-fill"></i><span>Mapa</span></a>
+            <div class="m-center-box" onclick="location.href='pages/publish.html'"><i class="bi bi-plus-lg"></i></div>
+            <a href="pages/chat.html" class="m-nav-item"><i class="bi bi-chat-dots-fill"></i><span>Chat</span></a>
+            <a href="pages/dashboard.html" class="m-nav-item"><i class="bi bi-grid-fill"></i><span>Painel</span></a>
+        </nav>
+
+    </div>
+
+    <!-- SCRIPTS CORE -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/api.js"></script>
+
+    <script>
+        /**
+         * MOTOR ARRENDA ANGOLA VIP - ULTIMATE
+         */
+        const ArrendaEngine = (() => {
+            
+            const init = async () => {
+                ThemeManager.boot();
+                syncUser();
+                await loadContent();
+                setupInteractions();
+            };
+
+            const loadContent = async (filters = {}) => {
+                const vipCont = document.getElementById('vipCarousel');
+                const gridCont = document.getElementById('recentGrid');
+
+                try {
+                    const res = await apiService.properties.getAll(filters);
+                    if(res.success) {
+                        const data = res.data;
+                        document.getElementById('activeCounter').innerText = `${data.length.toString().padStart(2, '0')} ATIVOS`;
+
+                        // Render VIPs
+                        const vips = data.filter(p => p.is_vip);
+                        vipCont.innerHTML = vips.length ? vips.map(p => `
+                            <div class="vip-card animate-fade" onclick="location.href='pages/details.html?id=${p.id}'">
+                                <img src="/api/properties/image/${p.id}/0" onerror="this.src='https://placehold.co/800x600/111/c6ff00?text=Premium+VIP'">
+                                <div class="vip-overlay">
+                                    <h3 class="fw-900 text-white mb-1 text-truncate">${p.title}</h3>
+                                    <p class="text-secondary small mb-3"><i class="bi bi-geo-alt-fill text-neon"></i> ${p.location}</p>
+                                    <div class="vip-price">${formatAO(p.price)}</div>
+                                </div>
+                            </div>
+                        `).join('') : '<div class="p-5 text-muted">A aguardar ativos de elite...</div>';
+
+                        // Render Recentes
+                        gridCont.innerHTML = data.length ? data.map(p => `
+                            <div class="recent-card-vip animate-fade" onclick="location.href='pages/details.html?id=${p.id}'">
+                                <div class="recent-img-holder">
+                                    <img src="/api/properties/image/${p.id}/0" loading="lazy" onerror="this.src='https://via.placeholder.com/400x400/222/c6ff00?text='">
+                                    <div class="recent-price-badge">${(p.price/1000).toFixed(0)}k</div>
+                                </div>
+                                <div class="recent-details">
+                                    <div class="rating-row"><i class="bi bi-star-fill"></i> 4.9 <span class="text-muted fw-normal" style="font-size:0.7rem">(Verificado)</span></div>
+                                    <h6 class="text-truncate">${p.title}</h6>
+                                    <div class="loc text-truncate text-muted small"><i class="bi bi-geo-alt-fill text-neon"></i> ${p.location}</div>
+                                </div>
+                            </div>
+                        `).join('') : '<div class="p-5 text-muted">Sem imóveis recentes no momento.</div>';
+                    }
+                } catch(e) { console.error("API Load Error:", e); }
+            };
+
+            const syncUser = () => {
+                const user = JSON.parse(localStorage.getItem('user'));
+                if(user) {
+                    document.getElementById('uName').innerText = user.name;
+                    document.getElementById('uInitial').innerText = user.name.charAt(0).toUpperCase();
+                    document.getElementById('uHeaderAvatar').innerText = user.name.charAt(0).toUpperCase();
+                }
+            };
+
+            const setupInteractions = () => {
+                const search = document.getElementById('globalPropSearch');
+                let timer;
+                search.oninput = (e) => {
+                    clearTimeout(timer);
+                    timer = setTimeout(() => loadContent({ query: e.target.value }), 700);
+                };
+
+                document.querySelectorAll('.cat-pill').forEach(p => {
+                    p.onclick = function() {
+                        document.querySelectorAll('.cat-pill').forEach(btn => btn.classList.remove('active'));
+                        this.classList.add('active');
+                        loadContent({ type: this.dataset.type === 'Todos' ? '' : this.dataset.type });
+                    };
+                });
+            };
+
+            const formatAO = (v) => new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(v).replace('AOA', 'Kz');
+
+            return { init };
+        })();
+
+        /**
+         * MOTOR DE TEMAS - CORRIGIDO E BLINDADO
+         */
+        const ThemeManager = {
+            boot: () => {
+                const saved = localStorage.getItem('theme') || 'dark';
+                ThemeManager.set(saved);
+                document.getElementById('btnThemeDark').onclick = () => ThemeManager.set('dark');
+                document.getElementById('btnThemeLight').onclick = () => ThemeManager.set('light');
+            },
+            set: (t) => {
+                document.documentElement.setAttribute('data-theme', t);
+                localStorage.setItem('theme', t);
+                
+                const dBtn = document.getElementById('btnThemeDark');
+                const lBtn = document.getElementById('btnThemeLight');
+
+                if(t === 'dark') {
+                    dBtn.classList.add('active'); lBtn.classList.remove('active');
+                } else {
+                    dBtn.classList.remove('active'); lBtn.classList.add('active');
+                }
+            }
+        };
+
+        document.addEventListener('DOMContentLoaded', ArrendaEngine.init);
+    </script>
+</body>
+</html>

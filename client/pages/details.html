@@ -1,0 +1,544 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Detalhes VIP | Arrenda Angola Elite</title>
+
+    <!-- 1. FONTES E ICONES (PLUS JAKARTA SANS) -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
+    <!-- 2. BIBLIOTECAS DE VISUALIZAÇÃO -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.css">
+
+    <style>
+        /* 
+           ===========================================================================
+           SISTEMA DE DESIGN: ARRENDA ANGOLA VIP - FULL EDITION
+           ===========================================================================
+        */
+        :root {
+            /* MODO ESCURO (PADRÃO) */
+            --bg-master: #050505;
+            --bg-card: #0f0f0f;
+            --bg-sidebar: #080808;
+            --bg-input: #121212;
+            --bg-glass: rgba(15, 15, 15, 0.8);
+            
+            --neon: #c6ff00;
+            --neon-rgb: 198, 255, 0;
+            --neon-glow: rgba(198, 255, 0, 0.3);
+            
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #4b5563;
+            --border: rgba(255, 255, 255, 0.08);
+            
+            --sidebar-w: 320px;
+            --radius-xl: 45px;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.6);
+            --trans-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        [data-theme="light"] {
+            --bg-master: #f2f5f7;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-input: #f8fafb;
+            --bg-glass: rgba(255, 255, 255, 0.85);
+            --text-main: #0a0a0b;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border: rgba(0, 0, 0, 0.06);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.05);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { display: none; }
+        
+        body {
+            background-color: var(--bg-master);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background 0.5s ease;
+        }
+
+        /* ---------------------------------------------------------------------------
+           SIDEBAR (ESTILO HOME)
+        --------------------------------------------------------------------------- */
+        .sidebar-desktop {
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0; top: 0; padding: 50px 35px;
+            display: flex; flex-direction: column; z-index: 2000;
+        }
+        .sidebar-brand { display: flex; align-items: center; gap: 18px; margin-bottom: 60px; }
+        .logo-box {
+            width: 52px; height: 52px; background: var(--neon); color: #000;
+            border-radius: 16px; display: grid; place-items: center;
+            font-weight: 900; font-size: 1.8rem; box-shadow: 0 0 20px var(--neon-glow);
+        }
+        .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; color: var(--text-main); }
+        .logo-text span { color: var(--neon); }
+        
+        .nav-link {
+            display: flex; align-items: center; gap: 18px; padding: 18px 25px;
+            color: var(--text-secondary); border-radius: 22px; font-weight: 700;
+            transition: var(--trans-smooth); margin-bottom: 10px;
+        }
+        .nav-link:hover { background: var(--bg-card); color: var(--text-main); transform: translateX(5px); }
+        .nav-link.active { background: var(--neon); color: #000; box-shadow: 0 10px 25px rgba(var(--neon-rgb), 0.2); }
+
+        /* ---------------------------------------------------------------------------
+           MAIN WRAPPER & HERO (MOBILE STYLE FIEL)
+        --------------------------------------------------------------------------- */
+        .main-wrapper { margin-left: var(--sidebar-w); min-height: 100vh; transition: var(--trans-smooth); }
+
+        .hero-gallery-mobile {
+            width: 100%;
+            height: 520px;
+            position: relative;
+            background: #111;
+            overflow: hidden;
+            border-bottom-left-radius: var(--radius-xl);
+            border-bottom-right-radius: var(--radius-xl);
+        }
+        .hero-gallery-mobile img { width: 100%; height: 100%; object-fit: cover; transition: 0.8s ease; }
+        
+        .floating-nav-top {
+            position: absolute; top: 25px; left: 0; right: 0;
+            padding: 0 25px; display: flex; justify-content: space-between;
+            z-index: 100;
+        }
+        .btn-glass-circle {
+            width: 48px; height: 48px; border-radius: 50%;
+            background: rgba(255,255,255,0.95); border: none;
+            display: grid; place-items: center; color: #000; font-size: 1.2rem;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1); cursor: pointer; transition: 0.3s;
+        }
+        .btn-glass-circle:active { transform: scale(0.9); }
+
+        /* CAPSULAS DE MINIATURAS (IDENTICO À IMAGEM) */
+        .image-capsules-row {
+            position: absolute; bottom: 35px; left: 20px; right: 20px;
+            display: flex; gap: 12px; justify-content: center; z-index: 50;
+        }
+        .capsule-item {
+            width: 65px; height: 85px; border-radius: 18px;
+            background: rgba(255,255,255,0.25); backdrop-filter: blur(12px);
+            border: 2px solid transparent; overflow: hidden; cursor: pointer;
+            transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .capsule-item.active { border-color: var(--neon); background: rgba(255,255,255,0.6); transform: translateY(-8px); }
+        .capsule-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* ---------------------------------------------------------------------------
+           DETAILS BODY & CONTENT
+        --------------------------------------------------------------------------- */
+        .details-body { padding: 35px 30px 150px 30px; max-width: 1200px; margin: 0 auto; }
+
+        .rating-chip { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 0.95rem; color: var(--text-main); margin-bottom: 12px; }
+        .rating-chip i { color: #ffb800; }
+        .rating-chip span { color: var(--text-muted); font-weight: 600; font-size: 0.8rem; }
+
+        .type-label {
+            background: var(--bg-input); color: var(--text-secondary);
+            padding: 8px 18px; border-radius: 100px; font-weight: 800; font-size: 0.7rem;
+            text-transform: uppercase; letter-spacing: 1px; display: inline-block; margin-bottom: 15px;
+            border: 1px solid var(--border);
+        }
+
+        .price-hero { font-size: 2.8rem; font-weight: 800; margin-bottom: 5px; color: var(--text-main); letter-spacing: -1.5px; }
+        .price-hero small { font-size: 1rem; color: var(--text-muted); font-weight: 600; }
+
+        .prop-title { font-size: 1.8rem; font-weight: 800; line-height: 1.2; margin-bottom: 10px; color: var(--text-main); }
+        .prop-loc { display: flex; align-items: center; gap: 8px; color: var(--text-muted); font-weight: 600; margin-bottom: 40px; text-decoration: none; }
+        .prop-loc i { color: var(--neon); font-size: 1.3rem; }
+
+        /* AMENITIES BOX (IDENTICO À IMAGEM) */
+        .amenities-card {
+            background: var(--bg-card); border-radius: 35px; border: 1px solid var(--border);
+            display: grid; grid-template-columns: repeat(3, 1fr); padding: 30px 10px;
+            box-shadow: var(--shadow-lux); margin-bottom: 40px;
+        }
+        .amenity-item { text-align: center; border-right: 1px solid var(--border); }
+        .amenity-item:last-child { border-right: none; }
+        .amenity-item i { font-size: 1.6rem; display: block; margin-bottom: 8px; color: var(--text-main); }
+        .amenity-item span { font-size: 0.85rem; font-weight: 800; color: var(--text-main); }
+
+        /* ---------------------------------------------------------------------------
+           FOOTER ACTIONS MOBILE (ULTRA MODERNO)
+        --------------------------------------------------------------------------- */
+        .footer-actions-fixed {
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--bg-glass); backdrop-filter: blur(30px);
+            padding: 20px 25px 45px 25px; display: flex; gap: 15px;
+            z-index: 3000; border-top: 1px solid var(--border);
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.3);
+            border-top-left-radius: 35px; border-top-right-radius: 35px;
+        }
+        .btn-call-dark {
+            width: 75px; height: 75px; border-radius: 50%;
+            background: #1e2532; color: white; border: none;
+            display: grid; place-items: center; font-size: 1.6rem;
+            transition: 0.3s; cursor: pointer;
+        }
+        .btn-neon-cta {
+            flex: 1; height: 75px; background: var(--neon); color: #000;
+            border: none; border-radius: 28px; font-weight: 900; font-size: 1rem;
+            text-transform: uppercase; letter-spacing: 1px; cursor: pointer;
+            box-shadow: 0 12px 25px rgba(var(--neon-rgb), 0.4);
+            transition: 0.3s;
+        }
+        .btn-neon-cta:active { transform: scale(0.96); }
+
+        /* ---------------------------------------------------------------------------
+           SIMILAR PROPERTIES GRID (O DESIGN DA EXPLORAR RECENTES)
+           ===========================================================================
+        */
+        .similar-section { margin-top: 60px; }
+        .section-header-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 30px; }
+        .section-header-row h4 { font-weight: 800; margin: 0; font-size: 1.5rem; }
+        
+        .property-grid-similar {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 25px;
+        }
+
+        .card-modern-vip {
+            background: var(--bg-card);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            border: 1px solid var(--border);
+            transition: var(--trans-smooth);
+            cursor: pointer;
+            position: relative;
+            padding-bottom: 15px;
+            box-shadow: var(--shadow-lux);
+        }
+        .card-modern-vip:hover { transform: translateY(-10px); border-color: var(--neon); }
+
+        .card-img-holder { 
+            width: 100%; aspect-ratio: 1 / 1; 
+            position: relative; background: #222;
+        }
+        .card-img-holder img { width: 100%; height: 100%; object-fit: cover; }
+
+        .card-price-badge {
+            position: absolute; top: 15px; right: 15px;
+            background: rgba(0, 0, 0, 0.65); backdrop-filter: blur(10px);
+            padding: 6px 14px; border-radius: 12px;
+            color: var(--neon); font-weight: 800; font-size: 0.85rem;
+            border: 1px solid rgba(255,255,255,0.1);
+        }
+
+        .card-details { padding: 18px 18px 5px 18px; }
+        .card-rating { display: flex; align-items: center; gap: 6px; font-weight: 800; font-size: 0.85rem; margin-bottom: 6px; }
+        .card-rating i { color: #ffb800; }
+
+        .card-title { font-weight: 800; font-size: 1.1rem; color: var(--text-main); margin-bottom: 4px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .card-loc { display: flex; align-items: center; gap: 5px; color: var(--text-secondary); font-size: 0.8rem; font-weight: 600; }
+        .card-loc i { color: var(--neon); }
+
+        /* ---------------------------------------------------------------------------
+           DEMAIS ELEMENTOS
+        --------------------------------------------------------------------------- */
+        .desc-text { color: var(--text-secondary); line-height: 1.8; font-size: 1.05rem; margin-bottom: 40px; }
+        #sphere-360-container { height: 450px; border-radius: 35px; display: none; margin-bottom: 50px; border: 2px solid var(--neon); }
+
+        /* RESPONSIVIDADE */
+        @media (max-width: 991px) {
+            .sidebar-desktop { display: none; }
+            .main-wrapper { margin-left: 0; }
+            .property-grid-similar { grid-template-columns: repeat(2, 1fr) !important; gap: 15px; }
+            .price-hero { font-size: 2.2rem; }
+            .hero-gallery-mobile { height: 450px; }
+        }
+
+        @media (min-width: 992px) {
+            .footer-actions-fixed { display: none; }
+            .hero-gallery-mobile { border-radius: var(--radius-xl); height: 600px; margin-top: 40px; width: 95%; margin-inline: auto; }
+            .details-body { padding-top: 60px; display: grid; grid-template-columns: 1fr 400px; gap: 60px; }
+            .booking-card-pc {
+                background: var(--bg-card); border: 1px solid var(--border);
+                border-radius: var(--radius-xl); padding: 40px; position: sticky; top: 50px;
+                height: fit-content; box-shadow: var(--shadow-lux);
+            }
+        }
+
+        /* ANIMS */
+        .animate-reveal { animation: revealUp 0.8s forwards cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; }
+        @keyframes revealUp { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+    </style>
+</head>
+<body>
+
+    <!-- 1. SIDEBAR ELITE (IDENTIDADE VISUAL DA HOME) -->
+    <aside class="sidebar-desktop">
+        <div class="sidebar-brand">
+            <div class="logo-box">V</div>
+            <div class="logo-text">Arrenda<span>VIP</span></div>
+        </div>
+        <nav class="sidebar-menu">
+            <a href="../index.html" class="nav-link"><i class="bi bi-house-door-fill"></i> <span>Explorar</span></a>
+            <a href="../index.html" class="nav-link"><i class="bi bi-geo-alt-fill"></i> <span>Mapa VIP</span></a>
+            <a href="chat.html" class="nav-link"><i class="bi bi-chat-dots-fill"></i> <span>Mensagens</span></a>
+            <a href="dashboard.html" class="nav-link"><i class="bi bi-grid-fill"></i> <span>Meu Painel</span></a>
+        </nav>
+        <div class="mt-auto">
+            <button onclick="themeManager.toggle()" class="nav-link border-0 bg-transparent w-100 text-start">
+                <i class="bi bi-moon-stars-fill"></i> <span>Alternar Visual</span>
+            </button>
+        </div>
+    </aside>
+
+    <div class="main-wrapper">
+        
+        <!-- 2. NAVEGAÇÃO MOBILE TOP (GLASS STYLE) -->
+        <div class="floating-nav-top d-lg-none">
+            <button onclick="history.back()" class="btn-glass-circle"><i class="bi bi-chevron-left"></i></button>
+            <div class="d-flex gap-2">
+                <button class="btn-glass-circle"><i class="bi bi-share"></i></button>
+                <button class="btn-glass-circle"><i class="bi bi-heart"></i></button>
+            </div>
+        </div>
+
+        <!-- 3. GALERIA HERO (IDENTICO À IMAGEM) -->
+        <section class="hero-gallery-mobile" id="heroGallery">
+            <img id="mainDisplayImage" src="" alt="Property Preview">
+            
+            <div class="image-capsules-row" id="capsuleTrack">
+                <!-- Injetado dinamicamente -->
+            </div>
+        </section>
+
+        <!-- 4. CONTEÚDO PRINCIPAL -->
+        <main class="details-body">
+            
+            <div class="info-column animate-reveal">
+                <div class="rating-chip">
+                    <i class="bi bi-star-fill"></i> 4.9 <span>(Verificado VIP)</span>
+                </div>
+
+                <div class="type-label" id="propTypeBadge">Apartamento</div>
+
+                <div class="price-hero" id="propPriceDisplay">0 Kz <small>/Mês</small></div>
+                <h1 class="prop-title" id="propTitleDisplay">Carregando detalhes...</h1>
+                
+                <a href="#" class="prop-loc">
+                    <i class="bi bi-geo-alt-fill"></i> <span id="propLocationDisplay">---</span>
+                </a>
+
+                <!-- AMENITIES (IDENTICO À IMAGEM) -->
+                <div class="amenities-card">
+                    <div class="amenity-item">
+                        <i class="bi bi-door-open"></i>
+                        <span id="propRooms">---</span>
+                    </div>
+                    <div class="amenity-item">
+                        <i class="bi bi-droplet"></i>
+                        <span id="propBaths">---</span>
+                    </div>
+                    <div class="amenity-item">
+                        <i class="bi bi-fullscreen-exit"></i>
+                        <span id="propSize">---</span>
+                    </div>
+                </div>
+
+                <!-- DESCRIÇÃO -->
+                <section class="mb-5">
+                    <h3 class="fw-800 mb-3">Sobre este imóvel</h3>
+                    <p class="desc-text" id="propDescriptionDisplay">---</p>
+                </section>
+
+                <!-- 360 VIEWER (SE DISPONÍVEL) -->
+                <div id="sphere-360-container" class="animate-reveal"></div>
+
+                <!-- SEÇÃO SIMILARES (SUBSTITUINDO O MAPA COM DESIGN MODERNO) -->
+                <section class="similar-section animate-reveal">
+                    <div class="section-header-row">
+                        <h4>Imóveis Similares</h4>
+                        <a href="../index.html" class="text-neon fw-bold small">Ver Todos</a>
+                    </div>
+                    <div class="property-grid-similar" id="similarGrid">
+                        <!-- CARDS SIMILARES (MESMO DESIGN DOS RECENTES) -->
+                    </div>
+                </section>
+            </div>
+
+            <!-- CARD DE RESERVA (DESKTOP) -->
+            <aside class="booking-card-pc d-none d-lg-block animate-reveal">
+                <h4 class="fw-800 mb-4">Interessado?</h4>
+                <p class="text-secondary small mb-4">Negocie diretamente com o proprietário. Nossos membros VIP têm prioridade no atendimento.</p>
+                <button onclick="actionManager.schedule()" class="btn-neon-cta w-100 mb-3">Agendar Visita</button>
+                <button onclick="actionManager.call()" class="btn-call-dark w-100 rounded-4 py-3" style="height: auto; border: 1px solid var(--border);">Ligar Agora</button>
+            </aside>
+
+        </main>
+    </div>
+
+    <!-- 5. FOOTER STICKY MOBILE (IDENTICO À IMAGEM) -->
+    <div class="footer-actions-fixed d-lg-none">
+        <button class="btn-call-dark" id="btnCallMobile"><i class="bi bi-telephone-fill"></i></button>
+        <button class="btn-neon-cta" onclick="actionManager.schedule()">Agendar Visita</button>
+    </div>
+
+    <!-- 6. SCRIPTS DE EXECUÇÃO -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/three/build/three.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@photo-sphere-viewer/core/index.min.js"></script>
+    
+    <!-- API SERVICE (DEPENDÊNCIA DO SISTEMA) -->
+    <script src="../js/api.js"></script>
+
+    <script>
+        /**
+         * ENGINE DE DETALHES ELITE
+         * Responsável por: Carregamento Binário, Renderização e Similares
+         */
+        const DetailsEngine = (() => {
+            const urlParams = new URLSearchParams(window.location.search);
+            const propId = urlParams.get('id');
+            let currentProp = null;
+
+            const boot = async () => {
+                if(!propId) { window.location.href = '../index.html'; return; }
+                
+                try {
+                    // 1. Buscar Dados do Ativo Principal
+                    const res = await apiService.properties.getById(propId);
+                    if(res.success) {
+                        currentProp = res.data;
+                        renderMainInfo();
+                        loadSimilarProperties();
+                        if(currentProp.is_360) init360();
+                    }
+                } catch(err) { console.error("Falha ao iniciar motor de detalhes:", err); }
+            };
+
+            const renderMainInfo = () => {
+                document.getElementById('propTitleDisplay').innerText = currentProp.title;
+                document.getElementById('propLocationDisplay').innerText = currentProp.location;
+                document.getElementById('propDescriptionDisplay').innerText = currentProp.description;
+                document.getElementById('propTypeBadge').innerText = currentProp.type;
+                document.getElementById('propPriceDisplay').innerHTML = `${formatKz(currentProp.price)} <small>/Mês</small>`;
+                
+                document.getElementById('propRooms').innerText = `${currentProp.rooms || 0} Quartos`;
+                document.getElementById('propBaths').innerText = `${currentProp.baths || 0} Banhos`;
+                document.getElementById('propSize').innerText = `${currentProp.size || 0} m²`;
+
+                // Render Galeria de Capsulas
+                const mainImg = document.getElementById('mainDisplayImage');
+                const track = document.getElementById('capsuleTrack');
+                mainImg.src = apiService.properties.resolveImageUrl(propId, 0);
+
+                for(let i=0; i < 5; i++) {
+                    const cap = document.createElement('div');
+                    cap.className = `capsule-item ${i === 0 ? 'active' : ''}`;
+                    cap.innerHTML = `<img src="${apiService.properties.resolveImageUrl(propId, i)}" onerror="this.src='https://placehold.co/100x120/111/c6ff00?text=VIP'">`;
+                    
+                    cap.onclick = () => {
+                        document.querySelectorAll('.capsule-item').forEach(c => c.classList.remove('active'));
+                        cap.classList.add('active');
+                        mainImg.src = apiService.properties.resolveImageUrl(propId, i);
+                    };
+                    track.appendChild(cap);
+                }
+            };
+
+            const loadSimilarProperties = async () => {
+                const grid = document.getElementById('similarGrid');
+                try {
+                    // Busca imóveis do mesmo tipo para preencher "Similares"
+                    const res = await apiService.properties.getAll({ type: currentProp.type });
+                    if(res.success) {
+                        const others = res.data.filter(p => p.id != propId).slice(0, 4);
+                        
+                        grid.innerHTML = others.length ? others.map(p => `
+                            <div class="card-modern-vip animate-reveal" onclick="location.href='details.html?id=${p.id}'">
+                                <div class="card-img-holder">
+                                    <img src="${apiService.properties.resolveImageUrl(p.id, 0)}" loading="lazy" onerror="this.src='https://placehold.co/400x400/111/c6ff00?text=Imóvel+Similar'">
+                                    <div class="card-price-badge">${(p.price/1000).toFixed(0)}k</div>
+                                </div>
+                                <div class="card-details">
+                                    <div class="card-rating"><i class="bi bi-star-fill"></i> 4.9</div>
+                                    <div class="card-title">${p.title}</div>
+                                    <div class="card-loc"><i class="bi bi-geo-alt-fill"></i> ${p.location}</div>
+                                </div>
+                            </div>
+                        `).join('') : '<p class="text-muted">Sem outros imóveis similares no momento.</p>';
+                    }
+                } catch(e) { console.error("Erro ao carregar similares:", e); }
+            };
+
+            const init360 = () => {
+                const container = document.getElementById('sphere-360-container');
+                container.style.display = 'block';
+                new PhotoSphereViewer.Viewer({
+                    container: container,
+                    panorama: apiService.properties.resolveImageUrl(propId, 0),
+                    loadingTxt: 'Preparando imersão 360°...'
+                });
+            };
+
+            const formatKz = (v) => new Intl.NumberFormat('pt-AO', { style: 'currency', currency: 'AOA' }).format(v).replace('AOA', 'Kz');
+
+            return { boot, getProp: () => currentProp };
+        })();
+
+        /**
+         * GESTÃO DE AÇÕES (WHATSAPP / CHAMADAS)
+         */
+        const actionManager = {
+            schedule: () => {
+                const p = DetailsEngine.getProp();
+                const msg = encodeURIComponent(`Olá, vi o anúncio "${p.title}" no Arrenda Angola VIP. Gostaria de agendar uma visita.`);
+                window.open(`https://wa.me/${p.phone_primary.replace(/\s/g, '')}?text=${msg}`);
+            },
+            call: () => {
+                window.location.href = `tel:${DetailsEngine.getProp().phone_primary}`;
+            }
+        };
+
+        /**
+         * GESTÃO DE TEMA
+         */
+        const themeManager = {
+            init: () => {
+                const saved = localStorage.getItem('theme') || 'dark';
+                document.documentElement.setAttribute('data-theme', saved);
+            },
+            toggle: () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem('theme', next);
+            }
+        };
+
+        // INICIALIZAÇÃO GLOBAL
+        document.addEventListener('DOMContentLoaded', () => {
+            themeManager.init();
+            DetailsEngine.boot();
+            
+            // Link do botão de chamada mobile
+            document.getElementById('btnCallMobile').onclick = actionManager.call;
+        });
+    </script>
+</body>
+</html>

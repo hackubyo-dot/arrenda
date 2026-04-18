@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="pt-ao" data-theme="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Configurações VIP | Arrenda Angola Elite</title>
+
+    <!-- 1. FONTES DE ALTA DEFINIÇÃO -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&display=swap" rel="stylesheet">
+
+    <!-- 2. BIBLIOTECAS CORE -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <style>
+        /* 
+           ===========================================================================
+           DESIGN SYSTEM: ARRENDA ANGOLA VIP - SETTINGS HUB
+           ===========================================================================
+        */
+        :root {
+            --bg-master: #050505;
+            --bg-card: #0f0f0f;
+            --bg-sidebar: #080808;
+            --bg-input: #121212;
+            --bg-glass: rgba(12, 12, 12, 0.85);
+            --neon: #c6ff00;
+            --neon-rgb: 198, 255, 0;
+            --neon-glow: rgba(198, 255, 0, 0.35);
+            --text-main: #ffffff;
+            --text-secondary: #94a3b8;
+            --text-muted: #4b5563;
+            --border: rgba(255, 255, 255, 0.08);
+            --sidebar-w: 320px;
+            --radius-xl: 45px;
+            --radius-lg: 32px;
+            --radius-md: 20px;
+            --trans-smooth: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.6);
+        }
+
+        [data-theme="light"] {
+            --bg-master: #f2f5f7;
+            --bg-card: #ffffff;
+            --bg-sidebar: #ffffff;
+            --bg-input: #f8fafb;
+            --bg-glass: rgba(255, 255, 255, 0.95);
+            --text-main: #0a0a0b;
+            --text-secondary: #4b5563;
+            --text-muted: #9ca3af;
+            --border: rgba(0, 0, 0, 0.12);
+            --shadow-lux: 0 25px 60px rgba(0, 0, 0, 0.05);
+        }
+
+        /* BASE RESET */
+        * { margin: 0; padding: 0; box-sizing: border-box; text-decoration: none !important; -webkit-tap-highlight-color: transparent; }
+        ::-webkit-scrollbar { display: none; }
+        
+        body {
+            background-color: var(--bg-master);
+            color: var(--text-main);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+            min-height: 100vh;
+            transition: background 0.6s ease;
+        }
+
+        /* ---------------------------------------------------------------------------
+           SIDEBAR DESKTOP (IDENTIDADE VISUAL VIP)
+        --------------------------------------------------------------------------- */
+        .sidebar-desktop {
+            width: var(--sidebar-w);
+            height: 100vh;
+            background: var(--bg-sidebar);
+            border-right: 1px solid var(--border);
+            position: fixed;
+            left: 0; top: 0; padding: 50px 35px;
+            display: flex; flex-direction: column; z-index: 2000;
+            transition: var(--trans-smooth);
+        }
+
+        .sidebar-brand { display: flex; align-items: center; gap: 18px; margin-bottom: 60px; }
+        .logo-box {
+            width: 52px; height: 52px; background: var(--neon); color: #000;
+            border-radius: 16px; display: grid; place-items: center;
+            font-weight: 900; font-size: 1.8rem; box-shadow: 0 0 25px var(--neon-glow);
+        }
+        .logo-text { font-size: 1.6rem; font-weight: 800; letter-spacing: -1.5px; color: var(--text-main); }
+        .logo-text span { color: var(--neon); }
+
+        .nav-link {
+            display: flex; align-items: center; gap: 18px; padding: 18px 25px;
+            color: var(--text-secondary); border-radius: 22px; font-weight: 700;
+            transition: var(--trans-smooth); margin-bottom: 10px;
+        }
+        .nav-link:hover { background: var(--bg-card); color: var(--text-main); transform: translateX(8px); }
+        .nav-link.active { background: var(--neon); color: #000; box-shadow: 0 10px 25px rgba(var(--neon-rgb), 0.25); }
+
+        .sidebar-footer { padding-top: 30px; border-top: 1px solid var(--border); }
+
+        /* ---------------------------------------------------------------------------
+           LAYOUT DE CONFIGURAÇÕES (MASTER GRID)
+        --------------------------------------------------------------------------- */
+        .main-wrapper {
+            margin-left: var(--sidebar-w);
+            padding: 40px 60px 150px 60px;
+            transition: var(--trans-smooth);
+        }
+
+        .settings-container {
+            display: grid;
+            grid-template-columns: 320px 1fr;
+            gap: 60px;
+            max-width: 1400px;
+            animation: fadeIn 0.8s ease;
+        }
+
+        /* Navegação de Definições */
+        .settings-nav-pane {
+            position: sticky; top: 40px; height: fit-content;
+        }
+        .settings-nav-item {
+            display: flex; align-items: center; gap: 15px; padding: 22px 28px;
+            border-radius: 22px; color: var(--text-muted); font-weight: 800;
+            transition: 0.3s; margin-bottom: 12px; cursor: pointer;
+            border: 1px solid transparent;
+        }
+        .settings-nav-item i { font-size: 1.4rem; }
+        .settings-nav-item:hover { color: var(--text-main); background: var(--bg-input); }
+        .settings-nav-item.active { background: var(--bg-card); color: var(--neon); border-color: var(--border); box-shadow: var(--shadow-lux); }
+
+        /* Seções de Conteúdo */
+        .settings-card {
+            background: var(--bg-card); border: 1px solid var(--border);
+            border-radius: 40px; padding: 50px; margin-bottom: 40px;
+            box-shadow: var(--shadow-lux);
+        }
+
+        .section-title-elite {
+            font-size: 1.8rem; font-weight: 800; margin-bottom: 40px;
+            display: flex; align-items: center; gap: 15px; letter-spacing: -1px;
+        }
+        .section-title-elite i { color: var(--neon); }
+
+        /* Form Elements */
+        .field-group { margin-bottom: 30px; }
+        .field-label {
+            display: block; font-size: 0.75rem; font-weight: 900;
+            color: var(--text-muted); text-transform: uppercase;
+            letter-spacing: 1.5px; margin-bottom: 12px;
+        }
+        .input-lux {
+            background: var(--bg-input); border: 1px solid var(--border);
+            border-radius: 20px; padding: 18px 25px; color: var(--text-main);
+            width: 100%; font-weight: 700; outline: none; transition: 0.3s;
+        }
+        .input-lux:focus { border-color: var(--neon); box-shadow: 0 0 30px rgba(var(--neon-rgb), 0.15); }
+
+        /* Avatar System */
+        .avatar-manager {
+            display: flex; align-items: center; gap: 35px;
+            padding-bottom: 40px; border-bottom: 1px solid var(--border);
+            margin-bottom: 40px;
+        }
+        .avatar-huge {
+            width: 120px; height: 120px; background: var(--neon);
+            border-radius: 40px; display: grid; place-items: center;
+            font-size: 3.5rem; font-weight: 900; color: #000;
+            box-shadow: 0 20px 40px rgba(var(--neon-rgb), 0.3);
+        }
+
+        /* ---------------------------------------------------------------------------
+           THEME SELECTOR 3D CARDS
+        --------------------------------------------------------------------------- */
+        .theme-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 25px; }
+        .theme-option-card {
+            background: var(--bg-input); border: 2px solid var(--border);
+            border-radius: 30px; padding: 30px; cursor: pointer; transition: 0.4s;
+            position: relative; overflow: hidden;
+        }
+        .theme-option-card:hover { transform: translateY(-8px); border-color: var(--text-muted); }
+        .theme-option-card.active { border-color: var(--neon); background: rgba(var(--neon-rgb), 0.05); }
+        
+        .theme-visual-preview {
+            height: 100px; border-radius: 18px; margin-bottom: 20px;
+            padding: 15px; display: flex; flex-direction: column; gap: 8px;
+        }
+        .theme-option-card h6 { font-weight: 800; font-size: 1.1rem; margin-bottom: 5px; }
+
+        /* SWITCH NEON */
+        .form-switch .form-check-input {
+            width: 60px; height: 30px; background-color: #333; border: none;
+            cursor: pointer; transition: 0.3s;
+        }
+        .form-switch .form-check-input:checked { background-color: var(--neon); background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23000'/%3e%3c/svg%3e"); }
+
+        /* ---------------------------------------------------------------------------
+           DOWNBAR MOBILE (IDÊNTICA À INDEX)
+        --------------------------------------------------------------------------- */
+        .mobile-nav-elite {
+            position: fixed; bottom: 0; left: 0; right: 0; height: 100px;
+            background: var(--bg-glass); backdrop-filter: blur(40px);
+            border-top: 1px solid var(--border); display: flex;
+            justify-content: space-around; align-items: center; padding-bottom: 25px; z-index: 3000;
+            border-top-left-radius: 35px; border-top-right-radius: 35px;
+            box-shadow: 0 -10px 40px rgba(0,0,0,0.1);
+        }
+        .m-nav-item { display: flex; flex-direction: column; align-items: center; color: var(--text-muted); text-decoration: none; }
+        .m-nav-item.active { color: var(--text-main); }
+        .m-nav-item i { font-size: 1.8rem; }
+        .m-nav-item span { font-size: 0.65rem; font-weight: 800; text-transform: uppercase; margin-top: 2px; }
+
+        .m-center-box {
+            width: 75px; height: 75px; background: var(--neon); color: #000;
+            border-radius: 50%; display: grid; place-items: center;
+            font-size: 2rem; transform: translateY(-35px);
+            box-shadow: 0 15px 35px rgba(var(--neon-rgb), 0.4);
+            border: 8px solid var(--bg-master);
+        }
+
+        /* ---------------------------------------------------------------------------
+           RESPONSIVIDADE
+        --------------------------------------------------------------------------- */
+        @media (max-width: 991px) {
+            .sidebar-desktop { display: none; }
+            .main-wrapper { margin-left: 0; padding: 25px 20px 140px 20px; }
+            .settings-container { grid-template-columns: 1fr; gap: 0; }
+            .settings-nav-pane { display: none; }
+            .settings-card { padding: 35px 25px; border-radius: 35px; }
+            .theme-grid { grid-template-columns: 1fr; }
+        }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
+
+        .btn-elite-save {
+            background: var(--neon); color: #000; border: none;
+            padding: 20px 45px; border-radius: 20px; font-weight: 900;
+            font-size: 1rem; text-transform: uppercase; letter-spacing: 1px;
+            transition: 0.3s; box-shadow: 0 10px 30px rgba(var(--neon-rgb), 0.3);
+            width: 100%;
+        }
+        .btn-elite-save:hover { transform: translateY(-5px); box-shadow: 0 15px 40px rgba(var(--neon-rgb), 0.5); }
+    </style>
+</head>
+<body>
+
+    <div class="app-shell">
+        
+        <!-- SIDEBAR ESQUERDA (DESKTOP) -->
+        <aside class="sidebar-desktop d-none d-lg-flex">
+            <a href="../index.html" class="sidebar-brand">
+                <div class="logo-box">V</div>
+                <div class="logo-text">Arrenda<span>VIP</span></div>
+            </a>
+            <nav class="sidebar-menu">
+                <a href="../index.html" class="nav-link"><i class="bi bi-house-door-fill"></i> <span>Explorar</span></a>
+                <a href="chat.html" class="nav-link"><i class="bi bi-chat-dots-fill"></i> <span>Mensagens</span></a>
+                <a href="dashboard.html" class="nav-link"><i class="bi bi-grid-1x2-fill"></i> <span>Meu Painel</span></a>
+                <a href="settings.html" class="nav-link active"><i class="bi bi-person-fill"></i> <span>Definições</span></a>
+            </nav>
+            <div class="sidebar-footer mt-auto">
+                <button onclick="logout()" class="btn btn-outline-danger w-100 rounded-4 py-3 fw-bold">
+                    <i class="bi bi-box-arrow-left me-2"></i> Sair do Sistema
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN CONTENT HUB -->
+        <main class="main-wrapper">
+            
+            <div class="settings-container">
+                
+                <!-- NAVEGAÇÃO INTERNA (STIKY) -->
+                <aside class="settings-nav-pane">
+                    <h2 class="fw-900 mb-4 px-3">HUB VIP</h2>
+                    <nav>
+                        <div onclick="scrollToSection('profile')" class="settings-nav-item active" id="nav-profile"><i class="bi bi-person-vcard"></i> Perfil Pessoal</div>
+                        <div onclick="scrollToSection('appearance')" class="settings-nav-item" id="nav-appearance"><i class="bi bi-palette-fill"></i> Aparência</div>
+                        <div onclick="scrollToSection('security')" class="settings-nav-item" id="nav-security"><i class="bi bi-shield-lock-fill"></i> Segurança</div>
+                        <div onclick="scrollToSection('billing')" class="settings-nav-item" id="nav-billing"><i class="bi bi-credit-card-fill"></i> Faturação</div>
+                    </nav>
+                </aside>
+
+                <!-- FLUXO DE CONTEÚDO -->
+                <div class="settings-content-flow">
+                    
+                    <!-- 1. PERFIL -->
+                    <section id="profile" class="settings-card">
+                        <h4 class="section-title-elite"><i class="bi bi-person-circle"></i> Perfil do Utilizador</h4>
+                        
+                        <div class="avatar-manager">
+                            <div class="avatar-huge" id="displayInitial">A</div>
+                            <div class="flex-grow-1">
+                                <h5 class="fw-800 mb-1">Identidade VIP</h5>
+                                <p class="text-muted small mb-3">A tua foto será visível nos chats e anúncios.</p>
+                                <div class="d-flex gap-2">
+                                    <button class="btn btn-dark rounded-pill px-4 btn-sm fw-bold border-secondary">Alterar Foto</button>
+                                    <button class="btn btn-link text-muted text-decoration-none btn-sm fw-bold">Remover</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <form id="formProfile">
+                            <div class="row g-4">
+                                <div class="col-md-6 field-group">
+                                    <label class="field-label">NOME COMPLETO</label>
+                                    <input type="text" id="uName" class="input-lux" placeholder="Ex: Augusto Silva">
+                                </div>
+                                <div class="col-md-6 field-group">
+                                    <label class="field-label">ENDEREÇO DE E-MAIL</label>
+                                    <input type="email" id="uEmail" class="input-lux" placeholder="email@dominio.com">
+                                </div>
+                                <div class="col-12 field-group">
+                                    <label class="field-label">BIO / APRESENTAÇÃO</label>
+                                    <textarea id="uBio" class="input-lux" rows="3" placeholder="Fale um pouco sobre si..."></textarea>
+                                </div>
+                            </div>
+                            <button type="submit" class="btn-elite-save mt-4">Guardar Perfil de Elite</button>
+                        </form>
+                    </section>
+
+                    <!-- 2. APARÊNCIA -->
+                    <section id="appearance" class="settings-card">
+                        <h4 class="section-title-elite"><i class="bi bi-palette"></i> Personalização Visual</h4>
+                        <p class="text-muted mb-5">Escolha o ambiente de navegação que melhor se adapta ao seu estilo.</p>
+                        
+                        <div class="theme-grid">
+                            <div class="theme-option-card" id="theme-dark" onclick="ThemeEngine.switch('dark')">
+                                <div class="theme-visual-preview" style="background: #000;">
+                                    <div style="width: 100%; height: 10px; background: #111; border-radius: 5px;"></div>
+                                    <div style="width: 60%; height: 10px; background: #222; border-radius: 5px;"></div>
+                                    <div style="width: 30px; height: 30px; background: #c6ff00; border-radius: 8px; margin-top: auto;"></div>
+                                </div>
+                                <h6>OLED Obsidian</h6>
+                                <p class="text-muted small mb-0">Interface escura e luxuosa.</p>
+                            </div>
+
+                            <div class="theme-option-card" id="theme-light" onclick="ThemeEngine.switch('light')">
+                                <div class="theme-visual-preview" style="background: #fff; border: 1px solid #ddd;">
+                                    <div style="width: 100%; height: 10px; background: #f0f0f0; border-radius: 5px;"></div>
+                                    <div style="width: 60%; height: 10px; background: #f8f8f8; border-radius: 5px;"></div>
+                                    <div style="width: 30px; height: 30px; background: #000; border-radius: 8px; margin-top: auto;"></div>
+                                </div>
+                                <h6>Crystal Pure</h6>
+                                <p class="text-muted small mb-0">Design leve e cristalino.</p>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- 3. SEGURANÇA -->
+                    <section id="security" class="settings-card">
+                        <h4 class="section-title-elite"><i class="bi bi-shield-lock-fill"></i> Segurança da Conta</h4>
+                        
+                        <div class="p-4 rounded-4 border border-secondary border-opacity-10 mb-5 d-flex justify-content-between align-items-center" style="background: var(--bg-input);">
+                            <div>
+                                <h6 class="fw-800 mb-1">Verificação em Duas Etapas (2FA)</h6>
+                                <p class="text-muted small mb-0">Adiciona uma camada extra de proteção via SMS.</p>
+                            </div>
+                            <div class="form-check form-switch">
+                                <input class="form-check-input" type="checkbox" id="2faSwitch">
+                            </div>
+                        </div>
+
+                        <h6 class="fw-800 mb-4">Alterar Password</h6>
+                        <div class="row g-4">
+                            <div class="col-12">
+                                <input type="password" class="input-lux" placeholder="Palavra-passe Atual">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" class="input-lux" placeholder="Nova Password">
+                            </div>
+                            <div class="col-md-6">
+                                <input type="password" class="input-lux" placeholder="Confirmar Nova">
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ZONA DE PERIGO -->
+                    <section class="settings-card border-danger border-opacity-25" style="background: rgba(255, 59, 48, 0.02);">
+                        <h4 class="fw-800 text-danger mb-3"><i class="bi bi-exclamation-octagon-fill me-2"></i> Zona Crítica</h4>
+                        <p class="text-muted small mb-4">A remoção da conta é irreversível. Todos os seus ativos binários e mensagens serão destruídos permanentemente.</p>
+                        <button class="btn btn-outline-danger w-100 py-3 rounded-4 fw-bold">ELIMINAR MINHA CONTA VIP</button>
+                    </section>
+
+                </div>
+
+            </div>
+
+        </main>
+
+        <!-- DOWNBAR MOBILE (FIEL À INDEX) -->
+        <nav class="mobile-nav-elite d-lg-none">
+            <a href="../index.html" class="m-nav-item"><i class="bi bi-house-door-fill"></i><span>Início</span></a>
+            <a href="chat.html" class="m-nav-item"><i class="bi bi-chat-dots-fill"></i><span>Chat</span></a>
+            <div class="m-center-box" onclick="location.href='publish.html'"><i class="bi bi-plus-lg"></i></div>
+            <a href="dashboard.html" class="m-nav-item"><i class="bi bi-grid-fill"></i><span>Painel</span></a>
+            <a href="settings.html" class="m-nav-item active"><i class="bi bi-person-fill"></i><span>Perfil</span></a>
+        </nav>
+
+    </div>
+
+    <!-- SCRIPTS CORE -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="../js/api.js"></script>
+
+    <script>
+        /**
+         * MOTOR DE DEFINIÇÕES VIP
+         */
+        document.addEventListener('DOMContentLoaded', () => {
+            ThemeEngine.init();
+            syncUserData();
+            handleProfileUpdate();
+        });
+
+        const syncUserData = () => {
+            const user = JSON.parse(localStorage.getItem('user'));
+            if(user) {
+                document.getElementById('uName').value = user.name;
+                document.getElementById('uEmail').value = user.email;
+                document.getElementById('displayInitial').innerText = user.name.charAt(0).toUpperCase();
+            } else {
+                window.location.href = 'login.html';
+            }
+        };
+
+        /**
+         * MOTOR DE TEMAS (DYNAMIC SYNC)
+         */
+        const ThemeEngine = {
+            init: () => {
+                const current = localStorage.getItem('theme') || 'dark';
+                ThemeEngine.applyUI(current);
+            },
+            switch: (t) => {
+                document.documentElement.setAttribute('data-theme', t);
+                localStorage.setItem('theme', t);
+                ThemeEngine.applyUI(t);
+            },
+            applyUI: (t) => {
+                document.querySelectorAll('.theme-option-card').forEach(c => c.classList.remove('active'));
+                document.getElementById(`theme-${t}`).classList.add('active');
+            }
+        };
+
+        const scrollToSection = (id) => {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+            document.querySelectorAll('.settings-nav-item').forEach(i => i.classList.remove('active'));
+            document.getElementById(`nav-${id}`).classList.add('active');
+        };
+
+        const handleProfileUpdate = () => {
+            document.getElementById('formProfile').onsubmit = async (e) => {
+                e.preventDefault();
+                const btn = e.target.querySelector('button');
+                btn.innerHTML = '<span class="spinner-border spinner-border-sm me-2"></span> SINCRONIZANDO...';
+                
+                // Simulação de delay para feedback visual
+                setTimeout(() => {
+                    btn.innerHTML = '<i class="bi bi-check-circle-fill me-2"></i> ATUALIZADO COM SUCESSO';
+                    btn.classList.replace('btn-elite-save', 'btn-success');
+                    setTimeout(() => {
+                        btn.innerHTML = 'Guardar Perfil de Elite';
+                        btn.classList.replace('btn-success', 'btn-elite-save');
+                    }, 3000);
+                }, 1000);
+            };
+        };
+
+        function logout() {
+            localStorage.clear();
+            window.location.href = 'login.html';
+        }
+    </script>
+</body>
+</html>
